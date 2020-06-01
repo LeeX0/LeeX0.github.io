@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>Linux基础知识复习(1)--基本命令</title>
+    <link href="/2020/06/01/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%A4%8D%E4%B9%A0-1-%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/"/>
+    <url>/2020/06/01/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%A4%8D%E4%B9%A0-1-%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/</url>
+    
+    <content type="html"><![CDATA[<p>很久没有使用Linux，基础知识也忘了不少。</p><p>找了本<a href="https://www.linuxprobe.com/docs/LinuxProbe.pdf" target="_blank" rel="noopener">参考书</a>顺带复习一下Linux的部分基础知识。</p><h2 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h2><h3 id="常用工作命令"><a href="#常用工作命令" class="headerlink" title="常用工作命令"></a>常用工作命令</h3><ul><li><p><code>echo</code>：用于在终端输出字符串或变量提取后的值</p><pre><code class="hljs bash">$ <span class="hljs-built_in">echo</span> Hello!Hello!$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">$SHELL</span>/bin/bash</code></pre></li><li><p><code>reboot</code>：重启系统</p></li><li><p><code>poweroff</code>：关闭系统</p></li><li><p><code>wget</code>：下载网络文件</p><pre><code class="hljs bash">$ wget http://www.linuxprobe.com/docs/LinuxProbe.pdf</code></pre></li><li><p><code>ps</code>：查看系统中的进程状态</p><pre><code class="hljs bash">$ ps -a(all) -u(user)</code></pre></li><li><p><code>top</code>：动态地监视进程活动与系统负载等信息</p></li><li><p><code>pidof</code>：查询某个指定服务进程的 PID 值</p><pre><code class="hljs bash">$ pidof sshd23587 798</code></pre></li><li><p><code>kill</code>：终止某个指定 PID 的服务进程</p><pre><code class="hljs bash">$ <span class="hljs-built_in">kill</span> 23587</code></pre></li><li><p><code>killall</code>：终止某个指定名称的服务所对应的全部进程</p><pre><code class="hljs bash">$ killall sshd</code></pre></li></ul><h3 id="系统状态命令"><a href="#系统状态命令" class="headerlink" title="系统状态命令"></a>系统状态命令</h3><ul><li><code>ifconfig</code>：用于获取网卡配置与网络状态等信息</li><li><code>uname</code>：用于查看系统内核与系统版本等信息 -a</li><li><code>free</code>：用于显示当前系统中内存的使用量信息</li><li><code>who</code>：用于查看当前登入主机的用户终端信息(whoami)</li><li><code>history</code>：用于显示历史执行过的命令（清除 -c）</li></ul><h3 id="目录切换命令"><a href="#目录切换命令" class="headerlink" title="目录切换命令"></a>目录切换命令</h3><ul><li><code>pwd</code>：显示用户当前所处的工作目录</li><li><code>cd</code>：切换工作路径</li><li><code>ls</code>：显示目录中文件信息（所有文件-a，详细信息-l）</li></ul><h3 id="文件编辑命令"><a href="#文件编辑命令" class="headerlink" title="文件编辑命令"></a>文件编辑命令</h3><ul><li><p><code>cat</code>：查看纯文本文件（较少）</p></li><li><p><code>more</code>：查看纯文本文件（较多）</p></li><li><p><code>head</code>：查看纯文本文档的前 n行</p><pre><code class="hljs bash">$ head -n 20 /etc/passwd</code></pre></li><li><p><code>tail</code>：查看纯文本文档的后 N 行或持续刷新内容</p><pre><code class="hljs bash">$ tail -n 20 /etc/passwd$ tail -f /var/<span class="hljs-built_in">log</span>/message</code></pre></li><li><p><code>tr</code>：替换文本文件中的字符</p><pre><code class="hljs bash">$ cat anaconda-ks.cfg | tr [a-z] [A-Z]</code></pre></li><li><p><code>wc</code>：统计指定文本的行数-l、字数-w、字节数-c</p><pre><code class="hljs bash">$ wc -l /etc/passwd</code></pre></li><li><p><code>stat</code>：查看文件的具体存储信息和时间等信息</p><pre><code class="hljs bash">$ <span class="hljs-built_in">stat</span> /etc/passwd</code></pre></li><li><p><code>diff</code>：比较多个文本文件的差异</p><pre><code class="hljs bash">$ diff diff_a.txt diff_b.txt</code></pre></li></ul><h3 id="目录管理命令"><a href="#目录管理命令" class="headerlink" title="目录管理命令"></a>目录管理命令</h3><ul><li><p><code>touch</code>：创建空白文件或设置文件的时间</p><pre><code class="hljs bash">$ touch touch_a.txt</code></pre></li><li><p><code>mkdir</code>：创建空白目录</p><pre><code class="hljs bash">$ mkdir ~/mkdir_a</code></pre></li><li><p><code>cp</code>：用于复制文件和目录</p><pre><code class="hljs bash">$ cp install.log x.log$ cp -r /etc ~/mkdir_a</code></pre></li><li><p><code>mv</code>：剪切文件或将文件重命名</p><pre><code class="hljs bash">$ mv x.log linux.log</code></pre></li><li><p><code>rm</code>：删除文件或目录</p><pre><code class="hljs bash">$ rm -f install.log$ rm -rf ~/mkdir_a</code></pre></li><li><p><code>dd</code>：按照指定大小和个数的数据块来复制文件或转换文件</p><pre><code class="hljs bash">$ dd <span class="hljs-keyword">if</span>=/dev/zero of=560_file count=1 bs=560M<span class="hljs-comment"># if为输入文件，of为输出文件，count为块数 bs为每个块大小</span>1+0 records <span class="hljs-keyword">in</span>1+0 records out587202560 bytes (587 MB, 560 MiB) copied, 3.49432 s, 168 MB/s</code></pre></li><li><p><code>file</code>：查看文件的类型</p><pre><code class="hljs bash">$ file 560_file560_file: data</code></pre></li></ul><h3 id="压缩搜索命令"><a href="#压缩搜索命令" class="headerlink" title="压缩搜索命令"></a>压缩搜索命令</h3><ul><li><p><code>tar</code>：对文件进行打包压缩或解压</p><pre><code class="hljs bash">$ tar -czvf etc.tar.gz /etc<span class="hljs-comment"># 压缩</span>$ tar -xzvf etc.tar.gz -C /root/etc <span class="hljs-comment"># 解压</span></code></pre></li><li><p><code>grep</code>：在文本中执行关键词搜索，并显示匹配的结果</p><pre><code class="hljs bash">$ grep /sbin/nologin /etc/passwd<span class="hljs-comment"># -n 显示行号； -v 反选信息</span></code></pre></li><li><p><code>find</code>：按照指定条件来查找文件</p><pre><code class="hljs bash">$ find /etc -name <span class="hljs-string">"host*"</span> -<span class="hljs-built_in">print</span><span class="hljs-comment"># 获取到/etc中所有以 host 开头的文件列表</span>$ find / -perm -4000 -<span class="hljs-built_in">print</span><span class="hljs-comment"># 在整个系统中搜索权限中包括 SUID 权限的所有文件</span>$ find / -user linuxprobe -<span class="hljs-built_in">exec</span> cp -a &#123;&#125; /root/findresults/ \;<span class="hljs-comment"># 在整个文件系统中找出所有归属于 linuxprobe 用户的文件并复制到/root/findresults 目录</span><span class="hljs-comment"># 命令的结尾必须是“\;”！！！</span></code></pre></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>学习笔记</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>linux</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>搭建Hexo个人博客</title>
     <link href="/2020/05/24/%E6%90%AD%E5%BB%BAHexo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"/>
     <url>/2020/05/24/%E6%90%AD%E5%BB%BAHexo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
