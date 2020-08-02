@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>模糊测试与Spike框架简介</title>
+    <link href="/2020/08/02/%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95%E4%B8%8ESpike%E6%A1%86%E6%9E%B6%E7%AE%80%E4%BB%8B/"/>
+    <url>/2020/08/02/%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95%E4%B8%8ESpike%E6%A1%86%E6%9E%B6%E7%AE%80%E4%BB%8B/</url>
+    
+    <content type="html"><![CDATA[<h2 id="1-内容介绍"><a href="#1-内容介绍" class="headerlink" title="1. 内容介绍"></a>1. 内容介绍</h2><h3 id="1-1-模糊测试简介"><a href="#1-1-模糊测试简介" class="headerlink" title="1.1 模糊测试简介"></a>1.1 模糊测试简介</h3><p>模糊测试（Fuzzing），是一种通过向目标系统提供非预期的输入并监视异常结果来发现软件漏洞的方法。<br>其核心思想是自动或半自动的生成随机数据输入到一个程序中，并监控目标程序异常，如崩溃，断言(assertion)失败，以发现可能的程序错误，比如内存泄漏等。<br>即用随机坏数据（也称做 fuzz）攻击一个程序，然后等着观察哪里遭到了破坏。但这一过程却能揭示出程序中的重要 bug。<br>它是一种介于完全的手工渗透测试与完全的自动化测试之间的安全性测试类型。它充分利用了机器能够随机生成和发送数据的能力。</p><h3 id="1-2-Spike框架"><a href="#1-2-Spike框架" class="headerlink" title="1.2 Spike框架"></a>1.2 Spike框架</h3><p>Spike是一个模糊器创建工具包，它提供了API，允许用户基于网络的协议来创建自己的fuzzer。其中包含一些通用的模糊测试器。</p><h3 id="1-3-网络协议模糊测试"><a href="#1-3-网络协议模糊测试" class="headerlink" title="1.3 网络协议模糊测试"></a>1.3 网络协议模糊测试</h3><p>对网络协议进行模糊测试也需要识别出可被攻击的接口，通过变异或生成方式得到能够触发错误的模糊测试值，然后将这些模糊测试值发送给目标应用，监视目标应用的错误。</p><h2 id="2-基本过程"><a href="#2-基本过程" class="headerlink" title="2. 基本过程"></a>2. 基本过程</h2><ul><li>确定测试的目标</li><li>确定输入的向量</li><li>生成模糊测试数据，可由测试工具通过随机或是半随机的方式生成</li><li>执行模糊数据测试</li><li>监视异常</li><li>判定发现的漏洞是否可能被利用</li></ul><h2 id="3-测试方法分类"><a href="#3-测试方法分类" class="headerlink" title="3. 测试方法分类"></a>3. 测试方法分类</h2><ul><li>基于<code>变异</code>的模糊测试——简而言之就是正常调用协议，抓包，然后混淆数据包达到生成异常数据包的结果，从而进行测试。</li></ul><blockquote><p>这种方法对已有的正常数据集依赖较高。需要有足够丰富的合法输入从而产生足够丰富的测试类型。</p></blockquote><p>例如，png图片除了文件头后面数据内容进行置换混淆得到异常测试数据。</p><p><img src="/image/%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95%E4%B8%8ESpike%E6%A1%86%E6%9E%B6%E7%AE%80%E4%BB%8B/png1.png" srcset="/img/loading.gif" alt=""></p><ul><li>基于<code>生成</code>的模糊测试——简而言之就是理解协议规约定义，创建文法自动生成动态模糊的测试用例。</li></ul><blockquote><p>这种方法对协议的理解掌握程度需求更高。难度更大。</p></blockquote><p>http的post请求如图，其中fuzzable的点可用来生成测试例子。</p><p><img src="/image/%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95%E4%B8%8ESpike%E6%A1%86%E6%9E%B6%E7%AE%80%E4%BB%8B/http-post.png" srcset="/img/loading.gif" alt=""></p><p><img src="/image/%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95%E4%B8%8ESpike%E6%A1%86%E6%9E%B6%E7%AE%80%E4%BB%8B/http-fuzz.png" srcset="/img/loading.gif" alt=""></p><h2 id="4-困难点"><a href="#4-困难点" class="headerlink" title="4. 困难点"></a>4. 困难点</h2><p>协议分析，对于特定的程序与配套协议，需要对程序段进行逆向分析才能得到<br>协议内容以创建测试样例，而其中逆向分析工作难度与工作量都较大。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>项目组</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>模糊测试</tag>
+      
+      <tag>Spike</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Linux基础知识复习(1)--基本命令</title>
     <link href="/2020/06/01/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%A4%8D%E4%B9%A0-1-%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/"/>
     <url>/2020/06/01/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%A4%8D%E4%B9%A0-1-%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/</url>
