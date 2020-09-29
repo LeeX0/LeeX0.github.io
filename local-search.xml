@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>Hydra开发说明</title>
+    <link href="/2020/09/29/Hydra%E5%BC%80%E5%8F%91%E8%AF%B4%E6%98%8E/"/>
+    <url>/2020/09/29/Hydra%E5%BC%80%E5%8F%91%E8%AF%B4%E6%98%8E/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>hydra工具集成进入扫描系统，与WEB开发端结合，通过开发说明明确输入输出格式与业务逻辑。</p></blockquote><h3 id="一、-输入格式"><a href="#一、-输入格式" class="headerlink" title="一、 输入格式"></a>一、 输入格式</h3><ol><li>命令行范式</li></ol><pre><code class="hljs bash">hydra [some <span class="hljs-built_in">command</span> line options] TARGET PROTOCOL</code></pre><ol start="2"><li>输入内容</li></ol><p>包括<strong>协议选择</strong>，<strong>IP地址与端口指定</strong></p><ul><li>协议（必选项），具有<code>RDP</code>、<code>MYSQL</code>、<code>SSH</code>、<code>TELNET</code>选项</li><li>IP地址（必选项）与端口（可选项），具有输入IP与上传IP地址文件两种模式</li></ul><blockquote><p>1) 输入IP模式：支持<code>IP[:port]</code>与<code>CIDR</code>模式(192.168.0.0/24)</p><p>2) 上传IP地址文件模式：文件一行表示一个地址，格式应为<code>IP[:port]</code>，例：</p><p>foo.bar.com<br>target.com:21<br>unusual.port.com:2121<br>default.used.here.com<br>127.0.0.1<br>127.0.0.1:2121</p></blockquote><p><em>（注：后期考虑将其他模块扫描得到的存活主机作为本模块地址参数）</em></p><ol start="3"><li>其他已选相关参数</li></ol><ul><li>-L：指定用户名字典（根据协议选定内置字典）</li><li>-P：指定密码字典（根据协议选定内置字典）</li></ul><p><em>（注：内置字典可置于服务器静态文件中，为行数较多的txt文件）</em></p><ul><li>-e ns：空密码与账密相同探测</li><li>-o：指定输出文件</li><li>-b：指定输出格式（本次选用json）</li></ul><ol start="4"><li>输入示例</li></ol><ul><li>扫描文件地址中的SSH弱口令</li></ul><pre><code class="hljs bash">hydra -L ssh_login.txt -P ssh_passwd.txt -e ns -o result.json -b json -M IP_addr.txt ssh</code></pre><ul><li>扫描指定IP的RDP弱口令</li></ul><pre><code class="hljs bash">hydra -L rdp_login.txt -P rdp_passwd.txt -e ns -o result.json -b json 127.0.0.1 rdp</code></pre><ul><li>扫描文件地址的TELNET弱口令</li></ul><pre><code class="hljs bash">hydra -L telnet_login.txt -P telnet_passwd.txt -e ns -o result.json -b json -M IP_addr.txt telnet</code></pre><ul><li>扫描指定IP的MYSQL弱口令</li></ul><pre><code class="hljs bash">hydra -L mysql_login.txt -P mysql_passwd.txt -e ns -o result.json -b json 127.0.0.1 mysql</code></pre><h3 id="二、输出格式"><a href="#二、输出格式" class="headerlink" title="二、输出格式"></a>二、输出格式</h3><blockquote><p>采用本地缓存json格式，输出文件由-o选项的参数指定。</p></blockquote><p>SSH测试成功样例，扫描记录信息记录在上，结果存于<code>results</code>中。</p><pre><code class="hljs json">&#123; <span class="hljs-attr">"generator"</span>: &#123;<span class="hljs-attr">"software"</span>: <span class="hljs-string">"Hydra"</span>, <span class="hljs-attr">"version"</span>: <span class="hljs-string">"v9.1"</span>, <span class="hljs-attr">"built"</span>: <span class="hljs-string">"2020-09-29 15:44:28"</span>,<span class="hljs-attr">"server"</span>: <span class="hljs-string">"127.0.0.1"</span>, <span class="hljs-attr">"service"</span>: <span class="hljs-string">"ssh"</span>, <span class="hljs-attr">"jsonoutputversion"</span>: <span class="hljs-string">"1.00"</span>,<span class="hljs-attr">"commandline"</span>: <span class="hljs-string">"hydra -l root -p root1 -e ns -o b.json -b json 127.0.0.1 ssh"</span>&#125;,<span class="hljs-attr">"results"</span>: [&#123;<span class="hljs-attr">"port"</span>: <span class="hljs-number">22</span>, <span class="hljs-attr">"service"</span>: <span class="hljs-string">"ssh"</span>, <span class="hljs-attr">"host"</span>: <span class="hljs-string">"127.0.0.1"</span>, <span class="hljs-attr">"login"</span>: <span class="hljs-string">"root"</span>, <span class="hljs-attr">"password"</span>: <span class="hljs-string">"root"</span>&#125;],<span class="hljs-attr">"success"</span>: <span class="hljs-literal">true</span>,<span class="hljs-attr">"errormessages"</span>: [  ],<span class="hljs-attr">"quantityfound"</span>: <span class="hljs-number">1</span>   &#125;</code></pre><p>为扫描出弱口令则<code>results</code>为空。</p><pre><code class="hljs json">&#123; <span class="hljs-attr">"generator"</span>: &#123;<span class="hljs-attr">"software"</span>: <span class="hljs-string">"Hydra"</span>, <span class="hljs-attr">"version"</span>: <span class="hljs-string">"v9.1"</span>, <span class="hljs-attr">"built"</span>: <span class="hljs-string">"2020-09-29 15:44:43"</span>,<span class="hljs-attr">"server"</span>: <span class="hljs-string">"127.0.0.1"</span>, <span class="hljs-attr">"service"</span>: <span class="hljs-string">"ssh"</span>, <span class="hljs-attr">"jsonoutputversion"</span>: <span class="hljs-string">"1.00"</span>,<span class="hljs-attr">"commandline"</span>: <span class="hljs-string">"hydra -l root1 -p root1 -e ns -o b.json -b json 127.0.0.1 ssh"</span>&#125;,<span class="hljs-attr">"results"</span>: [],<span class="hljs-attr">"success"</span>: <span class="hljs-literal">true</span>,<span class="hljs-attr">"errormessages"</span>: [  ],<span class="hljs-attr">"quantityfound"</span>: <span class="hljs-number">0</span>   &#125;</code></pre>]]></content>
+    
+    
+    <categories>
+      
+      <category>项目组</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>hydra</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>hydra用法简记</title>
     <link href="/2020/09/14/hydra%E7%94%A8%E6%B3%95%E7%AE%80%E8%AE%B0/"/>
     <url>/2020/09/14/hydra%E7%94%A8%E6%B3%95%E7%AE%80%E8%AE%B0/</url>
