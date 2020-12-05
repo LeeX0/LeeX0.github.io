@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>MacOS中Dock栏使用空白分隔</title>
+    <link href="/2020/12/05/MacOS%E4%B8%ADDock%E6%A0%8F%E4%BD%BF%E7%94%A8%E7%A9%BA%E7%99%BD%E5%88%86%E9%9A%94-0/"/>
+    <url>/2020/12/05/MacOS%E4%B8%ADDock%E6%A0%8F%E4%BD%BF%E7%94%A8%E7%A9%BA%E7%99%BD%E5%88%86%E9%9A%94-0/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>给Mac的Dock栏添加空白的图标用以分隔。</p></blockquote><h2 id="添加空白分割区"><a href="#添加空白分割区" class="headerlink" title="添加空白分割区"></a>添加空白分割区</h2><ul><li><p><strong>打开</strong><code>终端（Terminal.app）</code></p></li><li><p><strong>输入下列指令后，按回车键运行，空白区域就会添加到Dock中：</strong></p><pre><code class="hljs bash">defaults write com.apple.dock persistent-apps -array-add <span class="hljs-string">'&#123;"tile-type"="spacer-tile";&#125;'</span>; killall Dock</code></pre></li></ul><ul><li><strong>空白区域就是个透明图标，可以移动位置或拖离Dock栏，重复上方指令可添加多个</strong></li></ul><h2 id="只显示当前运行的应用"><a href="#只显示当前运行的应用" class="headerlink" title="只显示当前运行的应用"></a>只显示当前运行的应用</h2><ul><li><p><strong>打开</strong><code>终端（Terminal.app）</code></p></li><li><p><strong>输入下列指令后，按回车键运行，Dock栏只显示当前运行中的应用程序：</strong></p><pre><code class="hljs bash">defaults write com.apple.dock static-only -bool TRUE; killall Dock</code></pre></li></ul><ul><li><p><strong>想恢复原来状态，输入下列指令，按回车键运行即可：</strong></p><pre><code class="hljs bash">defaults write com.apple.dock static-only -bool FALSE; killall Dock</code></pre></li></ul><blockquote><p>参考：</p><p><a href="https://zhuanlan.zhihu.com/p/190175194" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/190175194</a></p></blockquote>]]></content>
+    
+    
+    <categories>
+      
+      <category>日常</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>MacOS</tag>
+      
+      <tag>Dock</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Python3-Cookbook第二章:字符串和文本(2)</title>
     <link href="/2020/11/16/Python3-Cookbook%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%92%8C%E6%96%87%E6%9C%AC-2/"/>
     <url>/2020/11/16/Python3-Cookbook%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%92%8C%E6%96%87%E6%9C%AC-2/</url>
