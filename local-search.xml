@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>MacOS清除DNS缓存</title>
+    <link href="/2021/01/15/MacOS%E6%B8%85%E9%99%A4DNS%E7%BC%93%E5%AD%98/"/>
+    <url>/2021/01/15/MacOS%E6%B8%85%E9%99%A4DNS%E7%BC%93%E5%AD%98/</url>
+    
+    <content type="html"><![CDATA[<pre><code class="hljs bash">sudo killall -HUP mDNSRespondersudo killall mDNSResponderHelpersudo dscacheutil -flushcache</code></pre>]]></content>
+    
+    
+    <categories>
+      
+      <category>日常</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>MacOS</tag>
+      
+      <tag>DNS</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>《假面山庄》摘录</title>
     <link href="/2020/12/24/%E3%80%8A%E5%81%87%E9%9D%A2%E5%B1%B1%E5%BA%84%E3%80%8B%E6%91%98%E5%BD%95/"/>
     <url>/2020/12/24/%E3%80%8A%E5%81%87%E9%9D%A2%E5%B1%B1%E5%BA%84%E3%80%8B%E6%91%98%E5%BD%95/</url>
