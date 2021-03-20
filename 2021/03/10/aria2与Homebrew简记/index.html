@@ -1,0 +1,107 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.jpg"><link rel="icon" type="image/png" href="/img/favicon.jpg"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta name="theme-color" content="#2f4154"><meta name="description" content=""><meta name="author" content="LeeX0"><meta name="keywords" content=""><title>aria2与Homebrew简记 - LeeX0&#39;s blog</title><link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_fmb4a04yx8h.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css"><link rel="stylesheet" href="/css/main.css"><meta name="generator" content="Hexo 4.2.1"></head><body><header style="height:70vh"><nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar"><div class="container"><a class="navbar-brand" href="/">&nbsp;<strong>LeeX0's blog</strong>&nbsp;</a> <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><div class="animated-icon"><span></span><span></span><span></span></div></button><div class="collapse navbar-collapse" id="navbarSupportedContent"><ul class="navbar-nav ml-auto text-center"><li class="nav-item"><a class="nav-link" href="/"><i class="iconfont icon-home-fill"></i> Home</a></li><li class="nav-item"><a class="nav-link" href="/archives/"><i class="iconfont icon-archive-fill"></i> Archives</a></li><li class="nav-item"><a class="nav-link" href="/categories/"><i class="iconfont icon-category-fill"></i> Categories</a></li><li class="nav-item"><a class="nav-link" href="/tags/"><i class="iconfont icon-tags-fill"></i> Tags</a></li><li class="nav-item"><a class="nav-link" href="/about/"><i class="iconfont icon-user-fill"></i> About</a></li><li class="nav-item" id="search-btn"><a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i class="iconfont icon-search"></i>&nbsp;&nbsp;</a></li></ul></div></div></nav><div class="view intro-2" id="background" parallax="true" style="background:url(/img/Royal_BluePetrol.jpg) no-repeat center center;background-size:cover"><div class="full-bg-img"><div class="mask flex-center" style="background-color:rgba(0,0,0,.3)"><div class="container text-center white-text fadeInUp"><span class="h2" id="subtitle"></span><div class="mt-3 post-meta"><i class="iconfont icon-date-fill" aria-hidden="true"></i> <time datetime="2021-03-10 15:32">March 10, 2021 pm</time></div><div class="mt-1"><span class="post-meta mr-2"><i class="iconfont icon-chart"></i> 895 字 </span><span class="post-meta mr-2"><i class="iconfont icon-clock-fill"></i> 11 分钟</span></div></div></div></div></div></header><main><div class="container-fluid"><div class="row"><div class="d-none d-lg-block col-lg-2"></div><div class="col-lg-8 nopadding-md"><div class="container nopadding-md" id="board-ctn"><div class="py-5" id="board"><div class="post-content mx-auto" id="post"><article class="markdown-body"><blockquote><p>Mac命令行指定特定程序打开文件 -a</p><p><code>open -a /Applications/Sublime\ Text.app/ httpd.conf</code></p></blockquote><h3 id="aria2"><a href="#aria2" class="headerlink" title="aria2"></a>aria2</h3><blockquote><p><a href="https://aria2.github.io/" target="_blank" rel="noopener">aria2</a>是一个自由、开源、轻量级多协议和多源的命令行下载工具，它支持 HTTP/HTTPS、FTP、SFTP、 BitTorrent 和 Metalink 协议。</p><p>brew install aria2</p></blockquote><pre><code class="hljs bash"><span class="hljs-comment"># 下载单个文件（支持使用种子文件与磁力链接）</span>
+aria2c https://x/owncloud-9.0.0.tar.bz2
+<span class="hljs-comment"># 下载多个文件</span>
+aria2c -Z https://x/owncloud-9.0.0.tar.bz2 https://y/owncloud-9.0.0.tar.bz2
+<span class="hljs-comment"># 另存文件名字</span>
+aria2c -o owncloud.zip https://x/owncloud-9.0.0.tar.bz2
+<span class="hljs-comment"># 续传未完成的下载（中断使用.aria2后缀保存文件，下次重启任务后续传）</span>
+aria2c -c https://x/owncloud-9.0.0.tar.bz2
+<span class="hljs-comment"># 从文件获取输入（可传入URL列表）</span>
+aria2c -i <span class="hljs-built_in">test</span>-aria2.txt
+<span class="hljs-comment"># 其他</span>
+-D 后台下载
+--conf-path=<span class="hljs-string">"~/.aria2/aria2.conf"</span> 配置文件
+-s 设置线程数
+-max-download-limit 设置最大下载速度
+-x3 到服务器的连接数
+--http-user=xxx --http-password=xxx http密码下载
+--ftp-user=xxx --ftp-password=xxx ftp密码下载</code></pre><p>配置文件可参考：</p><pre><code class="hljs bash"><span class="hljs-comment">#用户名</span>
+<span class="hljs-comment">#rpc-user=user</span>
+<span class="hljs-comment">#密码</span>
+<span class="hljs-comment">#rpc-passwd=passwd</span>
+<span class="hljs-comment">#上面的认证方式不建议使用,建议使用下面的token方式</span>
+<span class="hljs-comment">#设置加密的密钥</span>
+<span class="hljs-comment">#rpc-secret=token</span>
+<span class="hljs-comment">#允许rpc</span>
+<span class="hljs-built_in">enable</span>-rpc=<span class="hljs-literal">true</span>
+<span class="hljs-comment">#允许所有来源, web界面跨域权限需要</span>
+rpc-allow-origin-all=<span class="hljs-literal">true</span>
+<span class="hljs-comment">#允许外部访问，false的话只监听本地端口</span>
+rpc-listen-all=<span class="hljs-literal">true</span>
+<span class="hljs-comment">#RPC端口, 仅当默认端口被占用时修改</span>
+<span class="hljs-comment">#rpc-listen-port=6800</span>
+<span class="hljs-comment">#最大同时下载数(任务数), 路由建议值: 3</span>
+max-concurrent-downloads=5
+<span class="hljs-comment">#断点续传</span>
+<span class="hljs-built_in">continue</span>=<span class="hljs-literal">true</span>
+<span class="hljs-comment">#同服务器连接数</span>
+max-connection-per-server=5
+<span class="hljs-comment">#最小文件分片大小, 下载线程数上限取决于能分出多少片, 对于小文件重要</span>
+min-split-size=10M
+<span class="hljs-comment">#单文件最大线程数, 路由建议值: 5</span>
+split=10
+<span class="hljs-comment">#下载速度限制</span>
+max-overall-download-limit=0
+<span class="hljs-comment">#单文件速度限制</span>
+max-download-limit=0
+<span class="hljs-comment">#上传速度限制</span>
+max-overall-upload-limit=0
+<span class="hljs-comment">#单文件速度限制</span>
+max-upload-limit=0
+<span class="hljs-comment">#断开速度过慢的连接</span>
+<span class="hljs-comment">#lowest-speed-limit=0</span>
+<span class="hljs-comment">#验证用，需要1.16.1之后的release版本</span>
+<span class="hljs-comment">#referer=*</span>
+<span class="hljs-comment">#文件保存路径, 默认为当前启动位置</span>
+dir=/Users/xxx/Downloads
+<span class="hljs-comment">#文件缓存, 使用内置的文件缓存, 如果你不相信Linux内核文件缓存和磁盘内置缓存时使用, 需要1.16及以上版本</span>
+<span class="hljs-comment">#disk-cache=0</span>
+<span class="hljs-comment">#另一种Linux文件缓存方式, 使用前确保您使用的内核支持此选项, 需要1.15及以上版本(?)</span>
+<span class="hljs-comment">#enable-mmap=true</span>
+<span class="hljs-comment">#文件预分配, 能有效降低文件碎片, 提高磁盘性能. 缺点是预分配时间较长</span>
+<span class="hljs-comment">#所需时间 none &lt; falloc ? trunc « prealloc, falloc和trunc需要文件系统和内核支持</span>
+file-allocation=prealloc</code></pre><p>设置WebUI可参考<a href="https://ziahamza.github.io/webui-aria2/" target="_blank" rel="noopener">链接</a>。</p><h3 id="HomeBrew"><a href="#HomeBrew" class="headerlink" title="HomeBrew"></a>HomeBrew</h3><pre><code class="hljs bash"><span class="hljs-comment">## 管理HomeBrew</span>
+<span class="hljs-comment"># 安装 HomeBrew</span>
+/usr/bin/ruby -e <span class="hljs-string">"<span class="hljs-variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)</span>"</span>
+<span class="hljs-comment"># 卸载 HomeBrew</span>
+ruby -e <span class="hljs-string">"<span class="hljs-variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)</span>"</span>
+<span class="hljs-comment"># 更新 HomeBrew</span>
+brew update
+<span class="hljs-comment"># 检视HomeBrew</span>
+brew doctor
+
+<span class="hljs-comment">## 管理软件</span>
+<span class="hljs-comment"># 安装卸载更新软件</span>
+brew install wget
+brew uninstall wget
+brew uograde wget
+<span class="hljs-comment"># 列出安装的软件</span>
+brew list
+<span class="hljs-comment"># 列出安装的软件信息</span>
+brew info wget
+<span class="hljs-comment"># 检查软件库</span>
+brew search wget
+
+<span class="hljs-comment">## 管理服务</span>
+<span class="hljs-comment"># 列出服务</span>
+brew services list
+<span class="hljs-comment"># 注销未使用服务</span>
+brew services cleanup
+<span class="hljs-comment"># 运行服务（不注册为跟随系统启动）</span>
+brew services run nginx
+<span class="hljs-comment"># 运行后台服务（注册为跟随系统启动）</span>
+brew services start nginx
+<span class="hljs-comment"># 暂停并注销服务</span>
+brew services stop nginx
+<span class="hljs-comment"># 重启并注册服务</span>
+brew services restart nginx</code></pre><blockquote><p>参考：</p><p><a href="https://wild-flame.github.io/guides/docs/mac-os-x-setup-guide/aria_2/readme" target="_blank" rel="noopener">https://wild-flame.github.io/guides/docs/mac-os-x-setup-guide/aria_2/readme</a></p><p><a href="https://www.linuxprobe.com/aria2-download.html" target="_blank" rel="noopener">https://www.linuxprobe.com/aria2-download.html</a></p><p><a href="https://segmentfault.com/a/1190000018928643" target="_blank" rel="noopener">https://segmentfault.com/a/1190000018928643</a></p></blockquote></article><hr><div><div class="post-metas mb-3"><div class="post-meta mr-3"><i class="iconfont icon-category"></i> <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a> <a class="hover-with-bg" href="/categories/%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/">使用手册</a></div><div class="post-meta"><i class="iconfont icon-tags"></i> <a class="hover-with-bg" href="/tags/aria2/">aria2</a> <a class="hover-with-bg" href="/tags/Homebrew/">Homebrew</a> <a class="hover-with-bg" href="/tags/Terminal/">Terminal</a></div></div><p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p><div class="post-prevnext row"><div class="post-prev col-6"></div><div class="post-next col-6"><a href="/2021/02/25/%E3%80%8A%E5%8F%B2%E8%92%82%E5%A4%AB%C2%B7%E4%B9%94%E5%B8%83%E6%96%AF%E4%BC%A0%E3%80%8B%E6%91%98%E5%BD%95/"><span class="hidden-mobile">《史蒂夫·乔布斯传》摘录</span> <span class="visible-mobile">下一篇</span> <i class="iconfont icon-arrowright"></i></a></div></div></div></div></div></div></div><div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn"><div id="toc"><p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p><div id="tocbot"></div></div></div></div></div></main><a id="scroll-top-button" href="#" role="button"><i class="iconfont icon-arrowup" aria-hidden="true"></i></a><div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable modal-lg" role="document"><div class="modal-content"><div class="modal-header text-center"><h4 class="modal-title w-100 font-weight-bold">Search</h4><button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body mx-3"><div class="md-form mb-5"><input type="text" id="local-search-input" class="form-control validate"> <label data-error="x" data-success="v" for="local-search-input">keyword</label></div><div class="list-group" id="local-search-result"></div></div></div></div></div><footer class="mt-5"><div class="text-center py-3"><div><a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a></div></div></footer><script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script><script src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script><script src="/js/main.js"></script><script src="/js/lazyload.js"></script><script src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js"></script><script>$(document).ready(function(){var t=$("#board-ctn").offset().top;tocbot.init({tocSelector:"#tocbot",contentSelector:".post-content",headingSelector:"h1,h2,h3,h4,h5,h6",linkClass:"tocbot-link",activeLinkClass:"tocbot-active-link",listClass:"tocbot-list",isCollapsedClass:"tocbot-is-collapsed",collapsibleClass:"tocbot-is-collapsible",collapseDepth:0,scrollSmooth:!0,headingsOffset:-t}),0<$(".toc-list-item").length&&$("#toc").css("visibility","visible")})</script><script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js"></script><script src="/js/clipboard-use.js"></script><script src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js"></script><script>var typed=new Typed("#subtitle",{strings:["  ","aria2与Homebrew简记&nbsp;"],cursorChar:"_",typeSpeed:70,loop:!1});typed.stop(),$(document).ready(function(){$(".typed-cursor").addClass("h2"),typed.start()})</script><script src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js"></script><script>anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))</script><script src="/js/local-search.js"></script><script>var path="/local-search.xml",inputArea=document.querySelector("#local-search-input");inputArea.onclick=function(){searchFunc(path,"local-search-input","local-search-result"),this.onclick=null}</script><script src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js"></script><link rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css"><script>$("#post img:not(.no-zoom img, img[no-zoom]), img[zoom]").each(function(){var t=document.createElement("a");$(t).attr("data-fancybox","images"),$(t).attr("href",$(this).attr("src")),$(this).wrap(t)})</script></body></html>
