@@ -84,9 +84,9 @@
       
       <tag>Docker</tag>
       
-      <tag>Dockerfile</tag>
-      
       <tag>Image</tag>
+      
+      <tag>Dockerfile</tag>
       
     </tags>
     
@@ -693,6 +693,33 @@
       <tag>Python</tag>
       
       <tag>conda</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Kali安装相关设置</title>
+    <link href="/2020/10/17/Kali%E5%AE%89%E8%A3%85%E7%9B%B8%E5%85%B3%E8%AE%BE%E7%BD%AE/"/>
+    <url>/2020/10/17/Kali%E5%AE%89%E8%A3%85%E7%9B%B8%E5%85%B3%E8%AE%BE%E7%BD%AE/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>Kali安装后进行一些常规设置，以此记录。</p></blockquote><h2 id="设置root用户"><a href="#设置root用户" class="headerlink" title="设置root用户"></a>设置root用户</h2><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sudo passwd</code></pre></div><h2 id="文件夹名"><a href="#文件夹名" class="headerlink" title="文件夹名"></a>文件夹名</h2><p>若安装系统时选择为中文安装，初始的用户文件夹将为中文用起来不方便。</p><p>先把系统语言改为英文，在终端中输入命令:  </p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">export LANG&#x3D;en_USxdg-user-dirs-gtk-update</code></pre></div><p>跳出对话框询问是否将目录转化为英文路径，同意并关闭。</p><p>再将系统语言改为中文，在终端中输入命令：</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">export LANG&#x3D;zh_CN</code></pre></div><p>重启系统，下次进入系统，系统会提示是否把转化好的目录改回中文，选择不再提示，并取消修改。主目录的中文转英文就完成了。</p><h2 id="换源与更新"><a href="#换源与更新" class="headerlink" title="换源与更新"></a>换源与更新</h2><p>修改<code>/etc/apt/sources.list </code>，注释掉原来的源，写入新的源。</p><div class="code-wrapper"><pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">deb http:&#x2F;&#x2F;mirrors.ustc.edu.cn&#x2F;kali kali-rolling main non-free contribdeb-src http:&#x2F;&#x2F;mirrors.ustc.edu.cn&#x2F;kali kali-rolling main non-free contrib</code></pre></div><p>更新：</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"># 根据源里面的metadata更新本地软件包信息，包括这个源有什么包, 每个包什么版本之类的apt-get update# 根据metadata更新本地软件，如果有依赖变化问题则不更新相应packageapt-get upgrade# 在更新新软件时会更新依赖apt-get dist-upgrade</code></pre></div><h2 id="Gnome"><a href="#Gnome" class="headerlink" title="Gnome"></a>Gnome</h2><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">apt-get install kali-desktop-gnome</code></pre></div><p>在中间选择<code>显示管理器</code>时，选择<code>gdm3</code>之后重启。</p><h3 id="gnome允许root登入"><a href="#gnome允许root登入" class="headerlink" title="gnome允许root登入"></a>gnome允许root登入</h3><p>将 <code>/etc/pam.d/gdm-password</code> 文件中的root登录检查注释掉即可。</p><div class="code-wrapper"><pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"># auth required pam_succeed_if.so user !&#x3D; root quiet_success</code></pre></div><h2 id="输入法"><a href="#输入法" class="headerlink" title="输入法"></a>输入法</h2><p>安装输入法框架</p><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">apt-get install fcitx</code></pre></div><p>安装谷歌输入法</p><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">apt-get install fcitx-googlepinyin</code></pre></div><p>重启</p><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">reboot</code></pre></div><p>在fcitx配置中将Google拼音设置为首选项。</p><h2 id="设置SSH"><a href="#设置SSH" class="headerlink" title="设置SSH"></a>设置SSH</h2><p>将<code>/etc/ssh/sshd_config</code>中</p><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none"># PermitRootLogin prohibit-password···# PasswordAuthentication yes</code></pre></div><p>改为：</p><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">PermitRootLogin yes···PasswordAuthentication yes</code></pre></div><p>启动服务并设为开机启动：</p><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">service ssh restartupdate-rc.d ssh enable</code></pre></div><h2 id="美化"><a href="#美化" class="headerlink" title="美化"></a>美化</h2><p>在<code>优化</code>中，可以选择<a href="https://www.gnome-look.org/p/1013714">主题</a>和<a href="https://www.opendesktop.org/p/1305429/">图标</a>等。放于<code>/usr/share/themes</code>与<code>/usr/share/icons</code>文件夹下可直接使用。</p><blockquote><p>参考：</p><p><a href="https://www.zhihu.com/question/64374670/answer/1354272784">https://www.zhihu.com/question/64374670/answer/1354272784</a></p></blockquote>]]></content>
+    
+    
+    <categories>
+      
+      <category>学习笔记</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Ubuntu</tag>
+      
+      <tag>Kali</tag>
       
     </tags>
     
