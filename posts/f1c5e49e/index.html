@@ -1,0 +1,167 @@
+<!DOCTYPE html><html lang="en" data-default-color-scheme="&#34;auto&#34;"><head><meta charset="UTF-8"><link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png"><link rel="icon" href="/img/favicon.png"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta name="theme-color" content="#2f4154"><meta name="description" content=""><meta name="author" content="LeeX0"><meta name="keywords" content=""><title>Python3-Cookbook第二章:字符串和文本(1) - LeeX0&#39;s blog</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css"><link rel="stylesheet" href="/lib/hint/hint.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css"><link rel="stylesheet" href="/css/main.css"><script id="fluid-configs">var Fluid=window.Fluid||{},CONFIG={hostname:"leex0.top",root:"/",version:"1.8.9-a",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},copy_btn:!0,image_zoom:{enable:!0},toc:{enable:!0,headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:1},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,baidu:null,google:null,gtag:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null}}}</script><script src="/js/utils.js"></script><script src="/js/color-schema.js"></script><meta name="generator" content="Hexo 5.4.0"></head><body><header style="height:70vh"><nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar"><div class="container"><a class="navbar-brand" href="/">&nbsp;<strong>LeeX0's blog</strong>&nbsp;</a> <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><div class="animated-icon"><span></span><span></span><span></span></div></button><div class="collapse navbar-collapse" id="navbarSupportedContent"><ul class="navbar-nav ml-auto text-center"><li class="nav-item"><a class="nav-link" href="/"><i class="iconfont icon-home-fill"></i> Home</a></li><li class="nav-item"><a class="nav-link" href="/archives/"><i class="iconfont icon-archive-fill"></i> Archives</a></li><li class="nav-item"><a class="nav-link" href="/categories/"><i class="iconfont icon-category-fill"></i> Categories</a></li><li class="nav-item"><a class="nav-link" href="/tags/"><i class="iconfont icon-tags-fill"></i> Tags</a></li><li class="nav-item"><a class="nav-link" href="/about/"><i class="iconfont icon-user-fill"></i> About</a></li><li class="nav-item" id="search-btn"><a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i class="iconfont icon-search"></i>&nbsp;</a></li><li class="nav-item" id="color-toggle-btn"><a class="nav-link" href="javascript:">&nbsp;<i class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a></li></ul></div></div></nav><div class="banner" id="banner" parallax="true" style="background:url(/img/Royal_BluePetrol.jpg) no-repeat center center;background-size:cover"><div class="full-bg-img"><div class="mask flex-center" style="background-color:rgba(0,0,0,.3)"><div class="page-header text-center fade-in-up"><span class="h2" id="subtitle" title="Python3-Cookbook第二章:字符串和文本(1)"></span><div class="mt-3"><span class="post-meta mr-2"><i class="iconfont icon-author" aria-hidden="true"></i> LeeX0 </span><span class="post-meta"><i class="iconfont icon-date-fill" aria-hidden="true"></i> <time datetime="2020-11-14 19:25" pubdate>November 14, 2020 pm</time></span></div><div class="mt-1"><span class="post-meta mr-2"><i class="iconfont icon-chart"></i> 1.6k 字 </span><span class="post-meta mr-2"><i class="iconfont icon-clock-fill"></i> 24 分钟</span></div></div></div></div></div></header><main><div class="container-fluid nopadding-x"><div class="row nomargin-x"><div class="d-none d-lg-block col-lg-2"></div><div class="col-lg-8 nopadding-x-md"><div class="container nopadding-x-md" id="board-ctn"><div class="py-5" id="board"><article class="post-content mx-auto"><h1 style="display:none">Python3-Cookbook第二章:字符串和文本(1)</h1><div class="markdown-body"><h4 id="2-1-使用多个界定符分割字符串"><a href="#2-1-使用多个界定符分割字符串" class="headerlink" title="2.1 使用多个界定符分割字符串"></a>2.1 使用多个界定符分割字符串</h4><div class="code-wrapper"><pre class="line-numbers language-python" data-language="python"><code class="language-python"># 使用多个界定符分割字符串
+
+&quot;&quot;&quot; 
+string 对象的 split() 方法只适应于非常简单的字符串分割情形。
+re.split() 方法可以更加灵活的切割字符串。
+&quot;&quot;&quot;
+import re
+line &#x3D; &#39;asdf fjdk; afed, fjek,asdf, foo&#39;
+# 表示可以通过;或,或空格或多个空格分隔
+re.split(r&#39;[;,\s]\s*&#39;, line)
+# Outputs
+# [&#39;asdf&#39;, &#39;fjdk&#39;, &#39;afed&#39;, &#39;fjek&#39;, &#39;asdf&#39;, &#39;foo&#39;]
+</code></pre></div><h4 id="2-2-字符串开头或结尾匹配"><a href="#2-2-字符串开头或结尾匹配" class="headerlink" title="2.2 字符串开头或结尾匹配"></a>2.2 字符串开头或结尾匹配</h4><div class="code-wrapper"><pre class="line-numbers language-python" data-language="python"><code class="language-python"># 字符串开头或结尾匹配
+
+&quot;&quot;&quot; 
+简单使用可以通过str.startswith() 或者是 str.endswith() 方法。
+如果需要多种匹配可以将匹配项作为元组（且必须是元组tuple()）传入上述方法。
+切片实现不优雅，正则实现较复杂，这种方式简单使用较方便。
+&quot;&quot;&quot;
+filename &#x3D; &#39;spam.txt&#39;
+filename.endswith(&#39;.txt&#39;)  # True
+filename.startswith(&#39;file:&#39;)  # False
+url &#x3D; &#39;http:&#x2F;&#x2F;www.python.org&#39;
+url.startswith(&#39;http:&#39;)  # True
+
+[name for name in filenames if name.endswith((&#39;.c&#39;, &#39;.h&#39;))]
+</code></pre></div><h4 id="2-3-用Shell通配符匹配字符串"><a href="#2-3-用Shell通配符匹配字符串" class="headerlink" title="2.3 用Shell通配符匹配字符串"></a>2.3 用Shell通配符匹配字符串</h4><div class="code-wrapper"><pre class="line-numbers language-python" data-language="python"><code class="language-python"># 用Shell通配符匹配字符串
+
+&quot;&quot;&quot; 
+fnmatch 模块提供了两个函数—— fnmatch() 和 fnmatchcase() ，可以用来实现这样的匹配。
+fnmatch()大小写敏感根据系统不同而不尽相同。fnmatchcase()大小写敏感。
+功能强度介于字符串与正则之间。
+&quot;&quot;&quot;
+from fnmatch import fnmatch, fnmatchcase
+fnmatch(&#39;foo.txt&#39;, &#39;*.txt&#39;)  # True
+fnmatch(&#39;foo.txt&#39;, &#39;?oo.txt&#39;)  # True
+fnmatch(&#39;Dat45.csv&#39;, &#39;Dat[0-9]*&#39;)  # True
+</code></pre></div><h4 id="2-4-字符串匹配和搜索"><a href="#2-4-字符串匹配和搜索" class="headerlink" title="2.4 字符串匹配和搜索"></a>2.4 字符串匹配和搜索</h4><div class="code-wrapper"><pre class="line-numbers language-python" data-language="python"><code class="language-python"># 字符串匹配和搜索
+
+&quot;&quot;&quot; 
+str.find() , str.endswith() , str.startswith() 或者类似的方法可做简单匹配。
+复杂匹配可以使用re模块与正则表达式。表达式多次使用可以预编译为模式对象。
+&quot;&quot;&quot;
+import re
+text1 &#x3D; &#39;11&#x2F;27&#x2F;2012&#39;
+text2 &#x3D; &#39;Nov 27, 2012&#39;
+if re.match(r&#39;\d+&#x2F;\d+&#x2F;\d+&#39;, text1):
+    print(&#39;yes&#39;)
+else:
+    print(&#39;no&#39;)
+if re.match(r&#39;\d+&#x2F;\d+&#x2F;\d+&#39;, text2):
+    print(&#39;yes&#39;)
+else:
+    print(&#39;no&#39;)
+
+# 预编译为模式对象
+# 字符串前的r表示字符串为raw string，即不会转义。如果此处没有r需要双反斜杠阅读性差。
+datepat &#x3D; re.compile(r&#39;\d+&#x2F;\d+&#x2F;\d+&#39;)
+if datepat.match(text1):
+    print(&#39;yes&#39;)
+else:
+    print(&#39;no&#39;)
+
+&quot;&quot;&quot; 
+match() 总是从字符串开始去匹配，如果你想查找字符串任意部分的模式出现位置， 使用 findall() 方法去代替。
+如果你想以迭代方式返回匹配，可以使用 finditer() 方法来代替。
+&quot;&quot;&quot;
+text &#x3D; &#39;Today is 11&#x2F;27&#x2F;2012. PyCon starts 3&#x2F;13&#x2F;2013.&#39;
+datepat.findall(text)
+# Outputs
+# [&#39;11&#x2F;27&#x2F;2012&#39;, &#39;3&#x2F;13&#x2F;2013&#39;]
+
+&quot;&quot;&quot; 
+使用括号去捕获分组，分别将每个组的内容提取出来。
+&quot;&quot;&quot;
+datepat &#x3D; re.compile(r&#39;(\d+)&#x2F;(\d+)&#x2F;(\d+)&#39;)
+m &#x3D; datepat.match(&#39;11&#x2F;27&#x2F;2012&#39;)
+# &lt;_sre.SRE_Match object at 0x1005d2750&gt;
+m.group(0)  # &#39;11&#x2F;27&#x2F;2012&#39;
+m.group(1)  # &#39;11&#39;
+m.group(2)  # &#39;27&#39;
+m.group(3)  # &#39;2012&#39;
+m.groups()  # (&#39;11&#39;, &#39;27&#39;, &#39;2012&#39;)
+
+# Find all matches (notice splitting into tuples)
+text &#x3D; &#39;Today is 11&#x2F;27&#x2F;2012. PyCon starts 3&#x2F;13&#x2F;2013.&#39;
+datepat.findall(text)
+[(&#39;11&#39;, &#39;27&#39;, &#39;2012&#39;), (&#39;3&#39;, &#39;13&#39;, &#39;2013&#39;)]
+for month, day, year in datepat.findall(text):
+    print(&#39;&#123;&#125;-&#123;&#125;-&#123;&#125;&#39;.format(year, month, day))
+</code></pre></div><h4 id="2-5-字符串搜索和替换"><a href="#2-5-字符串搜索和替换" class="headerlink" title="2.5 字符串搜索和替换"></a>2.5 字符串搜索和替换</h4><div class="code-wrapper"><pre class="line-numbers language-python" data-language="python"><code class="language-python"># 字符串搜索和替换
+
+&quot;&quot;&quot; 
+简单字面模式可以使用str.replace()。
+对于复杂的模式，请使用 re 模块中的 sub() 函数。
+&quot;&quot;&quot;
+# str.replace()
+import re
+text &#x3D; &#39;yeah, but no, but yeah, but no, but yeah&#39;
+text.replace(&#39;yeah&#39;, &#39;yep&#39;)
+# &#39;yep, but no, but yep, but no, but yep&#39;
+
+# re.sub()
+text &#x3D; &#39;Today is 11&#x2F;27&#x2F;2012. PyCon starts 3&#x2F;13&#x2F;2013.&#39;
+re.sub(r&#39;(\d+)&#x2F;(\d+)&#x2F;(\d+)&#39;, r&#39;\3-\1-\2&#39;, text)
+# &#39;Today is 2012-11-27. PyCon starts 2013-3-13.&#39;
+# sub() 函数中的第一个参数是被匹配的模式，第二个参数是替换模式。反斜杠数字比如 \3 指向前面模式的捕获组号。
+
+# 预编译
+datepat &#x3D; re.compile(r&#39;(\d+)&#x2F;(\d+)&#x2F;(\d+)&#39;)
+datepat.sub(r&#39;\3-\1-\2&#39;, text)
+</code></pre></div><h4 id="2-6-字符串忽略大小写的搜索替换"><a href="#2-6-字符串忽略大小写的搜索替换" class="headerlink" title="2.6 字符串忽略大小写的搜索替换"></a>2.6 字符串忽略大小写的搜索替换</h4><div class="code-wrapper"><pre class="line-numbers language-python" data-language="python"><code class="language-python"># 字符串忽略大小写的搜索替换
+
+&quot;&quot;&quot; 
+为了在文本操作时忽略大小写，你需要在使用 re 模块的时候给这些操作提供 re.IGNORECASE 标志参数。
+&quot;&quot;&quot;
+import re
+text &#x3D; &#39;UPPER PYTHON, lower python, Mixed Python&#39;
+re.findall(&#39;python&#39;, text, flags&#x3D;re.IGNORECASE)
+# [&#39;PYTHON&#39;, &#39;python&#39;, &#39;Python&#39;]
+re.sub(&#39;python&#39;, &#39;snake&#39;, text, flags&#x3D;re.IGNORECASE)
+# &#39;UPPER snake, lower snake, Mixed snake&#39;
+</code></pre></div><h4 id="2-7-最短模式匹配"><a href="#2-7-最短模式匹配" class="headerlink" title="2.7 最短模式匹配"></a>2.7 最短模式匹配</h4><div class="code-wrapper"><pre class="line-numbers language-python" data-language="python"><code class="language-python"># 最短模式匹配
+
+&quot;&quot;&quot; 
+通过正则表达式的限定符?改变匹配的模式为最短匹配。
+&quot;(.*)&quot;表示最长匹配双引号内的内容。
+&quot;(.*?)&quot;表示最短匹配双引号内的内容。
+&quot;&quot;&quot;
+import re
+str_pat &#x3D; re.compile(r&#39;&quot;(.*)&quot;&#39;)
+text1 &#x3D; &#39;Computer says &quot;no.&quot;&#39;
+str_pat.findall(text1)
+# [&#39;no.&#39;]
+text2 &#x3D; &#39;Computer says &quot;no.&quot; Phone says &quot;yes.&quot;&#39;
+str_pat.findall(text2)
+# [&#39;no.&quot; Phone says &quot;yes.&#39;]
+
+str_pat &#x3D; re.compile(r&#39;&quot;(.*?)&quot;&#39;)
+str_pat.findall(text2)
+# [&#39;no.&#39;, &#39;yes.&#39;]
+</code></pre></div><h4 id="2-8-多行匹配模式"><a href="#2-8-多行匹配模式" class="headerlink" title="2.8 多行匹配模式"></a>2.8 多行匹配模式</h4><div class="code-wrapper"><pre class="line-numbers language-python" data-language="python"><code class="language-python"># 多行匹配模式
+
+&quot;&quot;&quot; 
+当你用点(.)去匹配任意字符的时候，发现点(.)不能匹配换行符的事实。
+其中一种场景就是匹配C语言的跨行注释。
+&quot;&quot;&quot;
+import re
+# 该模式对象只能匹配未换行的注释
+comment &#x3D; re.compile(r&#39;&#x2F;\*(.*?)\*&#x2F;&#39;)
+# 修改模式增加对换行的支持
+# (?:.|*?)中，?:表示匹配但不获取(非捕获组)，|表示或关系，*？表示任意数量但最短匹配
+comment &#x3D; re.compile(r&#39;&#x2F;\*((?:.|\n)*?)\*&#x2F;&#39;)
+</code></pre></div><h4 id="2-9-将Unicode文本标准化"><a href="#2-9-将Unicode文本标准化" class="headerlink" title="2.9 将Unicode文本标准化"></a>2.9 将Unicode文本标准化</h4><div class="code-wrapper"><pre class="line-numbers language-python" data-language="python"><code class="language-python"># 将Unicode文本标准化
+
+&quot;&quot;&quot; 
+使用unicodedata模块将文本标准化
+&quot;&quot;&quot;
+import unicodedata
+s1 &#x3D; &#39;Spicy Jalape\u00f1o&#39;  # &#39;Spicy Jalapeño&#39;
+s2 &#x3D; &#39;Spicy Jalapen\u0303o&#39;  # &#39;Spicy Jalapeño&#39;
+s1 &#x3D;&#x3D; s2  # False
+
+t1 &#x3D; unicodedata.normalize(&#39;NFC&#39;, s1)
+t2 &#x3D; unicodedata.normalize(&#39;NFC&#39;, s2)
+t1 &#x3D;&#x3D; t2  # True
+</code></pre></div><h4><a href="#" class="headerlink"></a></h4><blockquote><p>参考：</p><p><a target="_blank" rel="noopener" href="https://python3-cookbook.readthedocs.io/zh_CN/latest/">https://python3-cookbook.readthedocs.io/zh_CN/latest/</a></p><p><a target="_blank" rel="noopener" href="https://github.com/yidao620c/python3-cookbook">https://github.com/yidao620c/python3-cookbook</a></p></blockquote></div><hr><div><div class="post-metas mb-3"><div class="post-meta mr-3"><i class="iconfont icon-category"></i> <a class="hover-with-bg" href="/categories/%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/">使用手册</a> <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a> <a class="hover-with-bg" href="/categories/Python3-Cookbook/">Python3-Cookbook</a></div><div class="post-meta"><i class="iconfont icon-tags"></i> <a class="hover-with-bg" href="/tags/Python/">Python</a> <a class="hover-with-bg" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/">字符串</a></div></div><p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p><div class="post-prevnext"><article class="post-prev col-6"><a href="/posts/dae8b75d/"><i class="iconfont icon-arrowleft"></i> <span class="hidden-mobile">Python3-Cookbook第二章:字符串和文本(2)</span> <span class="visible-mobile">Previous</span></a></article><article class="post-next col-6"><a href="/posts/d590dae/"><span class="hidden-mobile">Python3-Cookbook第一章:数据结构和算法(2)</span> <span class="visible-mobile">Next</span> <i class="iconfont icon-arrowright"></i></a></article></div></div></article></div></div></div><div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn"><div id="toc"><p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p><div class="toc-body" id="toc-body"></div></div></div></div></div><a id="scroll-top-button" href="#" role="button"><i class="iconfont icon-arrowup" aria-hidden="true"></i></a><div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable modal-lg" role="document"><div class="modal-content"><div class="modal-header text-center"><h4 class="modal-title w-100 font-weight-bold">Search</h4><button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body mx-3"><div class="md-form mb-5"><input type="text" id="local-search-input" class="form-control validate"> <label data-error="x" data-success="v" for="local-search-input">keyword</label></div><div class="list-group" id="local-search-result"></div></div></div></div></div></main><footer class="text-center mt-5 py-3"><div class="footer-content"><a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a></div></footer><script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css"><script>NProgress.configure({showSpinner:!1,trickleSpeed:100}),NProgress.start(),window.addEventListener("load",(function(){NProgress.done()}))</script><script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script><script src="/js/debouncer.js"></script><script src="/js/events.js"></script><script src="/js/plugins.js"></script><script src="/js/img-lazyload.js"></script><script src="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/components/prism-core.min.js"></script><script src="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.js"></script><script src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js"></script><script>!function(t,i){(0,Fluid.plugins.typing)(i.getElementById("subtitle").title)}(window,document)</script><script src="/js/local-search.js"></script><script>$("#local-search-input").on("click",(function(){searchFunc("/local-search.xml","local-search-input","local-search-result")})),$("#modalSearch").on("shown.bs.modal",(function(){$("#local-search-input").focus()}))</script><script src="/js/boot.js"></script></body></html>
