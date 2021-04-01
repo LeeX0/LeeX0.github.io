@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>Hexo链接优化:abbrlink</title>
+    <link href="/posts/6e344d64/"/>
+    <url>/posts/6e344d64/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p><code>Hexo</code>博客的链接如果显示中文，在一些场景的超链接识别可能不完全，如果使用转码则中文转码较长较乱。</p><p>这里使用<a href="https://github.com/rozbo/hexo-abbrlink">hexo-abbrlink</a>插件进行优化链接。</p></blockquote><h3 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h3><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">npm install hexo-abbrlink --save</code></pre></div><h3 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h3><div class="code-wrapper"><pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">permalink: posts&#x2F;:abbrlink&#x2F;## abbrlink confabbrlink:  alg: crc32  # 算法：crc16(default) and crc32  rep: hex    # 进制：dec(default) and hex</code></pre></div><p>之后<code>md</code>文件的<code>Front-matter</code> 内会增加<code>abbrlink</code> 字段。无需操作。</p><blockquote><p><a href="https://github.com/rozbo/hexo-abbrlink">https://github.com/rozbo/hexo-abbrlink</a></p></blockquote>]]></content>
+    
+    
+    <categories>
+      
+      <category>日常</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>blog</tag>
+      
+      <tag>Hexo</tag>
+      
+      <tag>abbrlink</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Cocktail Formulas</title>
     <link href="/posts/56b5b661/"/>
     <url>/posts/56b5b661/</url>
