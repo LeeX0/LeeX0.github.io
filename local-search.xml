@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>Mac删除Launchpad残留图标</title>
+    <link href="/posts/98807702/"/>
+    <url>/posts/98807702/</url>
+    
+    <content type="html"><![CDATA[<p>在<code>finder</code>中前往<code>/private/var/folders</code>。</p><p>在<code>folders</code>中搜索<code>com.apple.dock.launchpad</code>。</p><p>在<code>终端</code>进入<code>com.apple.dock.launchpad/db</code>目录</p><p>执行以下命令，<code>What you want del</code>为你想要清除的残留图标名。</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sqlite3 db &quot;delete from apps where title&#x3D;&#39;What you want del&#39;;&quot;&amp;&amp;killall Dock</code></pre></div>]]></content>
+    
+    
+    <categories>
+      
+      <category>日常</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>MacOS</tag>
+      
+      <tag>Launchpad</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Hexo链接优化:abbrlink</title>
     <link href="/posts/6e344d64/"/>
     <url>/posts/6e344d64/</url>
@@ -492,11 +519,11 @@
     
     <tags>
       
+      <tag>摘录</tag>
+      
       <tag>假面山庄</tag>
       
       <tag>东野圭吾</tag>
-      
-      <tag>摘录</tag>
       
     </tags>
     
@@ -614,11 +641,11 @@
     
     <tags>
       
-      <tag>摘录</tag>
-      
       <tag>局外人</tag>
       
       <tag>阿尔贝·加缪</tag>
+      
+      <tag>摘录</tag>
       
     </tags>
     
