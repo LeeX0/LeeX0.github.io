@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>SetUID、SetGID与Sticky BIT</title>
+    <link href="/posts/8ee6b0b9/"/>
+    <url>/posts/8ee6b0b9/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>Linux除了我们常见的读(r)写(w)执行(x)权限外，还有三个较为特殊的权限SetUID、SetGID与Sticky BIT。</p></blockquote><h2 id="1-SetUID与SetGID"><a href="#1-SetUID与SetGID" class="headerlink" title="1. SetUID与SetGID"></a>1. SetUID与SetGID</h2><p>通常对于可执行程序能够设定<code>SetUID</code>权限，且命令执行者需要对该程序拥有<code>x</code>权限。</p><p><strong>设定<code>SetUID</code>权限后，命令执行者在执行程序时获得程序拥有者的身份，且身份改变仅在执行过程中有效。</strong></p><p>例：修改用户<code>passwd</code></p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ ll &#x2F;etc&#x2F;passwd &#x2F;etc&#x2F;shadow &#x2F;usr&#x2F;bin&#x2F;passwd-rw-r--r-- 1 root root    3360  3月 30 15:40 &#x2F;etc&#x2F;passwd-rw-r----- 1 root shadow  1808  3月 30 15:40 &#x2F;etc&#x2F;shadow-rwsr-xr-x 1 root root   63960  2月  7  2020 &#x2F;usr&#x2F;bin&#x2F;passwd</code></pre></div><ul><li><p>可以看到普通用户并没有对<code>/etc/passwd</code>与<code>/etc/shadow</code>具有执行修改权限。但在实际使用需求上是有修改自己password的需求。</p></li><li><p>所以在用户的<code>/usr/bin/passwd</code>程序中，设置了<code>SetUID</code>即拥有者权限中的<code>s</code>。</p></li><li><p>可以看到<code>Others</code>用户具有可执行权限<code>x</code>，而程序拥有者设定了<code>SetUID</code>，同时程序拥有者为<code>root</code>。</p></li><li><p>所以<code>Others</code>用户在执行<code>/usr/bin/passwd</code>时，会临时获得<code>root</code>权限，从而能修改密码。</p></li></ul><blockquote><p>SetGID与SetUID原理基本相同。</p></blockquote><h2 id="2-Sticky-BIT"><a href="#2-Sticky-BIT" class="headerlink" title="2. Sticky BIT"></a>2. Sticky BIT</h2><p>通常对于目录能够设定<code>Sticky BIT</code>。用于避免非文件拥有者误操作文件。</p><p>例：对于<code>/tmp</code>目录所有用户都具有操作权限，但任何人创建的文件能被其他人任意修改与删除可能会带来错误。</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ ll -d &#x2F;tmpdrwxrwxrwt 19 root root 4096  4月 15 09:39 &#x2F;tmp</code></pre></div><p><strong>可以通过对<code>/tmp</code>目录设定<code>Sticky BIT</code>即权限最后的<code>t</code>，来保证其中的文件仅能够被文件拥有者修改。</strong></p><h2 id="3-权限修改"><a href="#3-权限修改" class="headerlink" title="3. 权限修改"></a>3. 权限修改</h2><p>在常规的<em>777</em>类型的模式下设置权限，在最前面增加一位设置<code>SetUID</code>、<code>SetGID</code>与<code>Sticky BIT</code>即可，分别对应4、2、1。或通过增加权限的方式。</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"># 设置具有SetUID但其他用户只读的权限chmod 4744 filename# 设置setuid权限chmod u+s filename  # 设置setgid权限chmod g+s filename  # 设置stick bit权限，针对目录chmod o+t dirname  </code></pre></div><blockquote><p>参考:</p><p><a href="https://blog.csdn.net/wxbmelisky/article/details/51649343">https://blog.csdn.net/wxbmelisky/article/details/51649343</a></p><p><a href="https://www.jianshu.com/p/70f9ea162ca9">https://www.jianshu.com/p/70f9ea162ca9</a></p></blockquote>]]></content>
+    
+    
+    <categories>
+      
+      <category>学习笔记</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Linux</tag>
+      
+      <tag>权限</tag>
+      
+      <tag>SetUID</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>VSCode中配置Go相关插件失败问题</title>
     <link href="/posts/3d084d62/"/>
     <url>/posts/3d084d62/</url>
@@ -606,11 +635,11 @@
     
     <tags>
       
+      <tag>摘录</tag>
+      
       <tag>假面山庄</tag>
       
       <tag>东野圭吾</tag>
-      
-      <tag>摘录</tag>
       
     </tags>
     
@@ -728,11 +757,11 @@
     
     <tags>
       
-      <tag>摘录</tag>
-      
       <tag>局外人</tag>
       
       <tag>阿尔贝·加缪</tag>
+      
+      <tag>摘录</tag>
       
     </tags>
     
