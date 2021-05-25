@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>Suricata安装测试</title>
+    <link href="/posts/1c458c9b/"/>
+    <url>/posts/1c458c9b/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p><a href="https://suricata-ids.org/">Suricata</a>是一个免费和开源，成熟，快速且强大的网络威胁检测引擎。</p><p>Suricata引擎能够进行实时入侵检测（IDS），内联入侵防御（IPS），网络安全监控（NSM）和离线pcap处理。Suricata使用强大而广泛的规则和签名语言检查网络流量，并具有强大的Lua脚本支持来检测复杂的威胁。通过YAML和JSON之类的标准输入和输出格式，与现有SIEM，Splunk，Logstash / Elasticsearch，Kibana和其他数据库之类的工具的集成变得毫不费力。</p></blockquote><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"># Recommended dependencyapt-get install libpcre3 libpcre3-dbg libpcre3-dev build-essential libpcap-dev   \                libnet1-dev libyaml-0-2 libyaml-dev pkg-config zlib1g zlib1g-dev \                libcap-ng-dev libcap-ng0 make libmagic-dev         \                libgeoip-dev liblua5.1-dev libhiredis-dev libevent-dev \                python-yaml rustc cargo#  Binary packages - Ubuntusudo add-apt-repository ppa:oisf&#x2F;suricata-stablesudo apt-get update# &#96;jq&#96; help with displaying information from Suricata’s EVE JSON outputsudo apt-get install suricata jq# Verify Installationsudo suricata --build-infosudo systemctl status suricata# Outputs：● suricata.service - LSB: Next Generation IDS&#x2F;IPS   Loaded: loaded (&#x2F;etc&#x2F;init.d&#x2F;suricata; bad; vendor preset: enabled)   Active: active (exited) since 二 2021-05-25 15:29:42 CST; 2min 27s ago     Docs: man:systemd-sysv-generator(8)5月 25 15:29:42 ubuntu systemd[1]: Starting LSB: Next Generation IDS&#x2F;IPS...5月 25 15:29:42 ubuntu suricata[39360]: Starting suricata in IDS (af-packet) mode... done.5月 25 15:29:42 ubuntu systemd[1]: Starte™£d LSB: Next Generation IDS&#x2F;IPS.# update rules: merge the lastet rules to &#x2F;etc&#x2F;suricata&#x2F;rules&#x2F;*suricate-update</code></pre></div><h2 id="网卡配置"><a href="#网卡配置" class="headerlink" title="网卡配置"></a>网卡配置</h2><p><code>vim /etc/suricata/suricata.yaml</code></p><p>本例中，网卡为<code>ens33</code></p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"># Linux high speed capture supportaf-packet:  - interface: ens33    # Number of receive threads. &quot;auto&quot; uses the number of cores......# default rulesdefault-rule-path: &#x2F;var&#x2F;lib&#x2F;suricata&#x2F;rulesrule-files:  - suricata.rules</code></pre></div><p>修改完成后重启服务<code>systemctl restart suricata</code></p><h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>使用<code>2100498</code>规则进行测试。规则可在<code>/var/lib/suricata/rules/suricata.rules</code>查看：</p><div class="code-wrapper"><pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">alert ip any any -&gt; any any (msg:&quot;GPL ATTACK_RESPONSE id check returned root&quot;; content:&quot;uid&#x3D;0|28|root|29|&quot;; classtype:bad-unknown; sid:2100498; rev:7; metadata:created_at 2010_09_23, updated_at 2010_09_23;)</code></pre></div><p><code>tail</code>查看<code>fast.log</code>文件，运行<code>curl http://testmynids.org/uid/index.html</code>。可看到log文件中，增加到了监测内容。</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"># path of log filesfastlog_file:&quot;&#x2F;var&#x2F;log&#x2F;suricata&#x2F;fast.log&quot;log_file:&quot;&#x2F;var&#x2F;log&#x2F;suricata&#x2F;suricata.log&quot;statistics_file:&quot;&#x2F;var&#x2F;log&#x2F;suricata&#x2F;stats.log&quot;suricata tail -f fast.log # Outputs:05&#x2F;25&#x2F;2021-17:10:53.943090  [**] [1:2013028:5] ET POLICY curl User-Agent Outbound [**] [Classification: Attempted Information Leak] [Priority: 2] &#123;TCP&#125; 192.168.205.6:50856 -&gt; 13.225.103.101:8005&#x2F;25&#x2F;2021-17:10:54.040108  [**] [1:2100498:7] GPL ATTACK_RESPONSE id check returned root [**] [Classification: Potentially Bad Traffic] [Priority: 2] &#123;TCP&#125; 13.225.103.101:80 -&gt; 192.168.205.6:50856</code></pre></div><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">curl http:&#x2F;&#x2F;testmynids.org&#x2F;uid&#x2F;index.html# Outputs:uid&#x3D;0(root) gid&#x3D;0(root) groups&#x3D;0(root)</code></pre></div><blockquote><p>参考：</p><p><a href="https://suricata.readthedocs.io/en/latest/">https://suricata.readthedocs.io/en/latest/</a></p></blockquote>]]></content>
+    
+    
+    <categories>
+      
+      <category>项目组</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Suricata</tag>
+      
+      <tag>入侵检测</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>SetUID、SetGID与Sticky BIT</title>
     <link href="/posts/8ee6b0b9/"/>
     <url>/posts/8ee6b0b9/</url>
@@ -337,9 +364,9 @@
       
       <tag>Docker</tag>
       
-      <tag>Dockerfile</tag>
-      
       <tag>Image</tag>
+      
+      <tag>Dockerfile</tag>
       
     </tags>
     
