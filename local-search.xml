@@ -4,11 +4,42 @@
   
   
   <entry>
+    <title>Hexo Fluid主题颜色修改</title>
+    <link href="/posts/c31bada6/"/>
+    <url>/posts/c31bada6/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p><code>Hexo Fluid</code>当前配色下，段内代码显示不明显，更改一下配色。</p><p>更改段内代码配色后顺便修改了配套的超链接配色。</p></blockquote><h2 id="1-定位"><a href="#1-定位" class="headerlink" title="1. 定位"></a>1. 定位</h2><p>段内代码的样式在<code>Blog/node_modules/hexo-theme-fluid/layout/_partial/css.ejs</code>中指明为</p><div class="code-wrapper"><pre class="line-numbers language-css" data-language="css"><code class="language-css">&lt;%- css_ex(theme.static_prefix.github_markdown, &#39;github-markdown.min.css&#39;) %&gt;</code></pre></div><p>其中前缀在<code>Blog/_config.fluid.yml</code>中指明为</p><div class="code-wrapper"><pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">github_markdown: https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;github-markdown-css@4.0.0&#x2F;</code></pre></div><h2 id="2-修改内容"><a href="#2-修改内容" class="headerlink" title="2. 修改内容"></a>2. 修改内容</h2><h3 id="2-1-静态css"><a href="#2-1-静态css" class="headerlink" title="2.1 静态css"></a>2.1 静态css</h3><p>可以将<code>github-markdown.min.css</code>修改后放入<code>Blog/node_modules/hexo-theme-fluid/source/lib/github-markdown</code>。</p><p>在<code>Blog/_config.fluid.yml</code>中指明内部静态位置</p><div class="code-wrapper"><pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">github_markdown: &#x2F;lib&#x2F;github_markdown</code></pre></div><h3 id="2-2-覆盖"><a href="#2-2-覆盖" class="headerlink" title="2.2 覆盖"></a>2.2 覆盖</h3><p>直接修改<code>Blog/node_modules/hexo-theme-fluid/source/css/_pages/_post/post.styl</code>内容，会覆盖<code>github-markdown.min.css</code>展示。</p><p>此处我仅修改了<code>markdown</code>中段内代码样式，在文件尾增加</p><div class="code-wrapper"><pre class="line-numbers language-stylus" data-language="stylus"><code class="language-stylus">.markdown-body code&#123;  color #6f708f  background #edf0f7&#125;</code></pre></div><h2 id="2-3-超链接"><a href="#2-3-超链接" class="headerlink" title="2.3 超链接"></a>2.3 超链接</h2><p>修改段内代码颜色后，想要修改超链接颜色保持一致。</p><p>Fluid的配置文件<code>Blog/_config.fluid.yml</code>中提供选项修改。</p><div class="code-wrapper"><pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">color:···  # 文章超链接字体色  # Color of post link  post_link_color: &quot;#0366d6&quot;  post_link_color_dark: &quot;#1589e9&quot;# 修改为：color:···  # 文章超链接字体色  # Color of post link  post_link_color: &quot;#ad86a4&quot;  post_link_color_dark: &quot;#1589e9&quot;</code></pre></div><hr><blockquote><p>参考：</p><p>Fluid配置指南：<a href="https://hexo.fluid-dev.com/docs/guide/">https://hexo.fluid-dev.com/docs/guide/</a></p><p>颜色搭配：<a href="https://www.webdesignrankings.com/resources/lolcolors/">https://www.webdesignrankings.com/resources/lolcolors/</a></p><p>Fluid mod：<a href="https://github.com/lirengui/hexo-theme-fluid-mod/">https://github.com/lirengui/hexo-theme-fluid-mod/</a></p></blockquote>]]></content>
+    
+    
+    <categories>
+      
+      <category>日常</category>
+      
+      <category>博客</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>blog</tag>
+      
+      <tag>Hexo</tag>
+      
+      <tag>Fluid</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Whisky拼图</title>
     <link href="/posts/8946ac01/"/>
     <url>/posts/8946ac01/</url>
     
-    <content type="html"><![CDATA[<blockquote><p>努力完成Whisky拼图</p><p>持续更新</p></blockquote><p><img src="/image/Whisky%E6%8B%BC%E5%9B%BE/whisky.png"></p><h2 id="调和威士忌"><a href="#调和威士忌" class="headerlink" title="调和威士忌"></a>调和威士忌</h2><h4 id="Chivas（芝华士）——木质感"><a href="#Chivas（芝华士）——木质感" class="headerlink" title="Chivas（芝华士）——木质感"></a>Chivas（芝华士）——木质感</h4><h4 id="JohnnieWalker——主打烟熏"><a href="#JohnnieWalker——主打烟熏" class="headerlink" title="JohnnieWalker——主打烟熏"></a>JohnnieWalker——主打烟熏</h4><h4 id="Ballantine’s（百龄坛）——轻烟熏"><a href="#Ballantine’s（百龄坛）——轻烟熏" class="headerlink" title="Ballantine’s（百龄坛）——轻烟熏"></a>Ballantine’s（百龄坛）——轻烟熏</h4><h4 id="Label5——轻烟熏，麦芽含量30-较高"><a href="#Label5——轻烟熏，麦芽含量30-较高" class="headerlink" title="Label5——轻烟熏，麦芽含量30%较高"></a>Label5——轻烟熏，麦芽含量30%较高</h4><h4 id="Grant’s——酒精强烈，木质单宁重"><a href="#Grant’s——酒精强烈，木质单宁重" class="headerlink" title="Grant’s——酒精强烈，木质单宁重"></a>Grant’s——酒精强烈，木质单宁重</h4><h4 id="The-Famous-Grouse（威雀）——糖糖的，木质单宁"><a href="#The-Famous-Grouse（威雀）——糖糖的，木质单宁" class="headerlink" title="The Famous Grouse（威雀）——糖糖的，木质单宁"></a>The Famous Grouse（威雀）——糖糖的，木质单宁</h4><h4 id="KAKU角牌——清淡"><a href="#KAKU角牌——清淡" class="headerlink" title="KAKU角牌——清淡"></a>KAKU角牌——清淡</h4><h2 id="单一麦芽"><a href="#单一麦芽" class="headerlink" title="单一麦芽"></a>单一麦芽</h2><h4 id="The-Glenlivet（格兰威特）——波本，比较浅的琥珀色，经典的青草味道，青草和奶油味道作为主轴，后调带一些水果的味道-像是青苹果、凤梨，口味算是蛮清新"><a href="#The-Glenlivet（格兰威特）——波本，比较浅的琥珀色，经典的青草味道，青草和奶油味道作为主轴，后调带一些水果的味道-像是青苹果、凤梨，口味算是蛮清新" class="headerlink" title="The Glenlivet（格兰威特）——波本，比较浅的琥珀色，经典的青草味道，青草和奶油味道作为主轴，后调带一些水果的味道 像是青苹果、凤梨，口味算是蛮清新"></a>The Glenlivet（格兰威特）——波本，比较浅的琥珀色，经典的青草味道，青草和奶油味道作为主轴，后调带一些水果的味道 像是青苹果、凤梨，口味算是蛮清新</h4><h4 id="Macallan（麦卡伦）——雪莉，较深的琥珀色带一点棕红（这也是麦卡伦自己很标榜的the-natural-color自然酒色-不加焦糖色）"><a href="#Macallan（麦卡伦）——雪莉，较深的琥珀色带一点棕红（这也是麦卡伦自己很标榜的the-natural-color自然酒色-不加焦糖色）" class="headerlink" title="Macallan（麦卡伦）——雪莉，较深的琥珀色带一点棕红（这也是麦卡伦自己很标榜的the natural color自然酒色 不加焦糖色）"></a>Macallan（麦卡伦）——雪莉，较深的琥珀色带一点棕红（这也是麦卡伦自己很标榜的the natural color自然酒色 不加焦糖色）</h4>]]></content>
+    <content type="html"><![CDATA[<blockquote><p>努力完成Whisky拼图</p><p>持续更新</p></blockquote><p><img src="/image/Whisky%E6%8B%BC%E5%9B%BE/whisky.png"></p><h2 id="调和威士忌"><a href="#调和威士忌" class="headerlink" title="调和威士忌"></a>调和威士忌</h2><p><code>Chivas</code>（芝华士）——木质感</p><p><code>JohnnieWalker</code>——主打烟熏</p><p><code>Ballantine&#39;s</code>（百龄坛）——轻烟熏</p><p><code>Label5</code>——轻烟熏，麦芽含量30%较高</p><p><code>Grant&#39;s</code>——酒精强烈，木质单宁重</p><p><code>The Famous Grouse</code>（威雀）——糖糖的，木质单宁</p><p><code>KAKU</code>（角牌）——清淡</p><h2 id="单一麦芽"><a href="#单一麦芽" class="headerlink" title="单一麦芽"></a>单一麦芽</h2><p><code>The Glenlivet</code>（格兰威特）——波本，比较浅的琥珀色，经典的青草味道，青草和奶油味道作为主轴，后调带一些水果的味道 像是青苹果、凤梨，口味算是蛮清新</p><p><code>Macallan</code>（麦卡伦）——雪莉，较深的琥珀色带一点棕红（这也是麦卡伦自己很标榜的the natural color自然酒色 不加焦糖色）</p>]]></content>
     
     
     <categories>
@@ -35,7 +66,7 @@
     <link href="/posts/19bbe961/"/>
     <url>/posts/19bbe961/</url>
     
-    <content type="html"><![CDATA[<blockquote><p>微醺日记——清单</p><p>持续更新</p></blockquote><h2 id="Whisky"><a href="#Whisky" class="headerlink" title="Whisky"></a>Whisky</h2><h3 id="Whisky-Sour（威士忌酸）"><a href="#Whisky-Sour（威士忌酸）" class="headerlink" title="Whisky Sour（威士忌酸）"></a><code>Whisky Sour</code>（威士忌酸）</h3><blockquote><p><code>Daiquiri大吉利</code>——烈酒+柑橘酸+糖浆</p><p>属于酸＋甜结构。更改基酒核心即可（威士忌酸，白兰地酸，金酒酸，伏特加酸等）<a href="https://leex0.top/posts/56b5b661/">参考</a></p></blockquote><p><strong>40ml Whisky + 15ml 蜂蜜糖浆 + 挤半个柠檬</strong> ，满冰Shake壶Shake it，倒入Martini杯，挤柠檬皮油并装饰<br><em>tips：喜欢清爽感可以再加气泡水</em></p><blockquote><p>关于糖浆</p><p>单糖浆：水煮沸（冷水也可以）加入等量白砂糖，完全溶解冷藏</p><p>蜂蜜糖浆：将半杯水和半杯蜂蜜加入锅中，一边中火慢煮，一边搅拌至混合，等水煮干后滤入瓶中，用盖子密封，可在冰箱中保存1个月（用的蜂蜜越多，糖浆就越稠，味道就越浓）</p><p>别的各种品类糖浆可以直接购买成品</p></blockquote><h3 id="Jim-Beam-Highball"><a href="#Jim-Beam-Highball" class="headerlink" title="Jim Beam Highball"></a><code>Jim Beam Highball</code></h3><p><strong>40ml Bourbon Whisky + 120ml 苏打水</strong>，满冰Highball杯，可加适量柠檬与薄荷等</p><h3 id="Jim-Beam-Ginger-Highball"><a href="#Jim-Beam-Ginger-Highball" class="headerlink" title="Jim Beam Ginger Highball"></a><code>Jim Beam Ginger Highball</code></h3><p><strong>40ml Bourbon Whisky + 5-10ml 柠檬汁 + 100ml 姜汁汽水</strong>，满冰Highball杯</p><h3 id="Jim-Beam-Cola-Highball"><a href="#Jim-Beam-Cola-Highball" class="headerlink" title="Jim Beam Cola Highball"></a><code>Jim Beam Cola Highball</code></h3><p><strong>40ml Bourbon Whisky + 5-10ml 柠檬汁 + 适量可乐</strong></p><h2 id="Gin"><a href="#Gin" class="headerlink" title="Gin"></a>Gin</h2><h3 id="Gin-Tonic（金汤力）"><a href="#Gin-Tonic（金汤力）" class="headerlink" title="Gin Tonic（金汤力）"></a><code>Gin Tonic</code>（金汤力）</h3><p><strong>40ml 金酒 + 120ml 汤力水</strong>，满冰Highball杯，吧勺上下搅拌勾匀，喷挤柠檬皮油</p><h2 id="Vodka"><a href="#Vodka" class="headerlink" title="Vodka"></a>Vodka</h2><h3 id="Vodka-Lemon"><a href="#Vodka-Lemon" class="headerlink" title="Vodka Lemon"></a><code>Vodka Lemon</code></h3><p><strong>40ml Vodka + 挤半个柠檬切角</strong>，大块冰块，喷挤柠檬皮油</p><h3 id="Vodka-Soda"><a href="#Vodka-Soda" class="headerlink" title="Vodka Soda"></a><code>Vodka Soda</code></h3><p>Vodka Lemon基础上换成Highball杯，<strong>苏打水加满</strong></p><h3 id="Vodka-Lemon-Drop"><a href="#Vodka-Lemon-Drop" class="headerlink" title="Vodka Lemon Drop"></a><code>Vodka Lemon Drop</code></h3><p><strong>50ml Vodka + 15ml糖浆 +  挤半个柠檬</strong>，满冰Shake壶Shake it，倒入shot杯，搭配粘上糖粉的柠檬角（喝完酒吃）</p><h2 id="Rum"><a href="#Rum" class="headerlink" title="Rum"></a>Rum</h2><h3 id="Mojito（莫吉托）"><a href="#Mojito（莫吉托）" class="headerlink" title="Mojito（莫吉托）"></a><code>Mojito</code>（莫吉托）</h3><p><strong>1shot朗姆酒 + 2匙糖 + 青柠薄荷 + 气泡水</strong>，冰块与碎冰大半杯</p><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="百利甜奶茶"><a href="#百利甜奶茶" class="headerlink" title="百利甜奶茶"></a><code>百利甜奶茶</code></h3><p><strong>1shot 百利甜 + 120ml 奶茶</strong>，满冰Highball杯，打发奶泡倒在最上面</p>]]></content>
+    <content type="html"><![CDATA[<blockquote><p>微醺日记——清单</p><p>持续更新</p></blockquote><h2 id="Whisky"><a href="#Whisky" class="headerlink" title="Whisky"></a>Whisky</h2><h3 id="Whisky-Sour（威士忌酸）"><a href="#Whisky-Sour（威士忌酸）" class="headerlink" title="Whisky Sour（威士忌酸）"></a><code>Whisky Sour</code>（威士忌酸）</h3><blockquote><p><code>Daiquiri大吉利</code>——烈酒+柑橘酸+糖浆</p><p>属于酸＋甜结构。更改基酒核心即可（威士忌酸，白兰地酸，金酒酸，伏特加酸等）<a href="https://leex0.top/posts/56b5b661/">参考</a></p></blockquote><p><strong>40ml Whisky + 15ml 蜂蜜糖浆 + 挤半个柠檬</strong> ，满冰Shake壶Shake it，倒入Martini杯，挤柠檬皮油并装饰<br><em>tips：喜欢清爽感可以再加气泡水</em></p><blockquote><p>关于糖浆</p><p>单糖浆：水煮沸（冷水也可以）加入等量白砂糖，完全溶解冷藏</p><p>蜂蜜糖浆：将半杯水和半杯蜂蜜加入锅中，一边中火慢煮，一边搅拌至混合，等水煮干后滤入瓶中，用盖子密封，可在冰箱中保存1个月（用的蜂蜜越多，糖浆就越稠，味道就越浓）</p><p>别的各种品类糖浆可以直接购买成品</p></blockquote><h3 id="Jim-Beam-Highball"><a href="#Jim-Beam-Highball" class="headerlink" title="Jim Beam Highball"></a><code>Jim Beam Highball</code></h3><p><strong>40ml Bourbon Whisky + 120ml 苏打水</strong>，满冰Highball杯，可加适量柠檬与薄荷等</p><h3 id="Jim-Beam-Ginger-Highball"><a href="#Jim-Beam-Ginger-Highball" class="headerlink" title="Jim Beam Ginger Highball"></a><code>Jim Beam Ginger Highball</code></h3><p><strong>40ml Bourbon Whisky + 5-10ml 柠檬汁 + 100ml 姜汁汽水</strong>，满冰Highball杯</p><h3 id="Jim-Beam-Cola-Highball"><a href="#Jim-Beam-Cola-Highball" class="headerlink" title="Jim Beam Cola Highball"></a><code>Jim Beam Cola Highball</code></h3><p><strong>40ml Bourbon Whisky + 5-10ml 柠檬汁 + 适量可乐</strong></p><h3 id="Mizuwari（水割）"><a href="#Mizuwari（水割）" class="headerlink" title="Mizuwari（水割）"></a><code>Mizuwari</code>（水割）</h3><p>50ml 三得利角牌 + 150ml 水，满冰冻酒杯，搅拌至起霜</p><h2 id="Gin"><a href="#Gin" class="headerlink" title="Gin"></a>Gin</h2><h3 id="Gin-Tonic（金汤力）"><a href="#Gin-Tonic（金汤力）" class="headerlink" title="Gin Tonic（金汤力）"></a><code>Gin Tonic</code>（金汤力）</h3><p><strong>40ml 金酒 + 120ml 汤力水</strong>，满冰Highball杯，吧勺上下搅拌勾匀，喷挤柠檬皮油</p><h2 id="Vodka"><a href="#Vodka" class="headerlink" title="Vodka"></a>Vodka</h2><h3 id="Vodka-Lemon"><a href="#Vodka-Lemon" class="headerlink" title="Vodka Lemon"></a><code>Vodka Lemon</code></h3><p><strong>40ml Vodka + 挤半个柠檬切角</strong>，大块冰块，喷挤柠檬皮油</p><h3 id="Vodka-Soda"><a href="#Vodka-Soda" class="headerlink" title="Vodka Soda"></a><code>Vodka Soda</code></h3><p>Vodka Lemon基础上换成Highball杯，<strong>苏打水加满</strong></p><h3 id="Vodka-Lemon-Drop"><a href="#Vodka-Lemon-Drop" class="headerlink" title="Vodka Lemon Drop"></a><code>Vodka Lemon Drop</code></h3><p><strong>50ml Vodka + 15ml糖浆 +  挤半个柠檬</strong>，满冰Shake壶Shake it，倒入shot杯，搭配粘上糖粉的柠檬角（喝完酒吃）</p><h2 id="Rum"><a href="#Rum" class="headerlink" title="Rum"></a>Rum</h2><h3 id="Mojito（莫吉托）"><a href="#Mojito（莫吉托）" class="headerlink" title="Mojito（莫吉托）"></a><code>Mojito</code>（莫吉托）</h3><p><strong>1shot朗姆酒 + 2匙糖 + 青柠薄荷 + 气泡水</strong>，冰块与碎冰大半杯</p><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="百利甜奶茶"><a href="#百利甜奶茶" class="headerlink" title="百利甜奶茶"></a><code>百利甜奶茶</code></h3><p><strong>1shot 百利甜 + 120ml 奶茶</strong>，满冰Highball杯，打发奶泡倒在最上面</p>]]></content>
     
     
     <categories>
@@ -49,7 +80,7 @@
     
     <tags>
       
-      <tag></tag>
+      <tag>List</tag>
       
     </tags>
     
@@ -68,6 +99,8 @@
     <categories>
       
       <category>项目组</category>
+      
+      <category>Pktgen</category>
       
     </categories>
     
@@ -96,6 +129,8 @@
       
       <category>项目组</category>
       
+      <category>DPDK</category>
+      
     </categories>
     
     
@@ -116,12 +151,14 @@
     <link href="/posts/7214eebe/"/>
     <url>/posts/7214eebe/</url>
     
-    <content type="html"><![CDATA[<blockquote><p>配置信息：</p><p>VMware® Workstation 16 Pro: 16.1.1 build-17801498</p><p>Ubuntu-16.04.6: Linux ubuntu 4.15.0-142-generic</p><p>CPU: 2个处理器，每个处理器2个内核</p><p>内存: 4GB</p><p>网卡: 网络适配器-NAT(ens33)，网络适配器2-Host-only(ens38)，网络适配器3-Host-only(ens39)</p><p><a href="http://core.dpdk.org/download/">DPDK</a>: DPDK-17.11.10(LTS)</p></blockquote><h3 id="1-DPDK下载"><a href="#1-DPDK下载" class="headerlink" title="1. DPDK下载"></a>1. DPDK下载</h3><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">wget http:&#x2F;&#x2F;fast.dpdk.org&#x2F;rel&#x2F;dpdk-17.11.10.tar.xztar -xvf dpdk-17.11.10.tar.xz</code></pre></div><h3 id="2-编译前修改"><a href="#2-编译前修改" class="headerlink" title="2. 编译前修改"></a>2. 编译前修改</h3><blockquote><p>DPDK在虚拟机中实验，本例使用vmware添加的虚拟网卡，会有兼容性问题。</p><p><code>EAL:Error reading from file descriptor xx: Input/output error</code></p><p>修改<code>/dpdk-stable-17.11.10/lib/librte_eal/linuxapp/igb_uio/igb_uio.c</code>以下内容，跳过检测。</p></blockquote><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c">&#x2F;* fall back to INTX *&#x2F;case RTE_INTR_MODE_LEGACY:if (pci_intx_mask_supported(dev）) &#123;dev_dbg(&amp;dev-&gt;dev, &quot;using INTX&quot;);udev-&gt;info.irq_flags &#x3D; IRQF_SHARED | IRQF_NO_THREAD;udev-&gt;info.irq &#x3D; dev-&gt;irq;udev-&gt;mode &#x3D; RTE_INTR_MODE_LEGACY;break;&#125;dev_notice(&amp;dev-&gt;dev, &quot;PCI INTX mask not supported               &#x2F;&#x2F; 修改为：if判断中增加true使其为真               &#x2F;* fall back to INTX *&#x2F;case RTE_INTR_MODE_LEGACY:if (pci_intx_mask_supported(dev)||true) &#123;dev_dbg(&amp;dev-&gt;dev, &quot;using INTX&quot;);udev-&gt;info.irq_flags &#x3D; IRQF_SHARED | IRQF_NO_THREAD;udev-&gt;info.irq &#x3D; dev-&gt;irq;udev-&gt;mode &#x3D; RTE_INTR_MODE_LEGACY;break;&#125;dev_notice(&amp;dev-&gt;dev, &quot;PCI INTX mask not supported\</code></pre></div><h3 id="3-配置环境变量-编译-配置其他选项"><a href="#3-配置环境变量-编译-配置其他选项" class="headerlink" title="3. 配置环境变量-编译-配置其他选项"></a>3. 配置环境变量-编译-配置其他选项</h3><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">export RTE_SDK&#x3D;&lt;dpdk主目录&gt; # export RTE_SDK&#x3D;&#x2F;opt&#x2F;dpdk-stable-17.11.10export RTE_TARGET&#x3D;x86_64-native-linuxapp-gcc</code></pre></div><p>较早版本的DPDK都提供了一个安装脚本<code>/dpdk-stable-17.11.10/usertools/dpdk-setup.sh</code>，方便完成编译、设置、测试等内容。</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">.&#x2F;dpdk-setup.sh# 选择[14]编译DPDK[14] x86_64-native-linuxapp-gcc# 设置大页内存，本次设定的512[21] Setup hugepage mappings for NUMA systems# 查看大页内存[28] List hugepage info from &#x2F;proc&#x2F;meminfo# 载入IGB UIO模块[17] Insert IGB UIO module# 查看当前网卡绑定情况[22] Display current Ethernet&#x2F;Crypto device settings# 若需要绑定到DPDK的网卡处于*Active*状态，需要先down掉# 退出脚本，down网卡[34] Exit Script</code></pre></div><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"># 查看网卡信息，需要down那些网卡ifconfig# 本例down另外配置的ens38与ens39网卡ifconfig ens38 downifconfig ens39 down</code></pre></div><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"># 重新进入脚本绑定网卡到DPDK.&#x2F;dpdk-setup.sh[22] Display current Ethernet&#x2F;Crypto device settings# 输入网卡前的描述符进行绑定，本例ens38对应02:06.0，ens39对应02:07.002:06.002:07.0# 查看当前网卡绑定情况[22] Display current Ethernet&#x2F;Crypto device settings# 此时应该能看到刚才设定的两张网卡已设定到DPDK-compatible driver</code></pre></div><h3 id="4-简单测试"><a href="#4-简单测试" class="headerlink" title="4. 简单测试"></a>4. 简单测试</h3><p>完成以上配置之后DPDK配置基本已经完成，可以仍在安装脚本中直接进行测试。</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">[27] Run testpmd application in interactive mode ($RTE_TARGET&#x2F;app&#x2F;testpmd)bitmask:fLaunching appEAL: Detected 4 lcore(s)EAL: No free hugepages reported in hugepages-1048576kBEAL: Probing VFIO support...EAL: PCI device 0000:02:01.0 on NUMA socket -1EAL:   Invalid NUMA socket, default to 0EAL:   probe driver: 8086:100f net_e1000_emEAL: PCI device 0000:02:06.0 on NUMA socket -1EAL:   Invalid NUMA socket, default to 0EAL:   probe driver: 8086:100f net_e1000_emEAL: PCI device 0000:02:07.0 on NUMA socket -1EAL:   Invalid NUMA socket, default to 0EAL:   probe driver: 8086:100f net_e1000_emInteractive-mode selectedUSER1: create a new mbuf pool &lt;mbuf_pool_socket_0&gt;: n&#x3D;171456, size&#x3D;2176, socket&#x3D;0Configuring Port 0 (socket 0)Port 0: 00:0C:29:3E:A9:4FConfiguring Port 1 (socket 0)Port 1: 00:0C:29:3E:A9:59Checking link statuses...Donetestpmd&gt; startio packet forwarding - ports&#x3D;2 - cores&#x3D;1 - streams&#x3D;2 - NUMA support enabled, MP over anonymous pages disabledLogical Core 1 (socket 0) forwards packets on 2 streams:  RX P&#x3D;0&#x2F;Q&#x3D;0 (socket 0) -&gt; TX P&#x3D;1&#x2F;Q&#x3D;0 (socket 0) peer&#x3D;02:00:00:00:00:01  RX P&#x3D;1&#x2F;Q&#x3D;0 (socket 0) -&gt; TX P&#x3D;0&#x2F;Q&#x3D;0 (socket 0) peer&#x3D;02:00:00:00:00:00  io packet forwarding packets&#x2F;burst&#x3D;32  nb forwarding cores&#x3D;1 - nb forwarding ports&#x3D;2  port 0:  CRC stripping enabled  RX queues&#x3D;1 - RX desc&#x3D;128 - RX free threshold&#x3D;0  RX threshold registers: pthresh&#x3D;0 hthresh&#x3D;0  wthresh&#x3D;0  TX queues&#x3D;1 - TX desc&#x3D;512 - TX free threshold&#x3D;0  TX threshold registers: pthresh&#x3D;0 hthresh&#x3D;0  wthresh&#x3D;0  TX RS bit threshold&#x3D;0 - TXQ flags&#x3D;0x0  port 1:  CRC stripping enabled  RX queues&#x3D;1 - RX desc&#x3D;128 - RX free threshold&#x3D;0  RX threshold registers: pthresh&#x3D;0 hthresh&#x3D;0  wthresh&#x3D;0  TX queues&#x3D;1 - TX desc&#x3D;512 - TX free threshold&#x3D;0  TX threshold registers: pthresh&#x3D;0 hthresh&#x3D;0  wthresh&#x3D;0  TX RS bit threshold&#x3D;0 - TXQ flags&#x3D;0x0testpmd&gt; stopTelling cores to stop...Waiting for lcores to finish...  ---------------------- Forward statistics for port 0  ----------------------  RX-packets: 7194           RX-dropped: 0             RX-total: 7194  TX-packets: 6886           TX-dropped: 0             TX-total: 6886  ----------------------------------------------------------------------------  ---------------------- Forward statistics for port 1  ----------------------  RX-packets: 6886           RX-dropped: 0             RX-total: 6886  TX-packets: 7194           TX-dropped: 0             TX-total: 7194  ----------------------------------------------------------------------------  +++++++++++++++ Accumulated forward statistics for all ports+++++++++++++++  RX-packets: 14080          RX-dropped: 0             RX-total: 14080  TX-packets: 14080          TX-dropped: 0             TX-total: 14080  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++Done.testpmd&gt; quitStopping port 0...Stopping ports...DoneStopping port 1...Stopping ports...DoneShutting down port 0...Closing ports...DoneShutting down port 1...Closing ports...DoneBye...</code></pre></div><h3 id="其他版本相关"><a href="#其他版本相关" class="headerlink" title="其他版本相关"></a>其他版本相关</h3><blockquote><p>和上述内容相似，在虚拟机中使用igb_uio驱动时仍可能遇到网卡不兼容问题，在你的驱动编译前修改并调过验证。</p></blockquote><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">### 依赖检查gcc -v# gcc (version 4.9+) pkg-config --version# pkg-config 0.27+uname -r# Kernel version &gt;&#x3D; 4.4ldd --version# glibc &gt;&#x3D; 2.7grep -i huge &#x2F;boot&#x2F;config-4.15.0-142-generic# OutputCONFIG_HUGETLBFS&#x3D;yCONFIG_HUGETLB_PAGE&#x3D;ypip3 install meson ninja### dpdk下载wget http:&#x2F;&#x2F;fast.dpdk.org&#x2F;rel&#x2F;dpdk-20.11.1.tar.xztar xJf dpdk-20.11.1.tar.xzcd dpdk-stable-20.11.1# dpdk编译安装meson -Dexamples&#x3D;all buildcd buildninja install### 配置大页内存mkdir &#x2F;mnt&#x2F;hugeecho 512 &gt; &#x2F;sys&#x2F;devices&#x2F;system&#x2F;node&#x2F;node0&#x2F;hugepages&#x2F;hugepages-2048kB&#x2F;nr_hugepagesmount -t hugetlbfs nodev &#x2F;mnt&#x2F;hugegrep -i huge &#x2F;proc&#x2F;meminfo# 透明大页配置echo always &gt;&#x2F;sys&#x2F;kernel&#x2F;mm&#x2F;transparent_hugepage&#x2F;enabledecho madvise &gt;&#x2F;sys&#x2F;kernel&#x2F;mm&#x2F;transparent_hugepage&#x2F;enabledecho never &gt;&#x2F;sys&#x2F;kernel&#x2F;mm&#x2F;transparent_hugepage&#x2F;enabled### 自动挂载vim &#x2F;etc&#x2F;fstab#添加以下内容nodev &#x2F;mnt&#x2F;huge hugetlbfs pagesize&#x3D;2MB 0 0#如果是1GB 则nodev &#x2F;mnt&#x2F;huge hugetlbfs pagesize&#x3D;1GB 0 0### 编译产生问题可能由于缺少以下组件sudo apt-get install numactlsudo apt-get install libnuma-dev</code></pre></div><blockquote><p>参考：</p><p><a href="http://doc.dpdk.org/guides-20.11/">http://doc.dpdk.org/guides-20.11/</a></p><p><a href="https://blog.csdn.net/qwe13182912113/article/details/79260331?utm_medium=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-1.control&amp;dist_request_id=1332048.21311.16195122750681543&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-1.control">https://blog.csdn.net/qwe13182912113/article/details/79260331?utm_medium=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-1.control&amp;dist_request_id=1332048.21311.16195122750681543&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-1.control</a></p><p><a href="https://zhuanlan.zhihu.com/p/368045406">https://zhuanlan.zhihu.com/p/368045406</a></p></blockquote>]]></content>
+    <content type="html"><![CDATA[<blockquote><p>配置信息：</p><p>VMware® Workstation 16 Pro: 16.1.1 build-17801498</p><p>Ubuntu-16.04.6: Linux ubuntu 4.15.0-142-generic</p><p>CPU: 2个处理器，每个处理器2个内核</p><p>内存: 4GB</p><p>网卡: 网络适配器-NAT(ens33)，网络适配器2-Host-only(ens38)，网络适配器3-Host-only(ens39)</p><p><a href="http://core.dpdk.org/download/">DPDK</a>: DPDK-17.11.10(LTS)</p></blockquote><h3 id="1-DPDK下载"><a href="#1-DPDK下载" class="headerlink" title="1. DPDK下载"></a>1. DPDK下载</h3><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">wget http:&#x2F;&#x2F;fast.dpdk.org&#x2F;rel&#x2F;dpdk-17.11.10.tar.xztar -xvf dpdk-17.11.10.tar.xz</code></pre></div><h3 id="2-编译前修改"><a href="#2-编译前修改" class="headerlink" title="2. 编译前修改"></a>2. 编译前修改</h3><blockquote><p>DPDK在虚拟机中实验，本例使用vmware添加的虚拟网卡，会有兼容性问题。</p><p><code>EAL:Error reading from file descriptor xx: Input/output error</code></p><p>修改<code>/dpdk-stable-17.11.10/lib/librte_eal/linuxapp/igb_uio/igb_uio.c</code>以下内容，跳过检测。</p></blockquote><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c">&#x2F;* fall back to INTX *&#x2F;case RTE_INTR_MODE_LEGACY:if (pci_intx_mask_supported(dev）) &#123;dev_dbg(&amp;dev-&gt;dev, &quot;using INTX&quot;);udev-&gt;info.irq_flags &#x3D; IRQF_SHARED | IRQF_NO_THREAD;udev-&gt;info.irq &#x3D; dev-&gt;irq;udev-&gt;mode &#x3D; RTE_INTR_MODE_LEGACY;break;&#125;dev_notice(&amp;dev-&gt;dev, &quot;PCI INTX mask not supported               &#x2F;&#x2F; 修改为：if判断中增加true使其为真               &#x2F;* fall back to INTX *&#x2F;case RTE_INTR_MODE_LEGACY:if (pci_intx_mask_supported(dev)||true) &#123;dev_dbg(&amp;dev-&gt;dev, &quot;using INTX&quot;);udev-&gt;info.irq_flags &#x3D; IRQF_SHARED | IRQF_NO_THREAD;udev-&gt;info.irq &#x3D; dev-&gt;irq;udev-&gt;mode &#x3D; RTE_INTR_MODE_LEGACY;break;&#125;dev_notice(&amp;dev-&gt;dev, &quot;PCI INTX mask not supported\</code></pre></div><h3 id="3-配置环境变量-编译-配置其他选项"><a href="#3-配置环境变量-编译-配置其他选项" class="headerlink" title="3. 配置环境变量-编译-配置其他选项"></a>3. 配置环境变量-编译-配置其他选项</h3><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">export RTE_SDK&#x3D;&lt;dpdk主目录&gt; # export RTE_SDK&#x3D;&#x2F;opt&#x2F;dpdk-stable-17.11.10export RTE_TARGET&#x3D;x86_64-native-linuxapp-gcc</code></pre></div><p>较早版本的DPDK都提供了一个安装脚本<code>/dpdk-stable-17.11.10/usertools/dpdk-setup.sh</code>，方便完成编译、设置、测试等内容。</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">.&#x2F;dpdk-setup.sh# 选择[14]编译DPDK[14] x86_64-native-linuxapp-gcc# 设置大页内存，本次设定的512[21] Setup hugepage mappings for NUMA systems# 查看大页内存[28] List hugepage info from &#x2F;proc&#x2F;meminfo# 载入IGB UIO模块[17] Insert IGB UIO module# 查看当前网卡绑定情况[22] Display current Ethernet&#x2F;Crypto device settings# 若需要绑定到DPDK的网卡处于*Active*状态，需要先down掉# 退出脚本，down网卡[34] Exit Script</code></pre></div><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"># 查看网卡信息，需要down那些网卡ifconfig# 本例down另外配置的ens38与ens39网卡ifconfig ens38 downifconfig ens39 down</code></pre></div><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"># 重新进入脚本绑定网卡到DPDK.&#x2F;dpdk-setup.sh[22] Display current Ethernet&#x2F;Crypto device settings# 输入网卡前的描述符进行绑定，本例ens38对应02:06.0，ens39对应02:07.002:06.002:07.0# 查看当前网卡绑定情况[22] Display current Ethernet&#x2F;Crypto device settings# 此时应该能看到刚才设定的两张网卡已设定到DPDK-compatible driver</code></pre></div><h3 id="4-简单测试"><a href="#4-简单测试" class="headerlink" title="4. 简单测试"></a>4. 简单测试</h3><p>完成以上配置之后DPDK配置基本已经完成，可以仍在安装脚本中直接进行测试。</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">[27] Run testpmd application in interactive mode ($RTE_TARGET&#x2F;app&#x2F;testpmd)bitmask:fLaunching appEAL: Detected 4 lcore(s)EAL: No free hugepages reported in hugepages-1048576kBEAL: Probing VFIO support...EAL: PCI device 0000:02:01.0 on NUMA socket -1EAL:   Invalid NUMA socket, default to 0EAL:   probe driver: 8086:100f net_e1000_emEAL: PCI device 0000:02:06.0 on NUMA socket -1EAL:   Invalid NUMA socket, default to 0EAL:   probe driver: 8086:100f net_e1000_emEAL: PCI device 0000:02:07.0 on NUMA socket -1EAL:   Invalid NUMA socket, default to 0EAL:   probe driver: 8086:100f net_e1000_emInteractive-mode selectedUSER1: create a new mbuf pool &lt;mbuf_pool_socket_0&gt;: n&#x3D;171456, size&#x3D;2176, socket&#x3D;0Configuring Port 0 (socket 0)Port 0: 00:0C:29:3E:A9:4FConfiguring Port 1 (socket 0)Port 1: 00:0C:29:3E:A9:59Checking link statuses...Donetestpmd&gt; startio packet forwarding - ports&#x3D;2 - cores&#x3D;1 - streams&#x3D;2 - NUMA support enabled, MP over anonymous pages disabledLogical Core 1 (socket 0) forwards packets on 2 streams:  RX P&#x3D;0&#x2F;Q&#x3D;0 (socket 0) -&gt; TX P&#x3D;1&#x2F;Q&#x3D;0 (socket 0) peer&#x3D;02:00:00:00:00:01  RX P&#x3D;1&#x2F;Q&#x3D;0 (socket 0) -&gt; TX P&#x3D;0&#x2F;Q&#x3D;0 (socket 0) peer&#x3D;02:00:00:00:00:00  io packet forwarding packets&#x2F;burst&#x3D;32  nb forwarding cores&#x3D;1 - nb forwarding ports&#x3D;2  port 0:  CRC stripping enabled  RX queues&#x3D;1 - RX desc&#x3D;128 - RX free threshold&#x3D;0  RX threshold registers: pthresh&#x3D;0 hthresh&#x3D;0  wthresh&#x3D;0  TX queues&#x3D;1 - TX desc&#x3D;512 - TX free threshold&#x3D;0  TX threshold registers: pthresh&#x3D;0 hthresh&#x3D;0  wthresh&#x3D;0  TX RS bit threshold&#x3D;0 - TXQ flags&#x3D;0x0  port 1:  CRC stripping enabled  RX queues&#x3D;1 - RX desc&#x3D;128 - RX free threshold&#x3D;0  RX threshold registers: pthresh&#x3D;0 hthresh&#x3D;0  wthresh&#x3D;0  TX queues&#x3D;1 - TX desc&#x3D;512 - TX free threshold&#x3D;0  TX threshold registers: pthresh&#x3D;0 hthresh&#x3D;0  wthresh&#x3D;0  TX RS bit threshold&#x3D;0 - TXQ flags&#x3D;0x0testpmd&gt; stopTelling cores to stop...Waiting for lcores to finish...  ---------------------- Forward statistics for port 0  ----------------------  RX-packets: 7194           RX-dropped: 0             RX-total: 7194  TX-packets: 6886           TX-dropped: 0             TX-total: 6886  ----------------------------------------------------------------------------  ---------------------- Forward statistics for port 1  ----------------------  RX-packets: 6886           RX-dropped: 0             RX-total: 6886  TX-packets: 7194           TX-dropped: 0             TX-total: 7194  ----------------------------------------------------------------------------  +++++++++++++++ Accumulated forward statistics for all ports+++++++++++++++  RX-packets: 14080          RX-dropped: 0             RX-total: 14080  TX-packets: 14080          TX-dropped: 0             TX-total: 14080  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++Done.testpmd&gt; quitStopping port 0...Stopping ports...DoneStopping port 1...Stopping ports...DoneShutting down port 0...Closing ports...DoneShutting down port 1...Closing ports...DoneBye...</code></pre></div><h3 id="其他版本相关"><a href="#其他版本相关" class="headerlink" title="其他版本相关"></a>其他版本相关</h3><blockquote><p>和上述内容相似，在虚拟机中使用igb_uio驱动时仍可能遇到网卡不兼容问题，在你的驱动编译前修改并调过验证。</p></blockquote><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">### 依赖检查gcc -v# gcc (version 4.9+) pkg-config --version# pkg-config 0.27+uname -r# Kernel version &gt;&#x3D; 4.4ldd --version# glibc &gt;&#x3D; 2.7grep -i huge &#x2F;boot&#x2F;config-4.15.0-142-generic# OutputCONFIG_HUGETLBFS&#x3D;yCONFIG_HUGETLB_PAGE&#x3D;ypip3 install meson ninja### dpdk下载wget http:&#x2F;&#x2F;fast.dpdk.org&#x2F;rel&#x2F;dpdk-20.11.1.tar.xztar xJf dpdk-20.11.1.tar.xzcd dpdk-stable-20.11.1# dpdk编译安装meson -Dexamples&#x3D;all buildcd buildninja install### 配置大页内存mkdir &#x2F;mnt&#x2F;hugeecho 512 &gt; &#x2F;sys&#x2F;devices&#x2F;system&#x2F;node&#x2F;node0&#x2F;hugepages&#x2F;hugepages-2048kB&#x2F;nr_hugepagesmount -t hugetlbfs nodev &#x2F;mnt&#x2F;hugegrep -i huge &#x2F;proc&#x2F;meminfo# 透明大页配置echo always &gt;&#x2F;sys&#x2F;kernel&#x2F;mm&#x2F;transparent_hugepage&#x2F;enabledecho madvise &gt;&#x2F;sys&#x2F;kernel&#x2F;mm&#x2F;transparent_hugepage&#x2F;enabledecho never &gt;&#x2F;sys&#x2F;kernel&#x2F;mm&#x2F;transparent_hugepage&#x2F;enabled### 自动挂载vim &#x2F;etc&#x2F;fstab#添加以下内容nodev &#x2F;mnt&#x2F;huge hugetlbfs pagesize&#x3D;2MB 0 0#如果是1GB 则nodev &#x2F;mnt&#x2F;huge hugetlbfs pagesize&#x3D;1GB 0 0### 编译产生问题可能由于缺少以下组件sudo apt-get install numactlsudo apt-get install libnuma-dev</code></pre></div><hr><blockquote><p>参考：</p><p><a href="http://doc.dpdk.org/guides-20.11/">http://doc.dpdk.org/guides-20.11/</a></p><p><a href="https://blog.csdn.net/qwe13182912113/article/details/79260331?utm_medium=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-1.control&amp;dist_request_id=1332048.21311.16195122750681543&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-1.control">https://blog.csdn.net/qwe13182912113/article/details/79260331?utm_medium=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-1.control&amp;dist_request_id=1332048.21311.16195122750681543&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-1.control</a></p><p><a href="https://zhuanlan.zhihu.com/p/368045406">https://zhuanlan.zhihu.com/p/368045406</a></p></blockquote>]]></content>
     
     
     <categories>
       
       <category>项目组</category>
+      
+      <category>DPDK</category>
       
     </categories>
     
@@ -143,12 +180,14 @@
     <link href="/posts/1c458c9b/"/>
     <url>/posts/1c458c9b/</url>
     
-    <content type="html"><![CDATA[<blockquote><p><a href="https://suricata-ids.org/">Suricata</a>是一个免费和开源，成熟，快速且强大的网络威胁检测引擎。</p><p>Suricata引擎能够进行实时入侵检测（IDS），内联入侵防御（IPS），网络安全监控（NSM）和离线pcap处理。Suricata使用强大而广泛的规则和签名语言检查网络流量，并具有强大的Lua脚本支持来检测复杂的威胁。通过YAML和JSON之类的标准输入和输出格式，与现有SIEM，Splunk，Logstash / Elasticsearch，Kibana和其他数据库之类的工具的集成变得毫不费力。</p></blockquote><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"># Recommended dependencyapt-get install libpcre3 libpcre3-dbg libpcre3-dev build-essential libpcap-dev   \                libnet1-dev libyaml-0-2 libyaml-dev pkg-config zlib1g zlib1g-dev \                libcap-ng-dev libcap-ng0 make libmagic-dev         \                libgeoip-dev liblua5.1-dev libhiredis-dev libevent-dev \                python-yaml rustc cargo#  Binary packages - Ubuntusudo add-apt-repository ppa:oisf&#x2F;suricata-stablesudo apt-get update# &#96;jq&#96; help with displaying information from Suricata’s EVE JSON outputsudo apt-get install suricata jq# Verify Installationsudo suricata --build-infosudo systemctl status suricata# Outputs：● suricata.service - LSB: Next Generation IDS&#x2F;IPS   Loaded: loaded (&#x2F;etc&#x2F;init.d&#x2F;suricata; bad; vendor preset: enabled)   Active: active (exited) since 二 2021-05-25 15:29:42 CST; 2min 27s ago     Docs: man:systemd-sysv-generator(8)5月 25 15:29:42 ubuntu systemd[1]: Starting LSB: Next Generation IDS&#x2F;IPS...5月 25 15:29:42 ubuntu suricata[39360]: Starting suricata in IDS (af-packet) mode... done.5月 25 15:29:42 ubuntu systemd[1]: Starte™£d LSB: Next Generation IDS&#x2F;IPS.# update rules: merge the lastet rules to &#x2F;etc&#x2F;suricata&#x2F;rules&#x2F;*suricate-update</code></pre></div><h2 id="网卡配置"><a href="#网卡配置" class="headerlink" title="网卡配置"></a>网卡配置</h2><p><code>vim /etc/suricata/suricata.yaml</code></p><p>本例中，网卡为<code>ens33</code></p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"># Linux high speed capture supportaf-packet:  - interface: ens33    # Number of receive threads. &quot;auto&quot; uses the number of cores......# default rulesdefault-rule-path: &#x2F;var&#x2F;lib&#x2F;suricata&#x2F;rulesrule-files:  - suricata.rules</code></pre></div><p>修改完成后重启服务<code>systemctl restart suricata</code></p><h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>使用<code>2100498</code>规则进行测试。规则可在<code>/var/lib/suricata/rules/suricata.rules</code>查看：</p><div class="code-wrapper"><pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">alert ip any any -&gt; any any (msg:&quot;GPL ATTACK_RESPONSE id check returned root&quot;; content:&quot;uid&#x3D;0|28|root|29|&quot;; classtype:bad-unknown; sid:2100498; rev:7; metadata:created_at 2010_09_23, updated_at 2010_09_23;)</code></pre></div><p><code>tail</code>查看<code>fast.log</code>文件，运行<code>curl http://testmynids.org/uid/index.html</code>。可看到log文件中，增加到了监测内容。</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"># path of log filesfastlog_file:&quot;&#x2F;var&#x2F;log&#x2F;suricata&#x2F;fast.log&quot;log_file:&quot;&#x2F;var&#x2F;log&#x2F;suricata&#x2F;suricata.log&quot;statistics_file:&quot;&#x2F;var&#x2F;log&#x2F;suricata&#x2F;stats.log&quot;suricata tail -f fast.log # Outputs:05&#x2F;25&#x2F;2021-17:10:53.943090  [**] [1:2013028:5] ET POLICY curl User-Agent Outbound [**] [Classification: Attempted Information Leak] [Priority: 2] &#123;TCP&#125; 192.168.205.6:50856 -&gt; 13.225.103.101:8005&#x2F;25&#x2F;2021-17:10:54.040108  [**] [1:2100498:7] GPL ATTACK_RESPONSE id check returned root [**] [Classification: Potentially Bad Traffic] [Priority: 2] &#123;TCP&#125; 13.225.103.101:80 -&gt; 192.168.205.6:50856</code></pre></div><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">curl http:&#x2F;&#x2F;testmynids.org&#x2F;uid&#x2F;index.html# Outputs:uid&#x3D;0(root) gid&#x3D;0(root) groups&#x3D;0(root)</code></pre></div><blockquote><p>参考：</p><p><a href="https://suricata.readthedocs.io/en/latest/">https://suricata.readthedocs.io/en/latest/</a></p></blockquote>]]></content>
+    <content type="html"><![CDATA[<blockquote><p><a href="https://suricata-ids.org/">Suricata</a>是一个免费和开源，成熟，快速且强大的网络威胁检测引擎。</p><p>Suricata引擎能够进行实时入侵检测（IDS），内联入侵防御（IPS），网络安全监控（NSM）和离线pcap处理。Suricata使用强大而广泛的规则和签名语言检查网络流量，并具有强大的Lua脚本支持来检测复杂的威胁。通过YAML和JSON之类的标准输入和输出格式，与现有SIEM，Splunk，Logstash / Elasticsearch，Kibana和其他数据库之类的工具的集成变得毫不费力。</p></blockquote><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"># Recommended dependencyapt-get install libpcre3 libpcre3-dbg libpcre3-dev build-essential libpcap-dev   \                libnet1-dev libyaml-0-2 libyaml-dev pkg-config zlib1g zlib1g-dev \                libcap-ng-dev libcap-ng0 make libmagic-dev         \                libgeoip-dev liblua5.1-dev libhiredis-dev libevent-dev \                python-yaml rustc cargo#  Binary packages - Ubuntusudo add-apt-repository ppa:oisf&#x2F;suricata-stablesudo apt-get update# &#96;jq&#96; help with displaying information from Suricata’s EVE JSON outputsudo apt-get install suricata jq# Verify Installationsudo suricata --build-infosudo systemctl status suricata# Outputs：● suricata.service - LSB: Next Generation IDS&#x2F;IPS   Loaded: loaded (&#x2F;etc&#x2F;init.d&#x2F;suricata; bad; vendor preset: enabled)   Active: active (exited) since 二 2021-05-25 15:29:42 CST; 2min 27s ago     Docs: man:systemd-sysv-generator(8)5月 25 15:29:42 ubuntu systemd[1]: Starting LSB: Next Generation IDS&#x2F;IPS...5月 25 15:29:42 ubuntu suricata[39360]: Starting suricata in IDS (af-packet) mode... done.5月 25 15:29:42 ubuntu systemd[1]: Starte™£d LSB: Next Generation IDS&#x2F;IPS.# update rules: merge the lastet rules to &#x2F;etc&#x2F;suricata&#x2F;rules&#x2F;*suricate-update</code></pre></div><h2 id="网卡配置"><a href="#网卡配置" class="headerlink" title="网卡配置"></a>网卡配置</h2><p><code>vim /etc/suricata/suricata.yaml</code></p><p>本例中，网卡为<code>ens33</code></p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"># Linux high speed capture supportaf-packet:  - interface: ens33    # Number of receive threads. &quot;auto&quot; uses the number of cores......# default rulesdefault-rule-path: &#x2F;var&#x2F;lib&#x2F;suricata&#x2F;rulesrule-files:  - suricata.rules</code></pre></div><p>修改完成后重启服务<code>systemctl restart suricata</code></p><h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>使用<code>2100498</code>规则进行测试。规则可在<code>/var/lib/suricata/rules/suricata.rules</code>查看：</p><div class="code-wrapper"><pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">alert ip any any -&gt; any any (msg:&quot;GPL ATTACK_RESPONSE id check returned root&quot;; content:&quot;uid&#x3D;0|28|root|29|&quot;; classtype:bad-unknown; sid:2100498; rev:7; metadata:created_at 2010_09_23, updated_at 2010_09_23;)</code></pre></div><p><code>tail</code>查看<code>fast.log</code>文件，运行<code>curl http://testmynids.org/uid/index.html</code>。可看到log文件中，增加到了监测内容。</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"># path of log filesfastlog_file:&quot;&#x2F;var&#x2F;log&#x2F;suricata&#x2F;fast.log&quot;log_file:&quot;&#x2F;var&#x2F;log&#x2F;suricata&#x2F;suricata.log&quot;statistics_file:&quot;&#x2F;var&#x2F;log&#x2F;suricata&#x2F;stats.log&quot;suricata tail -f fast.log # Outputs:05&#x2F;25&#x2F;2021-17:10:53.943090  [**] [1:2013028:5] ET POLICY curl User-Agent Outbound [**] [Classification: Attempted Information Leak] [Priority: 2] &#123;TCP&#125; 192.168.205.6:50856 -&gt; 13.225.103.101:8005&#x2F;25&#x2F;2021-17:10:54.040108  [**] [1:2100498:7] GPL ATTACK_RESPONSE id check returned root [**] [Classification: Potentially Bad Traffic] [Priority: 2] &#123;TCP&#125; 13.225.103.101:80 -&gt; 192.168.205.6:50856</code></pre></div><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">curl http:&#x2F;&#x2F;testmynids.org&#x2F;uid&#x2F;index.html# Outputs:uid&#x3D;0(root) gid&#x3D;0(root) groups&#x3D;0(root)</code></pre></div><hr><blockquote><p>参考：</p><p><a href="https://suricata.readthedocs.io/en/latest/">https://suricata.readthedocs.io/en/latest/</a></p></blockquote>]]></content>
     
     
     <categories>
       
       <category>项目组</category>
+      
+      <category>Suricata</category>
       
     </categories>
     
@@ -175,7 +214,9 @@
     
     <categories>
       
-      <category>日常</category>
+      <category>学习笔记</category>
+      
+      <category>Linux</category>
       
     </categories>
     
@@ -195,12 +236,14 @@
     <link href="/posts/9a2c4456/"/>
     <url>/posts/9a2c4456/</url>
     
-    <content type="html"><![CDATA[<blockquote><p>升级ubuntu 16.04的内核时出现依赖libssl1.1.0问题</p></blockquote><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">下列软件包有未满足的依赖关系： linux-headers-5.3.0-050300rc4-generic : 依赖: libssl1.1 (&gt;&#x3D; 1.1.0) 但无法安装它E: 有未能满足的依赖关系。请尝试不指明软件包的名字来运行“apt-get -f install”(也可以指定一个解决办法)。</code></pre></div><h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>单独下载安装一个<code>libssl1.1_1.1.0g-2ubuntu4.1_amd64.deb</code>文件然后再升级就可以了</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">wget http:&#x2F;&#x2F;archive.ubuntu.com&#x2F;ubuntu&#x2F;pool&#x2F;main&#x2F;o&#x2F;openssl&#x2F;libssl1.1_1.1.0g-2ubuntu4_amd64.debsudo dpkg -i libssl1.1_1.1.0g-2ubuntu4_amd64.deb</code></pre></div><blockquote><p>参考：</p><p><a href="https://blog.csdn.net/z952957407/article/details/99690571">https://blog.csdn.net/z952957407/article/details/99690571</a></p></blockquote>]]></content>
+    <content type="html"><![CDATA[<blockquote><p>升级ubuntu 16.04的内核时出现依赖libssl1.1.0问题</p></blockquote><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">下列软件包有未满足的依赖关系： linux-headers-5.3.0-050300rc4-generic : 依赖: libssl1.1 (&gt;&#x3D; 1.1.0) 但无法安装它E: 有未能满足的依赖关系。请尝试不指明软件包的名字来运行“apt-get -f install”(也可以指定一个解决办法)。</code></pre></div><h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>单独下载安装一个<code>libssl1.1_1.1.0g-2ubuntu4.1_amd64.deb</code>文件然后再升级就可以了</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">wget http:&#x2F;&#x2F;archive.ubuntu.com&#x2F;ubuntu&#x2F;pool&#x2F;main&#x2F;o&#x2F;openssl&#x2F;libssl1.1_1.1.0g-2ubuntu4_amd64.debsudo dpkg -i libssl1.1_1.1.0g-2ubuntu4_amd64.deb</code></pre></div><hr><blockquote><p>参考：</p><p><a href="https://blog.csdn.net/z952957407/article/details/99690571">https://blog.csdn.net/z952957407/article/details/99690571</a></p></blockquote>]]></content>
     
     
     <categories>
       
-      <category>日常</category>
+      <category>学习笔记</category>
+      
+      <category>Linux</category>
       
     </categories>
     
@@ -231,6 +274,8 @@
       
       <category>学习笔记</category>
       
+      <category>Linux</category>
+      
     </categories>
     
     
@@ -260,6 +305,8 @@
       
       <category>日常</category>
       
+      <category>其他</category>
+      
     </categories>
     
     
@@ -285,7 +332,9 @@
     
     <categories>
       
-      <category>学习笔记</category>
+      <category>项目组</category>
+      
+      <category>Kali</category>
       
     </categories>
     
@@ -314,7 +363,9 @@
     
     <categories>
       
-      <category>学习笔记</category>
+      <category>项目组</category>
+      
+      <category>Kali</category>
       
     </categories>
     
@@ -347,6 +398,8 @@
       
       <category>日常</category>
       
+      <category>Mac</category>
+      
     </categories>
     
     
@@ -373,6 +426,8 @@
     <categories>
       
       <category>日常</category>
+      
+      <category>博客</category>
       
     </categories>
     
@@ -403,7 +458,7 @@
       
       <category>日常</category>
       
-      <category>微醺</category>
+      <category>微醺日记</category>
       
     </categories>
     
@@ -429,6 +484,8 @@
     <categories>
       
       <category>项目组</category>
+      
+      <category>Kali</category>
       
     </categories>
     
@@ -457,6 +514,8 @@
       
       <category>日常</category>
       
+      <category>Mac</category>
+      
     </categories>
     
     
@@ -483,8 +542,6 @@
     
     
     <categories>
-      
-      <category>使用手册</category>
       
       <category>学习笔记</category>
       
@@ -515,7 +572,9 @@
     
     <categories>
       
-      <category>日常</category>
+      <category>学习笔记</category>
+      
+      <category>Linux</category>
       
     </categories>
     
@@ -541,8 +600,6 @@
     
     
     <categories>
-      
-      <category>使用手册</category>
       
       <category>学习笔记</category>
       
@@ -575,8 +632,6 @@
     
     <categories>
       
-      <category>使用手册</category>
-      
       <category>学习笔记</category>
       
       <category>Docker</category>
@@ -606,9 +661,9 @@
     
     <categories>
       
-      <category>使用手册</category>
+      <category>日常</category>
       
-      <category>学习笔记</category>
+      <category>博客</category>
       
     </categories>
     
@@ -636,8 +691,6 @@
     
     
     <categories>
-      
-      <category>使用手册</category>
       
       <category>学习笔记</category>
       
@@ -668,8 +721,6 @@
     
     <categories>
       
-      <category>使用手册</category>
-      
       <category>学习笔记</category>
       
       <category>Docker</category>
@@ -698,8 +749,6 @@
     
     
     <categories>
-      
-      <category>使用手册</category>
       
       <category>学习笔记</category>
       
@@ -734,6 +783,8 @@
       
       <category>日常</category>
       
+      <category>Mac</category>
+      
     </categories>
     
     
@@ -759,9 +810,9 @@
     
     <categories>
       
-      <category>使用手册</category>
+      <category>日常</category>
       
-      <category>学习笔记</category>
+      <category>Mac</category>
       
     </categories>
     
@@ -790,6 +841,8 @@
     
     <categories>
       
+      <category>日常</category>
+      
       <category>杂谈</category>
       
     </categories>
@@ -797,11 +850,11 @@
     
     <tags>
       
-      <tag>摘录</tag>
-      
       <tag>史蒂夫·乔布斯</tag>
       
       <tag>沃尔特·艾萨克森</tag>
+      
+      <tag>摘录</tag>
       
     </tags>
     
@@ -820,6 +873,8 @@
     <categories>
       
       <category>日常</category>
+      
+      <category>Mac</category>
       
     </categories>
     
@@ -846,6 +901,8 @@
     
     <categories>
       
+      <category>日常</category>
+      
       <category>杂谈</category>
       
     </categories>
@@ -853,11 +910,11 @@
     
     <tags>
       
+      <tag>摘录</tag>
+      
       <tag>假面山庄</tag>
       
       <tag>东野圭吾</tag>
-      
-      <tag>摘录</tag>
       
     </tags>
     
@@ -876,6 +933,8 @@
     <categories>
       
       <category>学习笔记</category>
+      
+      <category>Linux</category>
       
     </categories>
     
@@ -910,6 +969,8 @@
       
       <category>学习笔记</category>
       
+      <category>Linux</category>
+      
     </categories>
     
     
@@ -943,6 +1004,8 @@
       
       <category>日常</category>
       
+      <category>Mac</category>
+      
     </categories>
     
     
@@ -967,6 +1030,8 @@
     
     
     <categories>
+      
+      <category>日常</category>
       
       <category>杂谈</category>
       
@@ -997,11 +1062,9 @@
     
     <categories>
       
-      <category>使用手册</category>
-      
       <category>学习笔记</category>
       
-      <category>Python3-Cookbook</category>
+      <category>Python</category>
       
     </categories>
     
@@ -1011,6 +1074,8 @@
       <tag>Python</tag>
       
       <tag>字符串</tag>
+      
+      <tag>Cookbook</tag>
       
     </tags>
     
@@ -1028,11 +1093,9 @@
     
     <categories>
       
-      <category>使用手册</category>
-      
       <category>学习笔记</category>
       
-      <category>Python3-Cookbook</category>
+      <category>Python</category>
       
     </categories>
     
@@ -1042,6 +1105,8 @@
       <tag>Python</tag>
       
       <tag>字符串</tag>
+      
+      <tag>Cookbook</tag>
       
     </tags>
     
@@ -1059,11 +1124,9 @@
     
     <categories>
       
-      <category>使用手册</category>
-      
       <category>学习笔记</category>
       
-      <category>Python3-Cookbook</category>
+      <category>Python</category>
       
     </categories>
     
@@ -1071,6 +1134,8 @@
     <tags>
       
       <tag>Python</tag>
+      
+      <tag>Cookbook</tag>
       
       <tag>数据结构</tag>
       
@@ -1092,11 +1157,9 @@
     
     <categories>
       
-      <category>使用手册</category>
-      
       <category>学习笔记</category>
       
-      <category>Python3-Cookbook</category>
+      <category>Python</category>
       
     </categories>
     
@@ -1104,6 +1167,8 @@
     <tags>
       
       <tag>Python</tag>
+      
+      <tag>Cookbook</tag>
       
       <tag>数据结构</tag>
       
@@ -1126,6 +1191,8 @@
     <categories>
       
       <category>项目组</category>
+      
+      <category>模糊测试</category>
       
     </categories>
     
@@ -1152,9 +1219,9 @@
     
     <categories>
       
-      <category>使用手册</category>
-      
       <category>学习笔记</category>
+      
+      <category>Python</category>
       
     </categories>
     
@@ -1181,7 +1248,9 @@
     
     <categories>
       
-      <category>学习笔记</category>
+      <category>项目组</category>
+      
+      <category>Kali</category>
       
     </categories>
     
@@ -1209,6 +1278,8 @@
     <categories>
       
       <category>学习笔记</category>
+      
+      <category>Linux</category>
       
     </categories>
     
@@ -1239,6 +1310,8 @@
       
       <category>学习笔记</category>
       
+      <category>Linux</category>
+      
     </categories>
     
     
@@ -1266,12 +1339,14 @@
       
       <category>项目组</category>
       
+      <category>Hydra</category>
+      
     </categories>
     
     
     <tags>
       
-      <tag>hydra</tag>
+      <tag>Hydra</tag>
       
       <tag>渗透测试</tag>
       
@@ -1284,7 +1359,7 @@
   
   
   <entry>
-    <title>hydra用法简记</title>
+    <title>Hydra用法简记</title>
     <link href="/posts/78d34d76/"/>
     <url>/posts/78d34d76/</url>
     
@@ -1293,16 +1368,16 @@
     
     <categories>
       
-      <category>使用手册</category>
+      <category>项目组</category>
       
-      <category>学习笔记</category>
+      <category>Hydra</category>
       
     </categories>
     
     
     <tags>
       
-      <tag>hydra</tag>
+      <tag>Hydra</tag>
       
       <tag>渗透测试</tag>
       
@@ -1323,6 +1398,8 @@
     <categories>
       
       <category>学习笔记</category>
+      
+      <category>Linux</category>
       
     </categories>
     
@@ -1351,6 +1428,8 @@
       
       <category>项目组</category>
       
+      <category>模糊测试</category>
+      
     </categories>
     
     
@@ -1375,6 +1454,8 @@
     <categories>
       
       <category>学习笔记</category>
+      
+      <category>Linux</category>
       
     </categories>
     
@@ -1405,6 +1486,8 @@
       
       <category>项目组</category>
       
+      <category>模糊测试</category>
+      
     </categories>
     
     
@@ -1432,6 +1515,8 @@
       
       <category>学习笔记</category>
       
+      <category>Linux</category>
+      
     </categories>
     
     
@@ -1455,9 +1540,9 @@
     
     <categories>
       
-      <category>使用手册</category>
+      <category>日常</category>
       
-      <category>学习笔记</category>
+      <category>博客</category>
       
     </categories>
     
