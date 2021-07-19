@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>多版本Python指定pip</title>
+    <link href="/posts/741c6074/"/>
+    <url>/posts/741c6074/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>因为系统中有时需要使用多个版本的Python，对应可能有多个版本的pip。</p><p>在指定与更新过程中之前有点没搞清楚，简单记录。</p></blockquote><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>如果<code>Ubuntu</code>中已经安装了<code>Python2</code>和<code>Python3</code>。可以通过脚本安装对应的<code>pip</code>。</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"># 为Python3安装pipcurl https:&#x2F;&#x2F;bootstrap.pypa.io&#x2F;get-pip.py -o get-pip.pypython3 get-pip.py --force-reinstall# 为Python2安装pipcurl https:&#x2F;&#x2F;bootstrap.pypa.io&#x2F;pip&#x2F;2.7&#x2F;get-pip.py -o get-pip.pypython get-pip.py --force-reinstall</code></pre></div><p>若要为具体版本安装pip将<code>python3 get-pip.py --force-reinstall</code>中的<code>python3</code>换成如<code>python3.5</code>或者<code>python3.6</code>之类的即可。</p><p>通过<code>pip -V</code>或<code>pip3 -V</code>即可查看对应的版本。</p><h2 id="管理"><a href="#管理" class="headerlink" title="管理"></a>管理</h2><p>在安装使用过程中可能产生<code>pip</code>没有对应到<code>python2</code>或者<code>pip3</code>没有对应<code>python3</code>之类的问题。</p><p>可以在<code>/usr/local/bin</code>目录中看到，有很多<code>pip</code>相关的脚本，<code>pip</code>、<code>pip2</code>、<code>pip3</code>等。实际内容都是<code>python</code>脚本。</p><p><strong>例如需要将<code>pip3</code>对应到<code>python3</code>，将脚本第一行的解释器对应到需要的<code>python</code>版本即可。</strong></p><div class="code-wrapper"><pre class="line-numbers language-python" data-language="python"><code class="language-python">#!&#x2F;usr&#x2F;bin&#x2F;python3# -*- coding: utf-8 -*-import reimport sysfrom pip._internal import mainif __name__ &#x3D;&#x3D; &#39;__main__&#39;:    sys.argv[0] &#x3D; re.sub(r&#39;(-script\.pyw|\.exe)?$&#39;, &#39;&#39;, sys.argv[0])    sys.exit(main())</code></pre></div><p>如果出现<code>ImportError: No module named _internal</code>错误，可能是你修改后的解释器还没有安装<code>pip</code>包，使用前面所述方法进行安装。</p><p><em>另外：直接改这个脚本文件来修改pip对应的python版本的前提是，当前脚本文件对应的Python版本与要修改对应的Python版本的pip包版本最好一致，不一致很可能出错。</em></p><blockquote><p>参考：</p><p><a href="https://zhuanlan.zhihu.com/p/37473690">https://zhuanlan.zhihu.com/p/37473690</a></p><p><a href="https://bootstrap.pypa.io/">https://bootstrap.pypa.io/</a></p></blockquote>]]></content>
+    
+    
+    <categories>
+      
+      <category>学习笔记</category>
+      
+      <category>Python</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Python</tag>
+      
+      <tag>pip</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Typora+七牛云图床</title>
     <link href="/posts/d6a29df8/"/>
     <url>/posts/d6a29df8/</url>
@@ -699,9 +728,9 @@
       
       <tag>Docker</tag>
       
-      <tag>Dockerfile</tag>
-      
       <tag>Image</tag>
+      
+      <tag>Dockerfile</tag>
       
     </tags>
     
