@@ -1,0 +1,316 @@
+<!DOCTYPE html><html lang="en" data-default-color-scheme="&#34;auto&#34;"><head><meta charset="UTF-8"><link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png"><link rel="icon" href="/img/favicon.png"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta name="theme-color" content="#2f4154"><meta name="description" content=""><meta name="author" content="LeeX0"><meta name="keywords" content=""><title>Suricata配置接口 - LeeX0&#39;s blog</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css"><link rel="stylesheet" href="/lib/hint/hint.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css"><link rel="stylesheet" href="/css/main.css"><script id="fluid-configs">var Fluid=window.Fluid||{},CONFIG={hostname:"leex0.top",root:"/",version:"1.8.9-a",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},copy_btn:!0,image_zoom:{enable:!0},toc:{enable:!0,headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:1},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,baidu:null,google:null,gtag:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null}}}</script><script src="/js/utils.js"></script><script src="/js/color-schema.js"></script><meta name="generator" content="Hexo 5.4.0"></head><body><header style="height:70vh"><nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar"><div class="container"><a class="navbar-brand" href="/">&nbsp;<strong>LeeX0's blog</strong>&nbsp;</a> <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><div class="animated-icon"><span></span><span></span><span></span></div></button><div class="collapse navbar-collapse" id="navbarSupportedContent"><ul class="navbar-nav ml-auto text-center"><li class="nav-item"><a class="nav-link" href="/"><i class="iconfont icon-home-fill"></i> Home</a></li><li class="nav-item"><a class="nav-link" href="/archives/"><i class="iconfont icon-archive-fill"></i> Archives</a></li><li class="nav-item"><a class="nav-link" href="/categories/"><i class="iconfont icon-category-fill"></i> Categories</a></li><li class="nav-item"><a class="nav-link" href="/tags/"><i class="iconfont icon-tags-fill"></i> Tags</a></li><li class="nav-item"><a class="nav-link" href="/about/"><i class="iconfont icon-user-fill"></i> About</a></li><li class="nav-item" id="search-btn"><a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i class="iconfont icon-search"></i>&nbsp;</a></li><li class="nav-item" id="color-toggle-btn"><a class="nav-link" href="javascript:">&nbsp;<i class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a></li></ul></div></div></nav><div class="banner" id="banner" parallax="true" style="background:url(/img/Royal_BluePetrol.jpg) no-repeat center center;background-size:cover"><div class="full-bg-img"><div class="mask flex-center" style="background-color:rgba(0,0,0,.3)"><div class="page-header text-center fade-in-up"><span class="h2" id="subtitle" title="Suricata配置接口"></span><div class="mt-3"><span class="post-meta mr-2"><i class="iconfont icon-author" aria-hidden="true"></i> LeeX0 </span><span class="post-meta"><i class="iconfont icon-date-fill" aria-hidden="true"></i> <time datetime="2021-08-18 14:22" pubdate>August 18, 2021 pm</time></span></div><div class="mt-1"><span class="post-meta mr-2"><i class="iconfont icon-chart"></i> 1.5k 字 </span><span class="post-meta mr-2"><i class="iconfont icon-clock-fill"></i> 27 分钟</span></div></div></div></div></div></header><main><div class="container-fluid nopadding-x"><div class="row nomargin-x"><div class="d-none d-lg-block col-lg-2"></div><div class="col-lg-8 nopadding-x-md"><div class="container nopadding-x-md" id="board-ctn"><div class="py-5" id="board"><article class="post-content mx-auto"><h1 style="display:none">Suricata配置接口</h1><div class="markdown-body"><blockquote><p>为<code>Suricata</code>对应的WEB页面开发编写相关接口用以实现配置修改与规则简单管理。</p></blockquote><h2 id="库引入、接口声明、常量定义"><a href="#库引入、接口声明、常量定义" class="headerlink" title="库引入、接口声明、常量定义"></a>库引入、接口声明、常量定义</h2><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;dirent.h&gt;
+
+static char **read_rules_file_name();
+static void alter_select_rules(char **rules_list, int count);
+static void alter_HOME_NET(char **HOME_NET_list, int count);
+static void alter_mpm_algo(char *mpm_algo);
+static void alter_spm_algo(char *spm_algo);
+static void alter_rule_action(char *rules_name, char *sid, char *action);
+static void add_custom_rule(char *action, char *protocol, char *stream_rule, char *option_rule);
+static void insert_specific_line_to_file(char *ins_content, char *load_file, char *des_opt);
+static char *read_rule_sid(char *src_rule);
+static void strrp(char *src, char *sub, char *rp, char *p);
+
+#define RULES_FILES_PATH &quot;&#x2F;var&#x2F;lib&#x2F;suricata&#x2F;rules&quot;
+#define CUSTOMRULES_FILE_PATH &quot;&#x2F;var&#x2F;lib&#x2F;suricata&#x2F;rules&#x2F;custom.rules&quot;
+#define CONFIG_YAML_FILR_PATH &quot;&#x2F;etc&#x2F;suricata&#x2F;suricata.yaml&quot;
+
+char *names[100];
+char sid[20];</code></pre></div><h2 id="接口定义"><a href="#接口定义" class="headerlink" title="接口定义"></a>接口定义</h2><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c">
+&#x2F;*
+ * 功能：读取 RULES_FILES_PATH 路径下所有规则文件名
+ * 传参：无
+ * 返回：names规则名二维数组
+ * usage：
+ * read_rules_file_name();
+ *&#x2F;
+static char **read_rules_file_name()
+&#123;
+    int n &#x3D; 0;
+    DIR *directory_pointer;
+    struct dirent *entry;
+    char *suffix;
+
+    if ((directory_pointer &#x3D; opendir(RULES_FILES_PATH)) &#x3D;&#x3D; NULL)
+        printf(&quot;Error opening \n &quot;);
+    else
+    &#123;
+        while ((entry &#x3D; readdir(directory_pointer)) !&#x3D; NULL)
+        &#123;
+            suffix &#x3D; strrchr(entry-&gt;d_name, &#39;.&#39;);
+            if (suffix !&#x3D; NULL &amp;&amp; strcmp(suffix, &quot;.rules&quot;) &#x3D;&#x3D; 0)
+            &#123;
+                names[n++] &#x3D; entry-&gt;d_name;
+            &#125;
+        &#125;
+        closedir(directory_pointer);
+    &#125;
+    return names;
+&#125;
+
+&#x2F;*
+ * 功能：将选择启用的规则集文件写入 CONFIG_YAML_FILR_PATH
+ * 传参：rules_list规则集名称列表,count共启用规则集数目
+ * 返回：无
+ * usage:
+ * char *a[] &#x3D; &#123;&quot;ftp.rules&quot;,&quot;dns.rules&quot;,&quot;dos.rules&quot;&#125;;
+ * alter_select_rules(a,3);
+ *&#x2F;
+static void alter_select_rules(char **rules_list, int count)
+&#123;
+    char rule_files[1000] &#x3D; &#123;&quot;rule-files: [&quot;&#125;;
+    for (int i &#x3D; 0; i &lt; count; i++)
+    &#123;
+        if (i !&#x3D; 0)
+        &#123;
+            strcat(rule_files, &quot;,&quot;);
+        &#125;
+        strcat(rule_files, rules_list[i]);
+    &#125;
+    strcat(rule_files, &quot;]\n&quot;);
+    insert_specific_line_to_file(rule_files, CONFIG_YAML_FILR_PATH, &quot;rule-files:&quot;);
+&#125;
+
+&#x2F;*
+ * 功能：将选择启用的规则集文件写入 CONFIG_YAML_FILR_PATH
+ * 传参：rules_list规则集名称列表,count共启用规则集数目
+ * 返回：无
+ * usage:
+ * char *a[] &#x3D; &#123;&quot;192.168.0.0&#x2F;16&quot;,&quot;10.0.0.0&#x2F;8&quot;,&quot;172.16.0.0&#x2F;12&quot;&#125;;
+ * alter_select_rules(a,3);
+
+ *&#x2F;
+static void alter_HOME_NET(char **HOME_NET_list, int count)
+&#123;
+    char HOME_NET[1000] &#x3D; &#123;&quot;    HOME_NET: \&quot;[&quot;&#125;;
+    for (int i &#x3D; 0; i &lt; count; i++)
+    &#123;
+        if (i !&#x3D; 0)
+        &#123;
+            strcat(HOME_NET, &quot;,&quot;);
+        &#125;
+        strcat(HOME_NET, HOME_NET_list[i]);
+    &#125;
+    strcat(HOME_NET, &quot;]\&quot;\n&quot;);
+    insert_specific_line_to_file(HOME_NET, CONFIG_YAML_FILR_PATH, &quot;HOME_NET:&quot;);
+&#125;
+
+&#x2F;*
+ * 功能：修改配置文件CONFIG_YAML_FILR_PATH中的mpm_algo选项
+ * 传参：mpm_algo待修改值
+ * 返回：无
+ * usage:
+ * alter_mpm_algo(&quot;hs&quot;);
+ *&#x2F;
+static void alter_mpm_algo(char *mpm_algo)
+&#123;
+    char mpm_algo_option[1000] &#x3D; &#123;&quot;mpm-algo: &quot;&#125;;
+    strcat(mpm_algo_option, mpm_algo);
+    strcat(mpm_algo_option, &quot;\n&quot;);
+    insert_specific_line_to_file(mpm_algo_option, CONFIG_YAML_FILR_PATH, &quot;mpm-algo:&quot;);
+&#125;
+
+&#x2F;*
+ * 功能：修改配置文件CONFIG_YAML_FILR_PATH中的spm_algo选项
+ * 传参：spm_algo待修改值
+ * 返回：无
+ * usage:
+ * alter_spm_algo(&quot;hc&quot;);
+ *&#x2F;
+static void alter_spm_algo(char *spm_algo)
+&#123;
+    char spm_algo_option[1000] &#x3D; &#123;&quot;spm-algo: &quot;&#125;;
+    strcat(spm_algo_option, spm_algo);
+    strcat(spm_algo_option, &quot;\n&quot;);
+    insert_specific_line_to_file(spm_algo_option, CONFIG_YAML_FILR_PATH, &quot;spm-algo:&quot;);
+&#125;
+
+&#x2F;*
+ * 功能：修改指定规则的动作
+ * 传参：rules_name规则集名称，sid规则标识符，action动作名称
+ * 返回：无
+ * usage:
+ * alter_rule_action(&quot;ftp.rules&quot;, &quot;2026691&quot;, &quot;alert&quot;);
+ *&#x2F;
+static void alter_rule_action(char *rules_name, char *sid, char *action)
+&#123;
+    FILE *fp;
+    FILE *fc;
+    char *temp_file &#x3D; (char *)malloc(strlen(RULES_FILES_PATH) + strlen(&quot;temp.rules&quot;) + 1);
+    sprintf(temp_file, &quot;%s&#x2F;%s&quot;, RULES_FILES_PATH, &quot;temp.rules&quot;);
+    int line_hit &#x3D; 0;
+    int ch;
+    char line[1000];
+    char temp_line[1000];
+    char *actions[] &#x3D; &#123;&quot;alert&quot;, &quot;pass&quot;, &quot;drop&quot;, &quot;reject&quot;&#125;;
+    char *load_file &#x3D; (char *)malloc(strlen(RULES_FILES_PATH) + strlen(rules_name) + 1);
+    sprintf(load_file, &quot;%s&#x2F;%s&quot;, RULES_FILES_PATH, rules_name);
+
+    fc &#x3D; fopen(temp_file, &quot;w&quot;);
+    fp &#x3D; fopen(load_file, &quot;r&quot;);
+
+    if (fp &#x3D;&#x3D; NULL || fc &#x3D;&#x3D; NULL)
+    &#123;
+        printf(&quot;Error opening \n &quot;);
+    &#125;
+    else
+    &#123;
+        while (!feof(fp) &amp;&amp; !line_hit)
+        &#123;
+            fgets(line, 1000, fp);
+            if (strstr(line, sid))
+            &#123;
+                line_hit &#x3D; 1;
+            &#125;
+            else
+            &#123;
+                fprintf(fc, &quot;%s&quot;, line);
+            &#125;
+        &#125;
+
+        strrp(line, actions[0], action, temp_line);
+        memset(line, 0, 1000);
+        strrp(temp_line, actions[1], action, line);
+        memset(temp_line, 0, 1000);
+        strrp(line, actions[2], action, temp_line);
+        memset(line, 0, 1000);
+        strrp(temp_line, actions[3], action, line);
+        fprintf(fc, &quot;%s&quot;, line);
+        while ((ch &#x3D; fgetc(fp)) !&#x3D; EOF)
+        &#123;
+            fprintf(fc, &quot;%c&quot;, ch);
+        &#125;
+
+        fclose(fc);
+        fclose(fp);
+        remove(load_file);
+        rename(temp_file, load_file);
+    &#125;
+&#125;
+
+&#x2F;*
+ * 功能：添加自定义规则到 CUSTOMRULES_FILE_PATH 文件中
+ * 传参：action动作名称，protocol协议名称，stream_rule流量方向规则，option_rule选项规则
+ * 返回：无
+ * usage:
+ * char a[1000] &#x3D; &quot;msg:&quot;ET MALWARE STOLENPENCIL CnC Domain in DNS Lookup&quot;; dns.query; content:&quot;client-message.com&quot;; nocase; fast_pattern; endswith; reference:url,asert.arbornetworks.com&#x2F;stolen-pencil-campaign-targets-academia&#x2F;; classtype:command-and-control; sid:2026691; rev:4; metadata:affected_product Windows_XP_Vista_7_8_10_Server_32_64_Bit, attack_target Client_Endpoint, created_at 2018_12_05, deployment Perimeter, former_category MALWARE, malware_family StolenPencil, performance_impact Low, signature_severity Major, updated_at 2020_09_16;&quot;;
+ * add_custom_rule(&quot;alert&quot;, &quot;dns&quot;, &quot;$HOME_NET any -&gt; any any&quot;, a);
+ *&#x2F;
+static void add_custom_rule(char *action, char *protocol, char *stream_rule, char *option_rule)
+&#123;
+    char *rule_content &#x3D; (char *)malloc(strlen(action) + strlen(protocol) + strlen(stream_rule) + strlen(option_rule) + 20);
+    sprintf(rule_content, &quot;%s %s %s (%s)&quot;, action, protocol, stream_rule, option_rule);
+
+    FILE *fp &#x3D; fopen(CUSTOMRULES_FILE_PATH, &quot;a+&quot;);
+    if (fp &#x3D;&#x3D; NULL)
+    &#123;
+        printf(&quot;Error opening \n &quot;);
+    &#125;
+    else
+    &#123;
+        fseek(fp, 0, SEEK_END);
+        fwrite(rule_content, strlen(rule_content), 1, fp);
+        fclose(fp);
+    &#125;
+&#125;
+
+&#x2F;*
+ * 功能：在文本中将指定内容插入在某一字段所在行(覆盖该行方式)
+ * 传参：line待插入的整行内容，load_file待插入的文件名，des_opt被覆盖行的特征字段
+ * 返回：无
+ * usage:
+ * char a[1000] &#x3D; &quot;rule-file: [ftp.rules,dns.rules]&quot;;
+ * insert_specific_line_to_file(a,CONFIG_YAML_FILR_PATH,&quot;rule-file:&quot;);
+ *&#x2F;
+static void insert_specific_line_to_file(char *ins_content, char *load_file, char *des_opt)
+&#123;
+    FILE *fp;
+    FILE *fc;
+    int line_hit &#x3D; 0;
+    int ch;
+    char line[1000];
+    char temp_file[100] &#x3D; &#123;&#125;;
+    strcat(temp_file, load_file);
+    strcat(temp_file, &quot;.temp&quot;);
+
+    fp &#x3D; fopen(load_file, &quot;r&quot;);
+    fc &#x3D; fopen(temp_file, &quot;w&quot;);
+
+    if (fp &#x3D;&#x3D; NULL || fc &#x3D;&#x3D; NULL)
+    &#123;
+        printf(&quot;Error opening \n &quot;);
+    &#125;
+    else
+    &#123;
+        while (!feof(fp) &amp;&amp; !line_hit)
+        &#123;
+            fgets(line, 1000, fp);
+            if (strstr(line, des_opt))
+            &#123;
+                line_hit &#x3D; 1;
+            &#125;
+            else
+            &#123;
+                fprintf(fc, &quot;%s&quot;, line);
+            &#125;
+        &#125;
+        fprintf(fc, &quot;%s&quot;, ins_content);
+        while ((ch &#x3D; fgetc(fp)) !&#x3D; EOF)
+        &#123;
+            fprintf(fc, &quot;%c&quot;, ch);
+        &#125;
+
+        fclose(fc);
+        fclose(fp);
+        remove(load_file);
+        rename(temp_file, load_file);
+    &#125;
+&#125;
+
+&#x2F;*
+ * 功能：sid读取
+ * 传参：src_rule源规则字符串
+ * 返回：sid规则标识符
+ * usage:
+ * char a[1000] &#x3D; &quot;alert dns $HOME_NET any -&gt; any any (msg:&quot;ET MALWARE STOLENPEN...... sid:2026691; ......ajor, updated_at 2020_09_16;)&quot;;
+ * char b[10] &#x3D; read_rule_sid(a);
+ *&#x2F;
+static char *read_rule_sid(char *src_rule)
+&#123;
+    int n &#x3D; 0;
+    char *index &#x3D; strstr(src_rule, &quot;sid:&quot;) + 4;
+    int position &#x3D; index - src_rule;
+
+    while (src_rule[position] !&#x3D; &#39;;&#39;)
+    &#123;
+        sid[n++] &#x3D; src_rule[position++];
+    &#125;
+    return sid;
+&#125;
+
+&#x2F;*
+ * 功能：字符串替换
+ * 传参：src源字符串，sub待替换内容，rp替换内容，p输出字符串
+ * 返回：无
+ * char line[1000] &#x3D; &quot;aabbccddxxyyzz&quot;;
+ * char temp_line[1000];
+ * char action[10] &#x3D; &quot;drop&quot;;
+ * char rep[10] &#x3D; &quot;alert&quot;;
+ * strrp(line, actions, rep, temp_line);
+ *&#x2F;
+static void strrp(char *src, char *sub, char *rp, char *p)
+&#123;
+    int sub_len &#x3D; strlen(sub);
+    char *po &#x3D; NULL, *q &#x3D; src;
+
+    while ((po &#x3D; strstr(q, sub)) !&#x3D; NULL)
+    &#123;
+        strncat(p, q, po - q);
+        strcat(p, rp);
+        q +&#x3D; po - q + sub_len;
+    &#125;
+    strcat(p, q);
+&#125;</code></pre></div></div><hr><div><div class="post-metas mb-3"><div class="post-meta mr-3"><i class="iconfont icon-category"></i> <a class="hover-with-bg" href="/categories/%E9%A1%B9%E7%9B%AE%E7%BB%84/">项目组</a> <a class="hover-with-bg" href="/categories/%E9%A1%B9%E7%9B%AE%E7%BB%84/Suricata/">Suricata</a></div><div class="post-meta"><i class="iconfont icon-tags"></i> <a class="hover-with-bg" href="/tags/Suricata/">Suricata</a> <a class="hover-with-bg" href="/tags/API/">API</a></div></div><p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p><div class="post-prevnext"><article class="post-prev col-6"></article><article class="post-next col-6"><a href="/posts/bbe9896b/"><span class="hidden-mobile">Suricata规则重载</span> <span class="visible-mobile">Next</span> <i class="iconfont icon-arrowright"></i></a></article></div></div></article></div></div></div><div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn"><div id="toc"><p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p><div class="toc-body" id="toc-body"></div></div></div></div></div><a id="scroll-top-button" href="#" role="button"><i class="iconfont icon-arrowup" aria-hidden="true"></i></a><div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable modal-lg" role="document"><div class="modal-content"><div class="modal-header text-center"><h4 class="modal-title w-100 font-weight-bold">Search</h4><button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body mx-3"><div class="md-form mb-5"><input type="text" id="local-search-input" class="form-control validate"> <label data-error="x" data-success="v" for="local-search-input">keyword</label></div><div class="list-group" id="local-search-result"></div></div></div></div></div></main><footer class="text-center mt-5 py-3"><div class="footer-content"><a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a></div></footer><script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css"><script>NProgress.configure({showSpinner:!1,trickleSpeed:100}),NProgress.start(),window.addEventListener("load",(function(){NProgress.done()}))</script><script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script><script src="/js/debouncer.js"></script><script src="/js/events.js"></script><script src="/js/plugins.js"></script><script src="/js/img-lazyload.js"></script><script src="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/components/prism-core.min.js"></script><script src="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.js"></script><script src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js"></script><script>!function(t,i){(0,Fluid.plugins.typing)(i.getElementById("subtitle").title)}(window,document)</script><script src="/js/local-search.js"></script><script>$("#local-search-input").on("click",(function(){searchFunc("/local-search.xml","local-search-input","local-search-result")})),$("#modalSearch").on("shown.bs.modal",(function(){$("#local-search-input").focus()}))</script><script src="/js/boot.js"></script></body></html>
