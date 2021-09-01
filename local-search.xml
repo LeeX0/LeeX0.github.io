@@ -142,9 +142,9 @@
       
       <tag>Suricata</tag>
       
-      <tag>rules</tag>
-      
       <tag>入侵检测</tag>
+      
+      <tag>rules</tag>
       
     </tags>
     
@@ -1082,11 +1082,11 @@
     
     <tags>
       
+      <tag>MacOS</tag>
+      
       <tag>Docker</tag>
       
       <tag>Ubuntu</tag>
-      
-      <tag>MacOS</tag>
       
     </tags>
     
