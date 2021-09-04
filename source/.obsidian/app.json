@@ -1,0 +1,20 @@
+{
+  "readableLineLength": true,
+  "foldHeading": true,
+  "showLineNumber": false,
+  "promptDelete": false,
+  "lineWrap": true,
+  "showFrontmatter": true,
+  "attachmentFolderPath": "./附件",
+  "alwaysUpdateLinks": true,
+  "showUnsupportedFiles": true,
+  "pdfExportSettings": {
+    "pageSize": "Letter",
+    "landscape": false,
+    "margin": "0",
+    "downscalePercent": 100
+  },
+  "newFileLocation": "current",
+  "newLinkFormat": "relative",
+  "useMarkdownLinks": true
+}
