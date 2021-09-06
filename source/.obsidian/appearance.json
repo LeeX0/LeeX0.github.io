@@ -1,6 +1,12 @@
 {
   "baseFontSize": 18,
-  "cssTheme": "Obsidian gruvbox",
+  "cssTheme": "Everforest",
   "theme": "obsidian",
-  "translucency": false
+  "translucency": false,
+  "enabledCssSnippets": [
+    "autofading-ui",
+    "bigger-link-popup-preview",
+    "custom-icons-for-specific-folders",
+    "smaller-scrollbar"
+  ]
 }
