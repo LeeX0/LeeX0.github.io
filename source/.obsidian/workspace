@@ -10,7 +10,7 @@
           "type": "markdown",
           "state": {
             "file": "_posts/日常/其他/笔记应用折腾.md",
-            "mode": "source"
+            "mode": "preview"
           }
         }
       }
@@ -109,6 +109,7 @@
   },
   "active": "2aac06dbc0e3ec2d",
   "lastOpenFiles": [
+    "_posts/日常/其他/笔记应用折腾.md",
     "_posts/日常/其他/未命名.md",
     "_posts/日常/Mac/Mac删除Launchpad残留图标.md",
     "_drafts/2 电网充电桩/电网项目CVE解析.md",
@@ -117,7 +118,6 @@
     "_posts/日常/博客/Hexo推送及备份.md",
     "_posts/日常/博客/未命名.md",
     "_drafts/2-6 Suricata/信创入侵检测系统——产品说明.md",
-    "_drafts/2-6 Suricata/未命名.md",
-    "_drafts/2-6 Suricata/IPS云服务器测试-2.md"
+    "_drafts/2-6 Suricata/未命名.md"
   ]
 }
