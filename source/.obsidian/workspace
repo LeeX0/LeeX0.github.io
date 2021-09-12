@@ -4,12 +4,12 @@
     "type": "split",
     "children": [
       {
-        "id": "a71da8d2f6708c1a",
+        "id": "2aac06dbc0e3ec2d",
         "type": "leaf",
         "state": {
           "type": "markdown",
           "state": {
-            "file": "_posts/日常/博客/Hexo推送及备份.md",
+            "file": "_posts/日常/其他/笔记应用折腾.md",
             "mode": "source"
           }
         }
@@ -68,7 +68,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_posts/日常/博客/Hexo推送及备份.md",
+                "file": "_posts/日常/其他/笔记应用折腾.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -96,7 +96,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/日常/博客/Hexo推送及备份.md"
+                "file": "_posts/日常/其他/笔记应用折腾.md"
               }
             }
           }
@@ -107,17 +107,17 @@
     "direction": "horizontal",
     "width": 300
   },
-  "active": "a71da8d2f6708c1a",
+  "active": "2aac06dbc0e3ec2d",
   "lastOpenFiles": [
+    "_posts/日常/其他/未命名.md",
+    "_posts/日常/Mac/Mac删除Launchpad残留图标.md",
+    "_drafts/2 电网充电桩/电网项目CVE解析.md",
+    "_posts/项目组/Kali/Kali安装相关设置.md",
+    "_drafts/2 电网充电桩/未命名.md",
+    "_posts/日常/博客/Hexo推送及备份.md",
     "_posts/日常/博客/未命名.md",
     "_drafts/2-6 Suricata/信创入侵检测系统——产品说明.md",
     "_drafts/2-6 Suricata/未命名.md",
-    "_drafts/2-6 Suricata/IPS云服务器测试-2.md",
-    "_drafts/2-6 Suricata/IPS云服务器测试-1.md",
-    "_drafts/2-6 Suricata/使用手册.md",
-    "_drafts/2-6 Suricata/附件/Pasted image 20210902170840.png",
-    "_drafts/2-6 Suricata/附件/Pasted image 20210902170803.png",
-    "_drafts/2-6 Suricata/附件/20210831132741.png",
-    "_drafts/2-6 Suricata/附件/20210831124409.png"
+    "_drafts/2-6 Suricata/IPS云服务器测试-2.md"
   ]
 }
