@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>微醺日记——威士忌拼图</title>
+    <link href="/posts/8946ac01/"/>
+    <url>/posts/8946ac01/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>努力完成威士忌拼图</p><p>持续更新（最新更新2021-10-28）</p><p>2021-10-28</p><p>2021-06-21</p></blockquote><p><img src="/posts/8946ac01/whisky.png"></p><h2 id="单一麦芽"><a href="#单一麦芽" class="headerlink" title="单一麦芽"></a>单一麦芽</h2><p><code>The Glenlivet</code>格兰威特</p><ul><li><p><input checked disabled type="checkbox">  格兰威特12年</p><p>波本桶，比较浅的琥珀色，经典的青草味道，青草和奶油味道作为主轴，后调带一些水果的味道 像是青苹果、凤梨，口味算是蛮清新</p></li></ul><p><code>Macallan</code>麦卡伦</p><ul><li><p><input checked disabled type="checkbox">  麦卡伦蓝钻12年双桶</p><p>雪莉，口味丰富，果香爆炸，较深的琥珀色带一点棕红（这也是麦卡伦自己很标榜的the natural color自然酒色 不加焦糖色）</p></li></ul><p><code>The Singleton</code>苏格登</p><ul><li><p><input checked disabled type="checkbox">  苏格登12年GLEN ORD</p><p>口味一般，别的忘了</p></li></ul><p><code>Clynelish</code>克里尼利基</p><ul><li><p><input checked disabled type="checkbox">  小猫14</p><p>入口柔顺，太妃糖巧克力香甜，尾韵略辛辣，口感比较醇厚（不知道是不是所谓的蜡质感）</p></li></ul><p><code>The Balvenie</code>百富</p><ul><li><p><input checked disabled type="checkbox">  百富12年双桶陈酿</p><p>香甜，口味均衡，有果香，尾韵一点烟熏，盒子瓶子好看</p></li></ul><h2 id="调和威士忌"><a href="#调和威士忌" class="headerlink" title="调和威士忌"></a>调和威士忌</h2><p><code>JohnnieWalker</code></p><ul><li><p><input checked disabled type="checkbox">  红方 RED LABEL</p><p>烟熏</p></li><li><p><input checked disabled type="checkbox">  黑方 BLACK LABEL</p><p>烟熏</p></li><li><p><input checked disabled type="checkbox">  DOUBLE BLACK</p><p>很重的烟熏</p></li></ul><p><code>Grant&#39;s</code></p><ul><li><p><input checked disabled type="checkbox">  红标三桶</p><p>酒精强烈，木质单宁重</p></li></ul><p><code>The Famous Grouse</code>威雀</p><ul><li><p><input checked disabled type="checkbox">  威雀基础款</p><p>酒精味较重，有些冲，木质感较重，便宜</p></li></ul><p><code>KAKU</code>（角牌）</p><ul><li><input checked disabled type="checkbox"> 三得利角牌</li></ul><p><code>Chivas</code>芝华士——木质感</p><p><code>Ballantine&#39;s</code>百龄坛——轻烟熏</p><p><code>Label5</code>——轻烟熏，麦芽含量30%较高</p><h2 id="波本"><a href="#波本" class="headerlink" title="波本"></a>波本</h2><p><code>Jim Beam</code>金宾/占边</p><ul><li><p><input checked disabled type="checkbox">  白金宾</p><p>口味香甜，典型的波本味道，便宜大碗</p></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>日常</category>
+      
+      <category>微醺日记</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Whisky</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>笔记应用折腾</title>
     <link href="/posts/eb0ecd3d/"/>
     <url>/posts/eb0ecd3d/</url>
@@ -412,33 +439,6 @@
       <tag>Hexo</tag>
       
       <tag>Fluid</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>微醺日记——Whisky拼图</title>
-    <link href="/posts/8946ac01/"/>
-    <url>/posts/8946ac01/</url>
-    
-    <content type="html"><![CDATA[<blockquote><p>努力完成Whisky拼图</p><p>持续更新</p></blockquote><p><img src="/posts/8946ac01/whisky.png"></p><h2 id="调和威士忌"><a href="#调和威士忌" class="headerlink" title="调和威士忌"></a>调和威士忌</h2><p><code>Chivas</code>（芝华士）——木质感</p><p><code>JohnnieWalker</code>——主打烟熏</p><p><code>Ballantine&#39;s</code>（百龄坛）——轻烟熏</p><p><code>Label5</code>——轻烟熏，麦芽含量30%较高</p><p><code>Grant&#39;s</code>——酒精强烈，木质单宁重</p><p><code>The Famous Grouse</code>（威雀）——糖糖的，木质单宁</p><p><code>KAKU</code>（角牌）——清淡</p><h2 id="单一麦芽"><a href="#单一麦芽" class="headerlink" title="单一麦芽"></a>单一麦芽</h2><p><code>The Glenlivet</code>（格兰威特）——波本，比较浅的琥珀色，经典的青草味道，青草和奶油味道作为主轴，后调带一些水果的味道 像是青苹果、凤梨，口味算是蛮清新</p><p><code>Macallan</code>（麦卡伦）——雪莉，较深的琥珀色带一点棕红（这也是麦卡伦自己很标榜的the natural color自然酒色 不加焦糖色）</p>]]></content>
-    
-    
-    <categories>
-      
-      <category>日常</category>
-      
-      <category>微醺日记</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>Whisky</tag>
       
     </tags>
     
@@ -1144,11 +1144,11 @@
     
     <tags>
       
+      <tag>MacOS</tag>
+      
       <tag>Docker</tag>
       
       <tag>Ubuntu</tag>
-      
-      <tag>MacOS</tag>
       
     </tags>
     
