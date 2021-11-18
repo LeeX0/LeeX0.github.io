@@ -3,8 +3,5 @@ Thumbs.db
 db.json
 *.log
 node_modules/
-source/.obsidian/
-source/_posts/.obsidian/
-source/_drafts/
 public/
 .deploy*/
