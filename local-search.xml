@@ -4,11 +4,11 @@
   
   
   <entry>
-    <title>笔记应用折腾-2 Craft</title>
+    <title>笔记应用折腾2-Craft</title>
     <link href="/posts/1ab2a467/"/>
     <url>/posts/1ab2a467/</url>
     
-    <content type="html"><![CDATA[<blockquote><p>接续上文<a href="https://leex0.top/posts/eb0ecd3d/">笔记应用折腾-1</a>。</p><p>上次体验了一些常见的笔记应用，在各处都有不太满意的地方，最近有看了看别的应用，目前是找到了对我自己而言比较好用的应用。</p><p>这次的应用是<a href="https://www.craft.do/"><code>Craft</code></a>。</p></blockquote><h2 id="0-明确个人需求"><a href="#0-明确个人需求" class="headerlink" title="0. 明确个人需求"></a>0. 明确个人需求</h2><blockquote><p>与上一篇博客一样，这次贴出了主要需求。</p></blockquote><ol><li><code>好看与稳定</code>。为了更优质的视觉效果，有时候甚至可以牺牲部分输入体验。</li><li><code>博客编写（Hexo）</code>。需要定期输出博客内容，但博客内容需要单独保存且需要使用单独的模板，同时需要考虑博客中的照片存放。</li><li><code>随笔记录</code>。在日常学习生活中可能会记录一些东西，不足以形成博客。</li><li><code>文档库管理</code>。期望能将博客内容与随笔内容一起管理。</li><li><code>分布存储</code>。属于某个项目的随笔，文件最好能存放在对应目录之下。<del>（基本放弃，逻辑上集中与分布都讲得通)</del></li><li><code>标签</code>。如果具有文档集中管理，通常具有便签功能。</li><li><code>云同步</code>。能够在手机上查看文档库内容。MacOS与IOS都有客户端的话一般都有这个功能。对于个人使用没有也行。</li></ol><h2 id="Craft"><a href="#Craft" class="headerlink" title="Craft"></a>Craft</h2><ol><li><h3 id="功能模块"><a href="#功能模块" class="headerlink" title="功能模块"></a>功能模块</h3></li></ol><p>功能模块主要有两个，一个是文档库，一个是日历形式的每日笔记。</p><p><code>文档库</code></p><ul><li>有预设的所有文档、收藏、未归档、废纸篓。</li><li>同时可以在下方文件夹组织自己的文档组织结构，在创建新文件夹时会默认让你选定一个文件夹对应的图标，种类不少可以自定义颜色还不错。</li></ul><p><img src="/posts/1ab2a467/Image.png" alt="Image.png"></p><p><code>每日笔记</code></p><ul><li>最上方为<strong>日历📅</strong>，可以快速定位当天位置，某日创建了笔记会在日历表中有小方框标注。</li><li>在下方可以在<strong>对应日期快速创建每日笔记</strong>，类似于在某天开了一篇日记，用法除了日记可以如对应某一日期的会议记录等。每日笔记独立于文档库，但可以把内容和文档库中相互引用。</li><li>在每日笔记中可以<strong>创建待办事项</strong>，会提示多少已完成和逾期。</li><li><strong>可以同步Apple日历中的日程</strong>，自动显示在对应日期的位置。</li></ul><p><img src="/posts/1ab2a467/Image(2).png" alt="Image.png"></p><ol start="2"><li><h3 id="笔记编写"><a href="#笔记编写" class="headerlink" title="笔记编写"></a>笔记编写</h3></li></ol><p>Craft的书写体验很好，快捷键逻辑也算是比较清楚，同时对于默认的md语法支持的标注单调有了一定补充。</p><blockquote><p>！！！可以选中文本或块后(未选中则默认当前Block)，通过输入<code>/</code>快速进行各种操作，插入内容，设置背景颜色，调整各种样式等等操作。配合<a href="https://support.craft.do/hc/en-us/articles/360019555557-Keyboard-Shortcuts">对块的操作快捷键</a>，能快速优化排版。</p></blockquote><h4 id="2-1-模块化"><a href="#2-1-模块化" class="headerlink" title="2.1 模块化"></a>2.1 模块化</h4><p>Craft中所有单元被设计为Block，操作不仅可以对具体的文本，同样可以针对单个或多个Block。例如对多个Block组织成卡片或者页面，装饰为焦点或者块等。这些部分在之后会有介绍。</p><p>可以在左侧至今进行单个的Block移动拖动复制等，也可以在页面左键框选多个Block统一操作。</p><h4 id="2-2-插入与样式"><a href="#2-2-插入与样式" class="headerlink" title="2.2 插入与样式"></a>2.2 插入与样式</h4><p><code>插入</code>方面，支持插入文本、表格、文件、图片等等<strong>，文件内容会统统上传至云端</strong>。</p><p><code>样式</code>方面，自带样式丰富，除了md语法支持的样式外：</p><ol><li>文本样式</li></ol><p><img src="/posts/1ab2a467/Image(3).png" alt="Image.png"></p><ul><li><strong>团体</strong>部分，可以将Block组织为<code>页面或卡片</code>，对于Craft而言，相当于在页面中添加了一个标签式的链接，可以进入作为二级页面打开。同时卡片有多种大小样式类型，方便文章排版。</li></ul><p><img src="/posts/1ab2a467/Image(4).png" alt="Image.png"></p><ul><li><strong>对齐</strong>部分，额外支持了<code>居中、左对齐、右对齐与缩进</code>。</li><li><strong>装饰</strong>部分，支持<code>焦点与块</code>。焦点即md中默认的quote块，而块指的是将几个block聚集在一起采用统一的样式管理。</li><li><strong>颜色</strong>部分，除了字体颜色标注外，每个Block与焦点或块都支持<code>背景颜色</code>。</li><li><strong>字体</strong>部分，可以选择内置的几种字体。</li></ul><ol start="2"><li>图片样式</li></ol><p>选中图片后，可以<strong>对图片进行单独的样式调整</strong>，图片尺寸，图片适应和排版。</p><ol start="3"><li>页面样式</li></ol><p>页面样式主要为<strong>基本页面信息</strong>：标题设定，Block间距，页面宽度。</p><p>同时可以查看<strong>页面信息</strong>，创建时间，创建者，修改时间。</p><p>同样可以查看文件操作历史，与<strong>回溯编辑版本</strong>(这点还是挺方便的，应该是30天的记录)。</p><p>同时包括页面<strong>统计信息</strong>：字数，块数等等。</p><ol start="4"><li>链接引用</li></ol><p>可以通过键入<code>@</code>或者<code>[[</code>来选择需要引用链接的文章或者部分。</p><h4 id="2-3-动作"><a href="#2-3-动作" class="headerlink" title="2.3 动作"></a>2.3 动作</h4><p>动作主要包括对文档整体的操作，和对多个块的操作。查找、副本、移动等等。</p><h4 id="2-4-分享"><a href="#2-4-分享" class="headerlink" title="2.4 分享"></a>2.4 分享</h4><p>这部分我认为Craft是做的比较好的。分享导出种类多，而且需要的配置选项都具有。</p><p><strong>分享主要通过私密链接、导出进行</strong>。</p><p><code>私密链接</code>即对文章生成一个Craft的链接，通过文章链接打开，可以选择开启对文章进行评论引用块等。类似于把文章发布与Craft的云端，获得了一个链接。</p><p>私密链接的文章保留了所有样式，包括作为二级内容的页面和卡片。可以作为直接发表的链接内容使用。</p><p><code>导出部分</code>常用的是导出PDF、图像作为查看，导出Markdown作为编辑或移植。</p><p>导出含有图片的Markdown文件的话，<strong>会将文件的md文件保存，另外有一个对应文件名的assert文件夹用以保存图片，并且正确引用图片链接</strong>，很方便。（注：这种导出操作不在页面的导出的选项中，需要在文件库中右键文件名进行导出）</p><blockquote><p>其中导出为Markdown可以选择，导出的类型，如Craft类型、Github类型等。</p><p>导出为Craft类型可以保留==符号的突出显示样式。</p><p>导出为Github类型兼容性更广。</p><p>导出时可以选择导出的具体样式如中标题尺寸，加粗水平线的样式等等。</p><p><strong>此外，一些Craft自带的一些样式在导出Markdown时会自动删除，保留基础md语法样式，如页面、卡片、对齐、字体颜色、背景颜色等都会默认删除，焦点和块都会保留为<code>quote</code>。只是在Craft中会正常显示这些样式，这点从兼容性上讲非常方便。</strong></p></blockquote><p><img src="/posts/1ab2a467/Image(5).png" alt="Image.png"></p><ol start="3"><li><h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3></li></ol><ul><li>导入其他文件</li></ul><p>这点非常友好，在文件夹界面，可以在右上角选定导入，导入可以是文件夹，会自动全部导入。</p><h2 id="个人看法"><a href="#个人看法" class="headerlink" title="个人看法"></a>个人看法</h2><blockquote><p>上述主要是使用过程中的一些方法和技巧，下面说一下个人体验方面的问题。</p></blockquote><ol><li>导入导出</li></ol><p>因为之前有很多博客文件需要导入进去，所以需要进行大量的Markdown文件导入，最后能自动识别图片(基于普通的Markdown语法路径)和通过文件夹导入。显然Craft可以，这也是我能选择使用这个App的第一步。</p><p>导出的话，提供了比较多的易用导出。包括平时分享的话，会选择PDF或者图片或者私密链接。需要内容输出为博客的话就导出文件Markdown文本与图片，参见上述<em>2.4 分享</em>。</p><blockquote><p>现在我已经不指望所有的文档管理都能完全管理已发布博文，还是在这边编写，导出再输出就OK。</p></blockquote><ol start="2"><li>美观</li></ol><p>没有主题设置，有对应的深色与浅色模式，排版和样式都还算不错。在用过的md文档编辑软件中也排得上前列。加上自带很多排版样式，这也是最吸引我的一点。</p><ol start="3"><li>跨平台</li></ol><p>Apple产品都具有相应的客户端，Mac、iPhone、iPad都有App。同步不需要额外管，联网状态编辑完成稍等一下即会同步，速度还OK。</p><p>对我而言主要文本工作都会在Mac进行，移动应用对我而言主要是作为临时查看和发送共享，移动App都足够我使用。</p><blockquote><p>For Windows：</p><p>目前已经开始了Web App的bate测试，还没有体验过，后续体验了补充。</p><p>如果体验较好，可以跨平台编辑文档，Windows也可以临时用一下且同步了文件就挺好的。</p></blockquote><ol start="4"><li>标签</li></ol><p>没有标签，需要自己组织文件结构，对我而言还好，文件都有对应组织。</p><p>内容间能相互引用就可以了。</p><ol start="5"><li>价格</li></ol><p>目前订阅制，45刀一年，<del>学生可以申请免费使用。</del></p><blockquote><p>更正：学生已经不能free了😢，只可以申请一个50%的discount。</p></blockquote><ol start="6"><li>协作</li></ol><p>应该是有比较好的协作体验，但这块功能我目前还没有使用过。</p><ol start="7"><li>缺点与问题</li></ol><p>在Mac中使用，隔一段时间输入法会卡顿(搜狗)，需要重启Craft解决。</p><p>没有对文档生成目录，看起来不是很方便。</p><p>标题很难看出层次，经常忘了自己写的几级标题，需要点一下看到。</p>]]></content>
+    <content type="html"><![CDATA[<blockquote><p>接续上文<a href="https://leex0.top/posts/eb0ecd3d/">笔记应用折腾1</a>。</p><p>上次体验了一些常见的笔记应用，在各处都有不太满意的地方，最近有看了看别的应用，目前是找到了对我自己而言比较好用的应用。</p><p>这次的应用是<a href="https://www.craft.do/"><code>Craft</code></a>。</p></blockquote><h2 id="明确个人需求"><a href="#明确个人需求" class="headerlink" title="明确个人需求"></a>明确个人需求</h2><blockquote><p>与上一篇博客一样，这次贴出了主要需求。</p></blockquote><ol><li><code>好看与稳定</code>。为了更优质的视觉效果，有时候甚至可以牺牲部分输入体验。</li><li><code>博客编写（Hexo）</code>。需要定期输出博客内容，但博客内容需要单独保存且需要使用单独的模板，同时需要考虑博客中的照片存放。</li><li><code>随笔记录</code>。在日常学习生活中可能会记录一些东西，不足以形成博客。</li><li><code>文档库管理</code>。期望能将博客内容与随笔内容一起管理。</li><li><code>分布存储</code>。属于某个项目的随笔，文件最好能存放在对应目录之下。<del>（基本放弃，逻辑上集中与分布都讲得通)</del></li><li><code>标签</code>。如果具有文档集中管理，通常具有便签功能。</li><li><code>云同步</code>。能够在手机上查看文档库内容。MacOS与IOS都有客户端的话一般都有这个功能。对于个人使用没有也行。</li></ol><h2 id="Craft"><a href="#Craft" class="headerlink" title="Craft"></a>Craft</h2><h3 id="1-功能模块"><a href="#1-功能模块" class="headerlink" title="1. 功能模块"></a>1. 功能模块</h3><p>功能模块主要有两个，一个是文档库，一个是日历形式的每日笔记。</p><p><code>文档库</code></p><ul><li>有预设的所有文档、收藏、未归档、废纸篓。</li><li>同时可以在下方文件夹组织自己的文档组织结构，在创建新文件夹时会默认让你选定一个文件夹对应的图标，种类不少可以自定义颜色还不错。</li></ul><p><img src="/posts/1ab2a467/Image.png"></p><p><code>每日笔记</code></p><ul><li>最上方为<strong>日历📅</strong>，可以快速定位当天位置，某日创建了笔记会在日历表中有小方框标注。</li><li>在下方可以在<strong>对应日期快速创建每日笔记</strong>，类似于在某天开了一篇日记，用法除了日记可以如对应某一日期的会议记录等。每日笔记独立于文档库，但可以把内容和文档库中相互引用。</li><li>在每日笔记中可以<strong>创建待办事项</strong>，会提示多少已完成和逾期。</li><li><strong>可以同步Apple日历中的日程</strong>，自动显示在对应日期的位置。</li></ul><p><img src="/posts/1ab2a467/Image(2).png"></p><h3 id="2-笔记编写"><a href="#2-笔记编写" class="headerlink" title="2. 笔记编写"></a>2. 笔记编写</h3><p>Craft的书写体验很好，快捷键逻辑也算是比较清楚，同时对于默认的md语法支持的标注单调有了一定补充。</p><blockquote><p>！！！可以选中文本或块后(未选中则默认当前Block)，通过输入<code>/</code>快速进行各种操作，插入内容，设置背景颜色，调整各种样式等等操作。配合<a href="https://support.craft.do/hc/en-us/articles/360019555557-Keyboard-Shortcuts">对块的操作快捷键</a>，能快速优化排版。</p></blockquote><h4 id="2-1-模块化"><a href="#2-1-模块化" class="headerlink" title="2.1 模块化"></a>2.1 模块化</h4><p>Craft中所有单元被设计为Block，操作不仅可以对具体的文本，同样可以针对单个或多个Block。例如对多个Block组织成卡片或者页面，装饰为焦点或者块等。这些部分在之后会有介绍。</p><p>可以在左侧至今进行单个的Block移动拖动复制等，也可以在页面左键框选多个Block统一操作。</p><h4 id="2-2-插入与样式"><a href="#2-2-插入与样式" class="headerlink" title="2.2 插入与样式"></a>2.2 插入与样式</h4><p><code>插入</code>方面，支持插入文本、表格、文件、图片等等<strong>，文件内容会统统上传至云端</strong>。</p><p><code>样式</code>方面，自带样式丰富，除了md语法支持的样式外：</p><ol><li>文本样式</li></ol><p><img src="/posts/1ab2a467/Image(3).png"></p><ul><li><strong>团体</strong>部分，可以将Block组织为<code>页面或卡片</code>，对于Craft而言，相当于在页面中添加了一个标签式的链接，可以进入作为二级页面打开。同时卡片有多种大小样式类型，方便文章排版。</li></ul><p><img src="/posts/1ab2a467/Image(4).png"></p><ul><li><strong>对齐</strong>部分，额外支持了<code>居中、左对齐、右对齐与缩进</code>。</li><li><strong>装饰</strong>部分，支持<code>焦点与块</code>。焦点即md中默认的quote块，而块指的是将几个block聚集在一起采用统一的样式管理。</li><li><strong>颜色</strong>部分，除了字体颜色标注外，每个Block与焦点或块都支持<code>背景颜色</code>。</li><li><strong>字体</strong>部分，可以选择内置的几种字体。</li></ul><ol start="2"><li>图片样式</li></ol><p>选中图片后，可以<strong>对图片进行单独的样式调整</strong>，图片尺寸，图片适应和排版。</p><ol start="3"><li>页面样式</li></ol><p>页面样式主要为<strong>基本页面信息</strong>：标题设定，Block间距，页面宽度。</p><p>同时可以查看<strong>页面信息</strong>，创建时间，创建者，修改时间。</p><p>同样可以查看文件操作历史，与<strong>回溯编辑版本</strong>(这点还是挺方便的，应该是30天的记录)。</p><p>同时包括页面<strong>统计信息</strong>：字数，块数等等。</p><ol start="4"><li>链接引用</li></ol><p>可以通过键入<code>@</code>或者<code>[[</code>来选择需要引用链接的文章或者部分。</p><h4 id="2-3-动作"><a href="#2-3-动作" class="headerlink" title="2.3 动作"></a>2.3 动作</h4><p>动作主要包括对文档整体的操作，和对多个块的操作。查找、副本、移动等等。</p><h4 id="2-4-分享"><a href="#2-4-分享" class="headerlink" title="2.4 分享"></a>2.4 分享</h4><p>这部分我认为Craft是做的比较好的。分享导出种类多，而且需要的配置选项都具有。</p><p><strong>分享主要通过私密链接、导出进行</strong>。</p><p><code>私密链接</code>即对文章生成一个Craft的链接，通过文章链接打开，可以选择开启对文章进行评论引用块等。类似于把文章发布与Craft的云端，获得了一个链接。</p><p>私密链接的文章保留了所有样式，包括作为二级内容的页面和卡片。可以作为直接发表的链接内容使用。</p><p><code>导出部分</code>常用的是导出PDF、图像作为查看，导出Markdown作为编辑或移植。</p><p>导出含有图片的Markdown文件的话，<strong>会将文件的md文件保存，另外有一个对应文件名的assert文件夹用以保存图片，并且正确引用图片链接</strong>，很方便。（注：这种导出操作不在页面的导出的选项中，需要在文件库中右键文件名进行导出）</p><blockquote><p>其中导出为Markdown可以选择，导出的类型，如Craft类型、Github类型等。</p><p>导出为Craft类型可以保留==符号的突出显示样式。</p><p>导出为Github类型兼容性更广。</p><p>导出时可以选择导出的具体样式如中标题尺寸，加粗水平线的样式等等。</p><p><strong>此外，一些Craft自带的一些样式在导出Markdown时会自动删除，保留基础md语法样式，如页面、卡片、对齐、字体颜色、背景颜色等都会默认删除，焦点和块都会保留为<code>quote</code>。只是在Craft中会正常显示这些样式，这点从兼容性上讲非常方便。</strong></p></blockquote><p><img src="/posts/1ab2a467/Image(5).png"></p><h3 id="3-其他"><a href="#3-其他" class="headerlink" title="3. 其他"></a>3. 其他</h3><ul><li>导入其他文件</li></ul><p>这点非常友好，在文件夹界面，可以在右上角选定导入，导入可以是文件夹，会自动全部导入。</p><h2 id="个人看法"><a href="#个人看法" class="headerlink" title="个人看法"></a>个人看法</h2><blockquote><p>上述主要是使用过程中的一些方法和技巧，下面说一下个人体验方面的问题。</p></blockquote><ol><li>导入导出</li></ol><p>因为之前有很多博客文件需要导入进去，所以需要进行大量的Markdown文件导入，最后能自动识别图片(基于普通的Markdown语法路径)和通过文件夹导入。显然Craft可以，这也是我能选择使用这个App的第一步。</p><p>导出的话，提供了比较多的易用导出。包括平时分享的话，会选择PDF或者图片或者私密链接。需要内容输出为博客的话就导出文件Markdown文本与图片，参见上述<em>2.4 分享</em>。</p><blockquote><p>现在我已经不指望所有的文档管理都能完全管理已发布博文，还是在这边编写，导出再输出就OK。</p></blockquote><ol start="2"><li>美观</li></ol><p>没有主题设置，有对应的深色与浅色模式，排版和样式都还算不错。在用过的md文档编辑软件中也排得上前列。加上自带很多排版样式，这也是最吸引我的一点。</p><ol start="3"><li>跨平台</li></ol><p>Apple产品都具有相应的客户端，Mac、iPhone、iPad都有App。同步不需要额外管，联网状态编辑完成稍等一下即会同步，速度还OK。</p><p>对我而言主要文本工作都会在Mac进行，移动应用对我而言主要是作为临时查看和发送共享，移动App都足够我使用。</p><blockquote><p>For Windows：</p><p>目前已经开始了Web App的bate测试，<del>还没有体验过，后续体验了补充</del>。</p><p>如果体验较好，可以跨平台编辑文档，Windows也可以临时用一下且同步了文件就挺好的。</p><p>补充：</p><p>目前已经体验了bate版的WebApp。体验还是比较优秀的，个人空间的内容全部得以保存，编辑功能与App端基本一致。Windows使用WebApp作为Mac之外的补充已经是非常好了。</p></blockquote><ol start="4"><li>标签</li></ol><p>没有标签，需要自己组织文件结构，对我而言还好，文件都有对应组织。</p><p>内容间能相互引用就可以了。</p><ol start="5"><li>价格</li></ol><p>目前订阅制，45刀一年，<del>学生可以申请免费使用。</del></p><blockquote><p>更正：学生已经不能free了😢，只可以申请一个50%的discount。</p></blockquote><ol start="6"><li>协作</li></ol><p>应该是有比较好的协作体验，但这块功能我目前还没有使用过。</p><ol start="7"><li>缺点与问题</li></ol><p>在Mac中使用，隔一段时间输入法会卡顿(搜狗)，需要重启Craft解决。</p><p>没有对文档生成目录，看起来不是很方便。</p><p>标题很难看出层次，经常忘了自己写的几级标题，需要点一下看到。</p>]]></content>
     
     
     <categories>
@@ -23,6 +23,64 @@
     <tags>
       
       <tag>Craft</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>微醺日记——啤酒杂谈3-气泡实验室与古斯</title>
+    <link href="/posts/9ea5f31b/"/>
+    <url>/posts/9ea5f31b/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>最近连着去了几次气泡实验室，喝了一些古斯。有的忘了拍照。</p></blockquote><hr><blockquote><p>以下几款，先说结论，**很推荐很推荐<code>芭乐古斯</code>和<code>果汁风暴</code>**。喜欢不重口的世涛可以尝一下世涛。</p></blockquote><h3 id="气泡实验室-爪哇部落-芭乐古斯"><a href="#气泡实验室-爪哇部落-芭乐古斯" class="headerlink" title="气泡实验室 爪哇部落 芭乐古斯"></a>气泡实验室 爪哇部落 <a href="https://www.jiuhuar.com/craftbeer/5fb748d3526c607673e4e912.html">芭乐古斯</a></h3><p>就是因为这个酒去了不止一次气泡实验室。非常不错。</p><p>浓郁的果香，入口酸甜，酒感很弱，果味满满。酸甜平衡的很好。</p><p>同样十分适合女士喝。</p><p><img src="/posts/9ea5f31b/IMG_2910-7210275.jpeg"></p><h3 id="气泡实验室-爪哇部落-草莓古斯"><a href="#气泡实验室-爪哇部落-草莓古斯" class="headerlink" title="气泡实验室 爪哇部落 草莓古斯"></a>气泡实验室 爪哇部落 <a href="https://www.jiuhuar.com/craftbeer/5f9dee81526c607673d92145.html">草莓古斯</a></h3><p>没什么味道，草莓味也不算很大，而且感觉做出来不是很搭调。</p><p>还是几款柑橘浆果类的这种增味对啤酒而言更适合。</p><h3 id="气泡实验室-爪哇部落-凤梨古斯"><a href="#气泡实验室-爪哇部落-凤梨古斯" class="headerlink" title="气泡实验室 爪哇部落 凤梨古斯"></a>气泡实验室 爪哇部落 <a href="https://www.jiuhuar.com/craftbeer/5fdac448790112110b7c10d8.html">凤梨古斯</a></h3><p>比较甜，有些酸，味道普普通通。</p><h3 id="气泡实验室-爪哇部落-魔法浆果黑加仑古斯"><a href="#气泡实验室-爪哇部落-魔法浆果黑加仑古斯" class="headerlink" title="气泡实验室 爪哇部落 魔法浆果黑加仑古斯"></a>气泡实验室 爪哇部落 <a href="https://www.jiuhuar.com/craftbeer/6014fb23526c6076731e039c.html">魔法浆果黑加仑古斯</a></h3><p>特别甜，一杯喝了半杯就甜的不想喝了。不太喜欢。</p><h3 id="气泡实验室-爪哇部落-绿里奇迹古斯"><a href="#气泡实验室-爪哇部落-绿里奇迹古斯" class="headerlink" title="气泡实验室 爪哇部落 绿里奇迹古斯"></a>气泡实验室 爪哇部落 <a href="https://www.jiuhuar.com/craftbeer/60e7cc97790112168caafba1.html">绿里奇迹古斯</a></h3><p>和凤梨古斯一样，有点酸甜普普通通。</p><h3 id="气泡实验室-果汁风暴-双倍新英格兰IPA"><a href="#气泡实验室-果汁风暴-双倍新英格兰IPA" class="headerlink" title="气泡实验室 果汁风暴 双倍新英格兰IPA"></a>气泡实验室 <a href="https://www.jiuhuar.com/craftbeer/603db8f17901124c0b489d93.html">果汁风暴 双倍新英格兰IPA</a></h3><p>这款是喝过的气泡实验室的第一款酒。也比较不错。</p><p>酒体浑浊，薄厚适中。确实正如其名果汁风暴，拿到手里感觉是一杯香气馥郁的果汁。闻起来喝起来都像，但又不是明显的香精味道，有着大量热带水果的香气。</p><p>果味之外，也有酒花的苦味，但不很强烈。</p><p>此外，这款酒的度数有8度多，对于这个口感而言根本体会不到这个度数，所以应该容易喝这款喝醉。</p><p><img src="/posts/9ea5f31b/IMG_2908-7210275.jpeg"></p><p>还有一款气泡实验室 <a href="https://www.jiuhuar.com/craftbeer/5b3992fc8ba5b0902e8b4568.html">及时雨</a> 新英格兰IPA，这个没有喝过，据了解是果汁风暴(juicy storm)的前身juicy rain。</p><h3 id="气泡实验室-气泡-IPA"><a href="#气泡实验室-气泡-IPA" class="headerlink" title="气泡实验室 气泡 IPA"></a>气泡实验室 <a href="https://www.jiuhuar.com/craftbeer/5b9f6f508ba5b04a2e8b4568.html">气泡 IPA</a></h3><p>普普通通IPA。</p><h3 id="气泡实验室-金色波特"><a href="#气泡实验室-金色波特" class="headerlink" title="气泡实验室 金色波特"></a>气泡实验室 <a href="https://www.jiuhuar.com/craftbeer/5b9f6d3c8ba5b0492e8b456a.html">金色波特</a></h3><p>颜色相对于其他波特来说比较淡，淡淡的金色。</p><p>口味相对其他波特也挺淡的。透着淡淡的咖啡味。</p><h3 id="气泡实验室-香草帝国世涛"><a href="#气泡实验室-香草帝国世涛" class="headerlink" title="气泡实验室 香草帝国世涛"></a>气泡实验室 <a href="https://www.jiuhuar.com/craftbeer/5b9f73198ba5b0442e8b4569.html">香草帝国世涛</a></h3><p>颜色重，酒体厚，除此之外也不是特别像世涛。</p><p>我喝起来一股花生酱🥜味。</p><p><img src="/posts/9ea5f31b/IMG_2992-7210275.jpeg"></p><h3 id="牛啤堂-帝都海盐-古斯"><a href="#牛啤堂-帝都海盐-古斯" class="headerlink" title="牛啤堂 帝都海盐 古斯"></a>牛啤堂 <a href="https://www.jiuhuar.com/craftbeer/5a7854da8ba5b0c30d8b4569.html">帝都海盐</a> 古斯</h3><p>主要是比较酸，稍微有一点点咸的回味。</p><p>整体而言就是酸，特别是第一口。之后就没那么酸，可以接受，但可能期望值比较高，没有喝出特别好的味道。</p><p>感觉很适合搭配油腻的东西佐餐，本身就比较清爽，同时又有酸味更加解腻。</p><h3 id="牛啤堂-芒果群-芒果海盐酸啤"><a href="#牛啤堂-芒果群-芒果海盐酸啤" class="headerlink" title="牛啤堂 芒果群 芒果海盐酸啤"></a>牛啤堂 <a href="https://www.jiuhuar.com/craftbeer/60b62ed5526c60388fd787f4.html">芒果群</a> 芒果海盐酸啤</h3><p>口味非常light，没味道，硬要说就有一丝丝芒果🥭味道？不是很喜欢。</p><blockquote><p>结尾粘一份芭乐古斯啤酒简介：</p><p>昏沉沉大太阳，使人放弃希望</p><p>空气在发烫，眼角留着晒伤</p><p>一个人踩着浪，已脱水的身体</p><p>汗水依然继续流淌，做着白日梦</p><p>脚步有些沉重，残留一身伤痛</p><p>心还留在Guava Tribe，太平洋的风让我有些醉</p><p>这游戏太过刺激，不想清醒，因为会痛</p><p>原谅我的吧啦吧啦，与我的不切实际，彻底告别</p><p>举起我的blahblah Gose，沉落在五光十色</p><p>去完成happy ending</p><p>All love is in the room</p><p>Gonna have the blahblah gose</p><p>Ruling my Guava tribe</p><p>美好假期，在“爪哇部落”重置</p></blockquote>]]></content>
+    
+    
+    <categories>
+      
+      <category>日常</category>
+      
+      <category>微醺日记</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>啤酒</tag>
+      
+      <tag>牛啤堂</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>微醺日记——啤酒杂谈2-牛啤堂一些</title>
+    <link href="/posts/a177e6fa/"/>
+    <url>/posts/a177e6fa/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>超市碰到了几个买了尝尝。</p></blockquote><h3 id="牛啤堂-凛冬将至-小麦博克"><a href="#牛啤堂-凛冬将至-小麦博克" class="headerlink" title="牛啤堂 凛冬将至 小麦博克"></a>牛啤堂 <a href="https://www.jiuhuar.com/craftbeer/5a795e078ba5b085368b456a.html">凛冬将至</a> 小麦博克</h3><p>比较顺滑，没有大多IPA苦的那么明显。</p><p>有麦芽那种味道，有一些甜味感觉，总感觉能量很高。</p><h3 id="牛啤堂-非黑记-白世涛"><a href="#牛啤堂-非黑记-白世涛" class="headerlink" title="牛啤堂 非黑记 白世涛"></a>牛啤堂 <a href="https://www.jiuhuar.com/craftbeer/60b62e20526c60388fd787a4.html">非黑记</a> 白世涛</h3><p>忘记了自己喝的具体哪款。不是很喜欢，咖啡味明显但是不融合。</p><p>作为世涛酒体不够厚，让苦味显得很单薄和冲击。</p><h3 id="牛啤堂-花醉似泥-成都腊梅风味奶油艾尔"><a href="#牛啤堂-花醉似泥-成都腊梅风味奶油艾尔" class="headerlink" title="牛啤堂 花醉似泥 成都腊梅风味奶油艾尔"></a>牛啤堂 <a href="https://www.jiuhuar.com/craftbeer/60b63dfd790112168c23c793.html">花醉似泥</a> 成都腊梅风味奶油艾尔</h3><p>没有什么酒味，微微花香，入口像蔓越莓汁。</p><h3 id="牛啤堂-帝都海盐-古斯"><a href="#牛啤堂-帝都海盐-古斯" class="headerlink" title="牛啤堂 帝都海盐 古斯"></a>牛啤堂 <a href="https://www.jiuhuar.com/craftbeer/5a7854da8ba5b0c30d8b4569.html">帝都海盐</a> 古斯</h3><p>主要是比较酸，稍微有一点点咸的回味。</p><p>整体而言就是酸，特别是第一口。之后就没那么酸，可以接受，但可能期望值比较高，没有喝出特别好的味道。</p><p>感觉很适合搭配油腻的东西佐餐，本身就比较清爽，同时又有酸味更加解腻。</p><h3 id="牛啤堂-芒果群-芒果海盐酸啤"><a href="#牛啤堂-芒果群-芒果海盐酸啤" class="headerlink" title="牛啤堂 芒果群 芒果海盐酸啤"></a>牛啤堂 <a href="https://www.jiuhuar.com/craftbeer/60b62ed5526c60388fd787f4.html">芒果群</a> 芒果海盐酸啤</h3><p>口味非常light，没味道，硬要说就有一丝丝芒果🥭味道？不是很喜欢。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>日常</category>
+      
+      <category>微醺日记</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>啤酒</tag>
+      
+      <tag>牛啤堂</tag>
       
     </tags>
     
@@ -58,7 +116,7 @@
   
   
   <entry>
-    <title>笔记应用折腾</title>
+    <title>笔记应用折腾1</title>
     <link href="/posts/eb0ecd3d/"/>
     <url>/posts/eb0ecd3d/</url>
     
@@ -138,9 +196,9 @@
     
     <tags>
       
-      <tag>C/C++</tag>
-      
       <tag>Makefile</tag>
+      
+      <tag>C/C++</tag>
       
     </tags>
     
@@ -198,9 +256,9 @@
     
     <tags>
       
-      <tag>gcc</tag>
-      
       <tag>C/C++</tag>
+      
+      <tag>gcc</tag>
       
     </tags>
     
@@ -300,7 +358,7 @@
   
   
   <entry>
-    <title>微醺日记——啤酒杂谈1</title>
+    <title>微醺日记——啤酒杂谈1-啤博士的啤酒札记</title>
     <link href="/posts/9f45fadf/"/>
     <url>/posts/9f45fadf/</url>
     
@@ -1024,9 +1082,9 @@
       
       <tag>Docker</tag>
       
-      <tag>Dockerfile</tag>
-      
       <tag>Image</tag>
+      
+      <tag>Dockerfile</tag>
       
     </tags>
     
