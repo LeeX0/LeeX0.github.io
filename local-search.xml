@@ -136,11 +136,11 @@
       
       <tag>DPDK</tag>
       
-      <tag>挑战杯</tag>
-      
       <tag>Suricata</tag>
       
       <tag>入侵检测</tag>
+      
+      <tag>挑战杯</tag>
       
     </tags>
     
@@ -186,7 +186,7 @@
     <link href="/posts/554fe90e/"/>
     <url>/posts/554fe90e/</url>
     
-    <content type="html"><![CDATA[<blockquote><p>Hexo推送通过渲染<code>./source</code>形成<code>./public</code>，将<code>./public</code>推送至Git下<code>master</code>主分支显示页面。</p><p>推送上传的都是渲染后的html内容，期望在推送前端页面同时，将所有博客资源进行推送保存，方便版本管理以及多设备同步编辑。</p><p>方式：<strong>在hexo博客git项目下增加分支backup保存博客所有内容，推送博客内容同时推送分支。</strong></p></blockquote><h2 id="布置分支"><a href="#布置分支" class="headerlink" title="布置分支"></a>布置分支</h2><p>在A电脑上完成hexo搭建以及正常deploy后，在hexo目录下进行操作：</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">git initgit remote add origin https:&#x2F;&#x2F;github.com&#x2F;Github_username&#x2F;Github_username.github.io.gitgit checkout -b branch_namegit add .git commit -m &quot;comment info&quot;git push origin backup # backup随意填写，分支名</code></pre></div><h2 id="拉取分支"><a href="#拉取分支" class="headerlink" title="拉取分支"></a>拉取分支</h2><p>在B电脑上<a href="https://leex0.top/posts/25ad3a99/">布置git与node环境</a>，拉取分支</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">git clone -b backup https:&#x2F;&#x2F;github.com&#x2F;Github_username&#x2F;Github_username.github.io.gitcd Github_username.github.io  sudo npm install -g hexo-clisudo npm installsudo npm install hexo-deployer-git</code></pre></div><h2 id="内容同步"><a href="#内容同步" class="headerlink" title="内容同步"></a>内容同步</h2><p>在一处电脑完成写作后，推送内容</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hexo g -dgit add .git commit -m &quot;comment info&quot;git push origin backup</code></pre></div><p>在另一处电脑需保持同步</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">git pull https:&#x2F;&#x2F;github.com&#x2F;Github_username&#x2F;Github_username.github.io backup</code></pre></div><h2 id="补：添加命令进行推送"><a href="#补：添加命令进行推送" class="headerlink" title="补：添加命令进行推送"></a>补：添加命令进行推送</h2><blockquote><p>每次在推送hexo都需要输入多个指令，现在还增加了分支备份，添加<code>alias</code>进行一键推送。</p><p>git提交的comment使用日期与时间戳。</p></blockquote><h3 id="方案一：直接alias（遇到问题）"><a href="#方案一：直接alias（遇到问题）" class="headerlink" title="方案一：直接alias（遇到问题）"></a>方案一：直接<code>alias</code>（遇到问题）</h3><p>在<code>~/.zshrc</code>中(根据使用shell变化)添加如下<code>alias</code>：</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">alias hexopush&#x3D;&quot;hexo clean &amp;&amp; hexo g &amp;&amp; hexo d &amp;&amp; git commit -am &quot;$(date &quot;+%Y-%m-%d-%s&quot;)&quot; &amp;&amp; git push origin backup&quot;</code></pre></div><p>问题在于，进行<code>source ~./zshrc</code>后，通过终端查看<code>alias</code>发现<code>hexopus</code>h中的<strong>时间戳固定不变</strong>，为source操作时的时间。</p><p>应该是在<code>source ~./zshrc</code>时<code>alias</code>中的变量<code>$(date &quot;+%Y-%m-%d-%s&quot;)</code>会被计算出并且固定保存。</p><p>于是采用方案二。</p><h3 id="方案二：引用脚本"><a href="#方案二：引用脚本" class="headerlink" title="方案二：引用脚本"></a>方案二：引用脚本</h3><p>将方案一中的内容保存到脚本中，通过alias执行脚本。</p><p><code>~/opt/script/hexopush.sh</code>:</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hexo cleanhexo ghexo dcd &#x2F;Users&#x2F;buddyholly&#x2F;LeeX0Bloggit commit -am &quot;$(date &quot;+%Y-%m-%d-%s&quot;)&quot;git push origin backupecho &quot;### Push finished! ###&quot;</code></pre></div><p>在<code>~/.zshrc</code>中添加如下<code>alias hexopush=&#39;. ~/opt/script/hexopush.sh&#39;</code></p><p><strong>使用时，在<code>hexo</code>根目录下执行<code>hexopush</code>即可完成master与backup分支推送。</strong></p><hr><blockquote><p>参考：<br><a href="https://mmmbo.com/2019/12/29/Hexo-Github-Pages-MWeb-Editor-blog/">https://mmmbo.com/2019/12/29/Hexo-Github-Pages-MWeb-Editor-blog/</a></p></blockquote>]]></content>
+    <content type="html"><![CDATA[<blockquote><p>Hexo推送通过渲染<code>./source</code>形成<code>./public</code>，将<code>./public</code>推送至Git下<code>master</code>主分支显示页面。</p><p>推送上传的都是渲染后的html内容，期望在推送前端页面同时，将所有博客资源进行推送保存，方便版本管理以及多设备同步编辑。</p><p>方式：<strong>在hexo博客git项目下增加分支backup保存博客所有内容，推送博客内容同时推送分支。</strong></p></blockquote><h2 id="布置分支"><a href="#布置分支" class="headerlink" title="布置分支"></a>布置分支</h2><p>在A电脑上完成hexo搭建以及正常deploy后，在hexo目录下进行操作：</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">git initgit remote add origin https:&#x2F;&#x2F;github.com&#x2F;Github_username&#x2F;Github_username.github.io.gitgit checkout -b branch_namegit add .git commit -m &quot;comment info&quot;git push origin backup # backup随意填写，分支名</code></pre></div><h2 id="拉取分支"><a href="#拉取分支" class="headerlink" title="拉取分支"></a>拉取分支</h2><p>在B电脑上<a href="https://leex0.top/posts/25ad3a99/">布置git与node环境</a>，拉取分支</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">git clone -b backup https:&#x2F;&#x2F;github.com&#x2F;Github_username&#x2F;Github_username.github.io.gitcd Github_username.github.io  sudo npm install -g hexo-clisudo npm installsudo npm install hexo-deployer-git</code></pre></div><h2 id="内容同步"><a href="#内容同步" class="headerlink" title="内容同步"></a>内容同步</h2><p>在一处电脑完成写作后，推送内容</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hexo g -dgit add .git commit -m &quot;comment info&quot;git push origin backup</code></pre></div><p>在另一处电脑需保持同步</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">git pull https:&#x2F;&#x2F;github.com&#x2F;Github_username&#x2F;Github_username.github.io backup</code></pre></div><h2 id="补：添加命令进行推送"><a href="#补：添加命令进行推送" class="headerlink" title="补：添加命令进行推送"></a>补：添加命令进行推送</h2><blockquote><p>每次在推送hexo都需要输入多个指令，现在还增加了分支备份，添加<code>alias</code>进行一键推送。</p><p>git提交的comment使用日期与时间戳。</p></blockquote><h3 id="方案一：直接alias（遇到问题）"><a href="#方案一：直接alias（遇到问题）" class="headerlink" title="方案一：直接alias（遇到问题）"></a>方案一：直接<code>alias</code>（遇到问题）</h3><p>在<code>~/.zshrc</code>中(根据使用shell变化)添加如下<code>alias</code>：</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">alias hexopush&#x3D;&quot;hexo clean &amp;&amp; hexo g &amp;&amp; hexo d &amp;&amp; git commit -am &quot;$(date &quot;+%Y-%m-%d-%s&quot;)&quot; &amp;&amp; git push origin backup&quot;</code></pre></div><p>问题在于，进行<code>source ~./zshrc</code>后，通过终端查看<code>alias</code>发现<code>hexopus</code>h中的<strong>时间戳固定不变</strong>，为source操作时的时间。</p><p>应该是在<code>source ~./zshrc</code>时<code>alias</code>中的变量<code>$(date &quot;+%Y-%m-%d-%s&quot;)</code>会被计算出并且固定保存。</p><p>于是采用方案二。</p><h3 id="方案二：引用脚本"><a href="#方案二：引用脚本" class="headerlink" title="方案二：引用脚本"></a>方案二：引用脚本</h3><p>将方案一中的内容保存到脚本中，通过alias执行脚本。</p><p><code>~/opt/script/hexopush.sh</code>:</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">cd &#x2F;Users&#x2F;buddyholly&#x2F;LeeX0Blogecho &quot; &quot;echo &quot;##############################&quot;echo &quot;### Hexo deployment Start! ###&quot;echo &quot;##############################&quot;hexo cleanhexo g -decho &quot; &quot;echo &quot;#################################&quot;echo &quot;### Hexo deployment finished! ###&quot;echo &quot;#################################&quot;echo &quot; &quot;echo &quot;#######################&quot;echo &quot;### Git Push Start! ###&quot;echo &quot;#######################&quot;git add .git commit -am &quot;$(date &quot;+%Y-%m-%d-%s&quot;)&quot;git push origin backupecho &quot; &quot;echo &quot;##########################&quot;echo &quot;### Git Push finished! ###&quot;echo &quot;##########################&quot;</code></pre></div><p>在<code>~/.zshrc</code>中添加如下<code>alias hexopush=&#39;. ~/opt/script/hexopush.sh&#39;</code></p><p><strong>使用时，在<code>hexo</code>根目录下执行<code>hexopush</code>即可完成master与backup分支推送。</strong></p><hr><blockquote><p>参考：<br><a href="https://mmmbo.com/2019/12/29/Hexo-Github-Pages-MWeb-Editor-blog/">https://mmmbo.com/2019/12/29/Hexo-Github-Pages-MWeb-Editor-blog/</a></p></blockquote>]]></content>
     
     
     <categories>
@@ -380,9 +380,9 @@
       
       <tag>Suricata</tag>
       
-      <tag>入侵检测</tag>
-      
       <tag>PF_RING</tag>
+      
+      <tag>入侵检测</tag>
       
     </tags>
     
@@ -610,9 +610,9 @@
     
     <tags>
       
-      <tag>Pktgen</tag>
-      
       <tag>DPDK</tag>
+      
+      <tag>Pktgen</tag>
       
     </tags>
     
@@ -844,9 +844,9 @@
     
     <tags>
       
-      <tag>Vulnhub</tag>
-      
       <tag>渗透测试</tag>
+      
+      <tag>Vulnhub</tag>
       
       <tag>提权</tag>
       
@@ -875,9 +875,9 @@
     
     <tags>
       
-      <tag>Vulnhub</tag>
-      
       <tag>渗透测试</tag>
+      
+      <tag>Vulnhub</tag>
       
       <tag>文件包含</tag>
       
@@ -1353,11 +1353,11 @@
     
     <tags>
       
-      <tag>摘录</tag>
-      
       <tag>史蒂夫·乔布斯</tag>
       
       <tag>沃尔特·艾萨克森</tag>
+      
+      <tag>摘录</tag>
       
     </tags>
     
@@ -1413,11 +1413,11 @@
     
     <tags>
       
+      <tag>摘录</tag>
+      
       <tag>假面山庄</tag>
       
       <tag>东野圭吾</tag>
-      
-      <tag>摘录</tag>
       
     </tags>
     
@@ -1849,9 +1849,9 @@
     
     <tags>
       
-      <tag>渗透测试</tag>
-      
       <tag>Hydra</tag>
+      
+      <tag>渗透测试</tag>
       
       <tag>弱口令扫描</tag>
       
@@ -1880,9 +1880,9 @@
     
     <tags>
       
-      <tag>渗透测试</tag>
-      
       <tag>Hydra</tag>
+      
+      <tag>渗透测试</tag>
       
     </tags>
     
