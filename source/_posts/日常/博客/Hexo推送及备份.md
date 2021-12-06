@@ -88,9 +88,9 @@ alias hexopush="hexo clean && hexo g && hexo d && git commit -am "$(date "+%Y-%m
 cd /Users/buddyholly/LeeX0Blog
 
 echo " "
-echo "##############################"
-echo "### Hexo deployment Start! ###"
-echo "##############################"
+echo "#################################"
+echo "### Hexo deployment Start!    ###"
+echo "#################################"
 
 hexo clean
 hexo g -d
@@ -98,21 +98,17 @@ hexo g -d
 echo " "
 echo "#################################"
 echo "### Hexo deployment finished! ###"
+echo "### Git Push Start!           ###"
 echo "#################################"
-
-echo " "
-echo "#######################"
-echo "### Git Push Start! ###"
-echo "#######################"
 
 git add .
 git commit -am "$(date "+%Y-%m-%d-%s")"
 git push origin backup
 
 echo " "
-echo "##########################"
-echo "### Git Push finished! ###"
-echo "##########################"
+echo "#################################"
+echo "### Git Push finished!        ###"
+echo "#################################"
 ```
 
 在`~/.zshrc`中添加如下`alias hexopush='. ~/opt/script/hexopush.sh'`
