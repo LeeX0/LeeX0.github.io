@@ -7,7 +7,7 @@ categories:
   - - 日常
     - 博客
 abbrlink: 554fe90e
-date: 2021-09-06 11:28:16
+date: 2021-10-06 11:28:16
 ---
 > Hexo推送通过渲染`./source`形成`./public`，将`./public`推送至Git下`master`主分支显示页面。
 >

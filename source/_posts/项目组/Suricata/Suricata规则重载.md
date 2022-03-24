@@ -8,7 +8,7 @@ categories:
   - - 项目组
     - Suricata
 abbrlink: bbe9896b
-date: 2021-08-09 11:25:41
+date: 2021-10-09 11:25:41
 ---
 
 > Suricata 不重启情况下更新规则rules。

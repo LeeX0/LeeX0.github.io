@@ -7,7 +7,7 @@ categories:
   - - 项目组
     - Suricata
 abbrlink: ad19baf
-date: 2021-08-18 14:22:16
+date: 2021-10-18 14:22:16
 ---
 > 为`Suricata`对应的WEB页面开发编写相关接口用以实现配置修改与规则简单管理。
 

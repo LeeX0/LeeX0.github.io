@@ -7,7 +7,7 @@ tags:
 categories:
   - [学习笔记, Linux]
 abbrlink: 8ee6b0b9
-date: 2021-04-15 08:46:26
+date: 2021-11-15 08:46:26
 ---
 
 > Linux除了我们常见的读(r)写(w)执行(x)权限外，还有三个较为特殊的权限SetUID、SetGID与Sticky BIT。
