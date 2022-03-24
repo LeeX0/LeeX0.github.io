@@ -93,6 +93,39 @@
   
   
   <entry>
+    <title>挑战杯记录</title>
+    <link href="/posts/a2531f57/"/>
+    <url>/posts/a2531f57/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>最近主要在做之前参加的挑战杯专项赛，中国电信的题目，做IPS。</p><p>关于比赛记录一些内容。有些技术成果不便分享。其他的一些内容可参见Categories中<a href="https://leex0.top/categories/">[项目组, Suricata/DPDK]</a>。</p></blockquote><h2 id="比赛内容"><a href="#比赛内容" class="headerlink" title="比赛内容"></a>比赛内容</h2><p>简单来说：<code>在国产平台(比赛是鲲鹏+麒麟)，基于Suricata做一个入侵防御系统，需要具有比较大的流量负载能力，和对一些恶意流量能够识别拦截</code>。</p><p>大流量下还有一些分片之类的变形，仍需要能够负载和识别拦截。</p><p>流量是给了pcap和csv说明，照着一个一个写对应的规则就可以。</p><h2 id="技术方案"><a href="#技术方案" class="headerlink" title="技术方案"></a>技术方案</h2><p>主要用DPDK和Suricata结合，DPDK负责大流量的转发，Suricata用写的和收集的规则负责检测。最后结合日志做一个WEB界面。</p><h2 id="工作内容"><a href="#工作内容" class="headerlink" title="工作内容"></a>工作内容</h2><h4 id="1-DPDK-Suricata结合并在国产平台运行"><a href="#1-DPDK-Suricata结合并在国产平台运行" class="headerlink" title="1. DPDK+Suricata结合并在国产平台运行"></a>1. DPDK+Suricata结合并在国产平台运行</h4><p>参考了一些别的DPDK+Suricata结合的项目，了解基本程序运行和结合逻辑。最终在尝试多个版本后<strong>确定使用的版本</strong>。</p><p>在国产平台上编译运行也遇到不少问题，主要是<strong>依赖、驱动、库兼容性的问题</strong>解决。</p><h4 id="2-编写规则"><a href="#2-编写规则" class="headerlink" title="2. 编写规则"></a>2. 编写规则</h4><p>对所有的恶意数据流分析之后，还是需要写不少规则，熟悉完规则编写语法，对照着已有的规则，分工进行规则编写。</p><p>每次一轮编写完成，重放恶意流量，查看流量是否识别到拦截下来，对没有识别好的流量继续优化规则。最后一共筛了几遍规则，形成了<strong>针对性的恶意流量规则集</strong>。</p><p>此外还添加了<strong>精选的现有规则</strong>。默认的规则集条目非常多，检测很慢影响效率。对默认规则进行精简，留下了数量合适的现有规则，合并自己的规则集使用。</p><h4 id="3-界面"><a href="#3-界面" class="headerlink" title="3. 界面"></a>3. 界面</h4><p>界面主要是<strong>针对Suricata的配置文件、规则管理、日志文件写一些接口</strong>，使其能够正确的在前端进行查看与配置。</p><h4 id="4-调参"><a href="#4-调参" class="headerlink" title="4. 调参"></a>4. 调参</h4><p>默认的Suricata参数对于大流量的负载能力一般，需要<strong>针对测试环境进行参数调整</strong>来获取更好的性能。</p><blockquote><p>本次主要调整的参数如下：</p><ul><li><p>针对NUMA环境分配CPU数量</p></li><li><p>调整数据流的超时限制</p></li><li><p>对数据流与会话预分配内存，使用大页内存提高缓存效率</p></li><li><p>调整分片重组的深度限制，在保证负载的情况下尽量对更多的分片进行检测</p></li></ul></blockquote><h2 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h2><table><thead><tr><th align="center">测试项</th><th align="center">测试结果</th></tr></thead><tbody><tr><td align="center">检测率</td><td align="center">98%</td></tr><tr><td align="center">误截率</td><td align="center">0%</td></tr><tr><td align="center">单10G网卡吞吐</td><td align="center">9G——阻断率99.41%</td></tr><tr><td align="center">双10G网卡吞吐</td><td align="center">20G——阻断率82.514%</td></tr><tr><td align="center">小包吞吐</td><td align="center">8.196Gbps</td></tr><tr><td align="center">新建连接数吞吐</td><td align="center">16.15万flow/s——阻断率74.86%</td></tr></tbody></table>]]></content>
+    
+    
+    <categories>
+      
+      <category>项目组</category>
+      
+      <category>挑战杯</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Suricata</tag>
+      
+      <tag>入侵检测</tag>
+      
+      <tag>挑战杯</tag>
+      
+      <tag>DPDK</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>笔记应用折腾2-Craft</title>
     <link href="/posts/1ab2a467/"/>
     <url>/posts/1ab2a467/</url>
@@ -120,27 +153,29 @@
   
   
   <entry>
-    <title>微醺日记——啤酒杂谈3-气泡实验室与古斯</title>
-    <link href="/posts/9ea5f31b/"/>
-    <url>/posts/9ea5f31b/</url>
+    <title>SetUID、SetGID与Sticky BIT</title>
+    <link href="/posts/8ee6b0b9/"/>
+    <url>/posts/8ee6b0b9/</url>
     
-    <content type="html"><![CDATA[<blockquote><p>最近连着去了几次气泡实验室，喝了一些古斯。有的忘了拍照。</p></blockquote><hr><blockquote><p>以下几款，先说结论，<strong>很推荐很推荐<code>芭乐古斯</code>和<code>果汁风暴</code>。</strong>喜欢不重口的世涛可以尝一下世涛。</p></blockquote><h3 id="气泡实验室-爪哇部落-芭乐古斯"><a href="#气泡实验室-爪哇部落-芭乐古斯" class="headerlink" title="气泡实验室 爪哇部落 芭乐古斯"></a>气泡实验室 爪哇部落 <a href="https://www.jiuhuar.com/craftbeer/5fb748d3526c607673e4e912.html">芭乐古斯</a></h3><p>就是因为这个酒去了不止一次气泡实验室。非常不错。</p><p>浓郁的果香，入口酸甜，酒感很弱，果味满满。酸甜平衡的很好。</p><p>同样十分适合女士喝。</p><p><img src="/posts/9ea5f31b/IMG_2910-7210275.jpeg"></p><h3 id="气泡实验室-爪哇部落-草莓古斯"><a href="#气泡实验室-爪哇部落-草莓古斯" class="headerlink" title="气泡实验室 爪哇部落 草莓古斯"></a>气泡实验室 爪哇部落 <a href="https://www.jiuhuar.com/craftbeer/5f9dee81526c607673d92145.html">草莓古斯</a></h3><p>没什么味道，草莓味也不算很大，而且感觉做出来不是很搭调。</p><p>还是几款柑橘浆果类的这种增味对啤酒而言更适合。</p><h3 id="气泡实验室-爪哇部落-凤梨古斯"><a href="#气泡实验室-爪哇部落-凤梨古斯" class="headerlink" title="气泡实验室 爪哇部落 凤梨古斯"></a>气泡实验室 爪哇部落 <a href="https://www.jiuhuar.com/craftbeer/5fdac448790112110b7c10d8.html">凤梨古斯</a></h3><p>比较甜，有些酸，味道普普通通。</p><h3 id="气泡实验室-爪哇部落-魔法浆果黑加仑古斯"><a href="#气泡实验室-爪哇部落-魔法浆果黑加仑古斯" class="headerlink" title="气泡实验室 爪哇部落 魔法浆果黑加仑古斯"></a>气泡实验室 爪哇部落 <a href="https://www.jiuhuar.com/craftbeer/6014fb23526c6076731e039c.html">魔法浆果黑加仑古斯</a></h3><p>特别甜，一杯喝了半杯就甜的不想喝了。不太喜欢。</p><h3 id="气泡实验室-爪哇部落-绿里奇迹古斯"><a href="#气泡实验室-爪哇部落-绿里奇迹古斯" class="headerlink" title="气泡实验室 爪哇部落 绿里奇迹古斯"></a>气泡实验室 爪哇部落 <a href="https://www.jiuhuar.com/craftbeer/60e7cc97790112168caafba1.html">绿里奇迹古斯</a></h3><p>和凤梨古斯一样，有点酸甜普普通通。</p><h3 id="气泡实验室-果汁风暴-双倍新英格兰IPA"><a href="#气泡实验室-果汁风暴-双倍新英格兰IPA" class="headerlink" title="气泡实验室 果汁风暴 双倍新英格兰IPA"></a>气泡实验室 <a href="https://www.jiuhuar.com/craftbeer/603db8f17901124c0b489d93.html">果汁风暴 双倍新英格兰IPA</a></h3><p>这款是喝过的气泡实验室的第一款酒。也比较不错。</p><p>酒体浑浊，薄厚适中。确实正如其名果汁风暴，拿到手里感觉是一杯香气馥郁的果汁。闻起来喝起来都像，但又不是明显的香精味道，有着大量热带水果的香气。</p><p>果味之外，也有酒花的苦味，但不很强烈。</p><p>此外，这款酒的度数有8度多，对于这个口感而言根本体会不到这个度数，所以应该容易喝这款喝醉。</p><p><img src="/posts/9ea5f31b/IMG_2908-7210275.jpeg"></p><p>还有一款气泡实验室 <a href="https://www.jiuhuar.com/craftbeer/5b3992fc8ba5b0902e8b4568.html">及时雨</a> 新英格兰IPA，这个没有喝过，据了解是果汁风暴(juicy storm)的前身juicy rain。</p><h3 id="气泡实验室-气泡-IPA"><a href="#气泡实验室-气泡-IPA" class="headerlink" title="气泡实验室 气泡 IPA"></a>气泡实验室 <a href="https://www.jiuhuar.com/craftbeer/5b9f6f508ba5b04a2e8b4568.html">气泡 IPA</a></h3><p>普普通通IPA。</p><h3 id="气泡实验室-金色波特"><a href="#气泡实验室-金色波特" class="headerlink" title="气泡实验室 金色波特"></a>气泡实验室 <a href="https://www.jiuhuar.com/craftbeer/5b9f6d3c8ba5b0492e8b456a.html">金色波特</a></h3><p>颜色相对于其他波特来说比较淡，淡淡的金色。</p><p>口味相对其他波特也挺淡的。透着淡淡的咖啡味。</p><h3 id="气泡实验室-香草帝国世涛"><a href="#气泡实验室-香草帝国世涛" class="headerlink" title="气泡实验室 香草帝国世涛"></a>气泡实验室 <a href="https://www.jiuhuar.com/craftbeer/5b9f73198ba5b0442e8b4569.html">香草帝国世涛</a></h3><p>颜色重，酒体厚，除此之外也不是特别像世涛。</p><p>我喝起来一股花生酱🥜味。</p><p><img src="/posts/9ea5f31b/IMG_2992-7210275.jpeg"></p><h3 id="牛啤堂-帝都海盐-古斯"><a href="#牛啤堂-帝都海盐-古斯" class="headerlink" title="牛啤堂 帝都海盐 古斯"></a>牛啤堂 <a href="https://www.jiuhuar.com/craftbeer/5a7854da8ba5b0c30d8b4569.html">帝都海盐</a> 古斯</h3><p>主要是比较酸，稍微有一点点咸的回味。</p><p>整体而言就是酸，特别是第一口。之后就没那么酸，可以接受，但可能期望值比较高，没有喝出特别好的味道。</p><p>感觉很适合搭配油腻的东西佐餐，本身就比较清爽，同时又有酸味更加解腻。</p><h3 id="牛啤堂-芒果群-芒果海盐酸啤"><a href="#牛啤堂-芒果群-芒果海盐酸啤" class="headerlink" title="牛啤堂 芒果群 芒果海盐酸啤"></a>牛啤堂 <a href="https://www.jiuhuar.com/craftbeer/60b62ed5526c60388fd787f4.html">芒果群</a> 芒果海盐酸啤</h3><p>口味非常light，没味道，硬要说就有一丝丝芒果🥭味道？不是很喜欢。</p><hr><blockquote><p>结尾粘一份芭乐古斯啤酒简介：</p><p>昏沉沉大太阳，使人放弃希望</p><p>空气在发烫，眼角留着晒伤</p><p>一个人踩着浪，已脱水的身体</p><p>汗水依然继续流淌，做着白日梦</p><p>脚步有些沉重，残留一身伤痛</p><p>心还留在Guava Tribe，太平洋的风让我有些醉</p><p>这游戏太过刺激，不想清醒，因为会痛</p><p>原谅我的吧啦吧啦，与我的不切实际，彻底告别</p><p>举起我的blahblah Gose，沉落在五光十色</p><p>去完成happy ending</p><p>All love is in the room</p><p>Gonna have the blahblah gose</p><p>Ruling my Guava tribe</p><p>美好假期，在“爪哇部落”重置</p></blockquote>]]></content>
+    <content type="html"><![CDATA[<blockquote><p>Linux除了我们常见的读(r)写(w)执行(x)权限外，还有三个较为特殊的权限SetUID、SetGID与Sticky BIT。</p></blockquote><h2 id="1-SetUID与SetGID"><a href="#1-SetUID与SetGID" class="headerlink" title="1. SetUID与SetGID"></a>1. SetUID与SetGID</h2><p>通常对于可执行程序能够设定<code>SetUID</code>权限，且命令执行者需要对该程序拥有<code>x</code>权限。</p><p><strong>设定<code>SetUID</code>权限后，命令执行者在执行程序时获得程序拥有者的身份，且身份改变仅在执行过程中有效。</strong></p><p>例：修改用户<code>passwd</code></p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ ll &#x2F;etc&#x2F;passwd &#x2F;etc&#x2F;shadow &#x2F;usr&#x2F;bin&#x2F;passwd-rw-r--r-- 1 root root    3360  3月 30 15:40 &#x2F;etc&#x2F;passwd-rw-r----- 1 root shadow  1808  3月 30 15:40 &#x2F;etc&#x2F;shadow-rwsr-xr-x 1 root root   63960  2月  7  2020 &#x2F;usr&#x2F;bin&#x2F;passwd</code></pre></div><ul><li><p>可以看到普通用户并没有对<code>/etc/passwd</code>与<code>/etc/shadow</code>具有执行修改权限。但在实际使用需求上是有修改自己password的需求。</p></li><li><p>所以在用户的<code>/usr/bin/passwd</code>程序中，设置了<code>SetUID</code>即拥有者权限中的<code>s</code>。</p></li><li><p>可以看到<code>Others</code>用户具有可执行权限<code>x</code>，而程序拥有者设定了<code>SetUID</code>，同时程序拥有者为<code>root</code>。</p></li><li><p>所以<code>Others</code>用户在执行<code>/usr/bin/passwd</code>时，会临时获得<code>root</code>权限，从而能修改密码。</p></li></ul><blockquote><p>SetGID与SetUID原理基本相同。</p></blockquote><h2 id="2-Sticky-BIT"><a href="#2-Sticky-BIT" class="headerlink" title="2. Sticky BIT"></a>2. Sticky BIT</h2><p>通常对于目录能够设定<code>Sticky BIT</code>。用于避免非文件拥有者误操作文件。</p><p>例：对于<code>/tmp</code>目录所有用户都具有操作权限，但任何人创建的文件能被其他人任意修改与删除可能会带来错误。</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ ll -d &#x2F;tmpdrwxrwxrwt 19 root root 4096  4月 15 09:39 &#x2F;tmp</code></pre></div><p><strong>可以通过对<code>/tmp</code>目录设定<code>Sticky BIT</code>即权限最后的<code>t</code>，来保证其中的文件仅能够被文件拥有者修改。</strong></p><h2 id="3-权限修改"><a href="#3-权限修改" class="headerlink" title="3. 权限修改"></a>3. 权限修改</h2><p>在常规的<em>777</em>类型的模式下设置权限，在最前面增加一位设置<code>SetUID</code>、<code>SetGID</code>与<code>Sticky BIT</code>即可，分别对应4、2、1。或通过增加权限的方式。</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"># 设置具有SetUID但其他用户只读的权限chmod 4744 filename# 设置setuid权限chmod u+s filename  # 设置setgid权限chmod g+s filename  # 设置stick bit权限，针对目录chmod o+t dirname  </code></pre></div><hr><blockquote><p>参考:</p><p><a href="https://blog.csdn.net/wxbmelisky/article/details/51649343">https://blog.csdn.net/wxbmelisky/article/details/51649343</a></p><p><a href="https://www.jianshu.com/p/70f9ea162ca9">https://www.jianshu.com/p/70f9ea162ca9</a></p></blockquote>]]></content>
     
     
     <categories>
       
-      <category>日常</category>
+      <category>学习笔记</category>
       
-      <category>微醺日记</category>
+      <category>Linux</category>
       
     </categories>
     
     
     <tags>
       
-      <tag>啤酒</tag>
+      <tag>Linux</tag>
       
-      <tag>牛啤堂</tag>
+      <tag>权限</tag>
+      
+      <tag>SetUID</tag>
       
     </tags>
     
@@ -176,27 +211,27 @@
   
   
   <entry>
-    <title>微醺日记——啤酒杂谈2-牛啤堂一些</title>
-    <link href="/posts/a177e6fa/"/>
-    <url>/posts/a177e6fa/</url>
+    <title>Suricata配置接口</title>
+    <link href="/posts/ad19baf/"/>
+    <url>/posts/ad19baf/</url>
     
-    <content type="html"><![CDATA[<blockquote><p>超市碰到了几个买了尝尝。</p></blockquote><h3 id="牛啤堂-凛冬将至-小麦博克"><a href="#牛啤堂-凛冬将至-小麦博克" class="headerlink" title="牛啤堂 凛冬将至 小麦博克"></a>牛啤堂 <a href="https://www.jiuhuar.com/craftbeer/5a795e078ba5b085368b456a.html">凛冬将至</a> 小麦博克</h3><p>比较顺滑，没有大多IPA苦的那么明显。</p><p>有麦芽那种味道，有一些甜味感觉，总感觉能量很高。</p><h3 id="牛啤堂-非黑记-白世涛"><a href="#牛啤堂-非黑记-白世涛" class="headerlink" title="牛啤堂 非黑记 白世涛"></a>牛啤堂 <a href="https://www.jiuhuar.com/craftbeer/60b62e20526c60388fd787a4.html">非黑记</a> 白世涛</h3><p>忘记了自己喝的具体哪款。不是很喜欢，咖啡味明显但是不融合。</p><p>作为世涛酒体不够厚，让苦味显得很单薄和冲击。</p><h3 id="牛啤堂-花醉似泥-成都腊梅风味奶油艾尔"><a href="#牛啤堂-花醉似泥-成都腊梅风味奶油艾尔" class="headerlink" title="牛啤堂 花醉似泥 成都腊梅风味奶油艾尔"></a>牛啤堂 <a href="https://www.jiuhuar.com/craftbeer/60b63dfd790112168c23c793.html">花醉似泥</a> 成都腊梅风味奶油艾尔</h3><p>没有什么酒味，微微花香，入口像蔓越莓汁。</p><h3 id="牛啤堂-帝都海盐-古斯"><a href="#牛啤堂-帝都海盐-古斯" class="headerlink" title="牛啤堂 帝都海盐 古斯"></a>牛啤堂 <a href="https://www.jiuhuar.com/craftbeer/5a7854da8ba5b0c30d8b4569.html">帝都海盐</a> 古斯</h3><p>主要是比较酸，稍微有一点点咸的回味。</p><p>整体而言就是酸，特别是第一口。之后就没那么酸，可以接受，但可能期望值比较高，没有喝出特别好的味道。</p><p>感觉很适合搭配油腻的东西佐餐，本身就比较清爽，同时又有酸味更加解腻。</p><h3 id="牛啤堂-芒果群-芒果海盐酸啤"><a href="#牛啤堂-芒果群-芒果海盐酸啤" class="headerlink" title="牛啤堂 芒果群 芒果海盐酸啤"></a>牛啤堂 <a href="https://www.jiuhuar.com/craftbeer/60b62ed5526c60388fd787f4.html">芒果群</a> 芒果海盐酸啤</h3><p>口味非常light，没味道，硬要说就有一丝丝芒果🥭味道？不是很喜欢。</p>]]></content>
+    <content type="html"><![CDATA[<blockquote><p>为<code>Suricata</code>对应的WEB页面开发编写相关接口用以实现配置修改与规则简单管理。</p></blockquote><h2 id="库引入、接口声明、常量定义"><a href="#库引入、接口声明、常量定义" class="headerlink" title="库引入、接口声明、常量定义"></a>库引入、接口声明、常量定义</h2><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c">#include &lt;stdio.h&gt;#include &lt;stdlib.h&gt;#include &lt;string.h&gt;#include &lt;dirent.h&gt;static char **read_rules_file_name();static void alter_select_rules(char **rules_list, int count);static void alter_HOME_NET(char **HOME_NET_list, int count);static void alter_mpm_algo(char *mpm_algo);static void alter_spm_algo(char *spm_algo);static void alter_rule_action(char *rules_name, char *sid, char *action);static void add_custom_rule(char *action, char *protocol, char *stream_rule, char *option_rule);static void insert_specific_line_to_file(char *ins_content, char *load_file, char *des_opt);static char *read_rule_sid(char *src_rule);static void strrp(char *src, char *sub, char *rp, char *p);#define RULES_FILES_PATH &quot;&#x2F;var&#x2F;lib&#x2F;suricata&#x2F;rules&quot;#define CUSTOMRULES_FILE_PATH &quot;&#x2F;var&#x2F;lib&#x2F;suricata&#x2F;rules&#x2F;custom.rules&quot;#define CONFIG_YAML_FILR_PATH &quot;&#x2F;etc&#x2F;suricata&#x2F;suricata.yaml&quot;char *names[100];char sid[20];</code></pre></div><h2 id="接口定义"><a href="#接口定义" class="headerlink" title="接口定义"></a>接口定义</h2><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c">&#x2F;* * 功能：读取 RULES_FILES_PATH 路径下所有规则文件名 * 传参：无 * 返回：names规则名二维数组 * usage： * read_rules_file_name(); *&#x2F;static char **read_rules_file_name()&#123;    int n &#x3D; 0;    DIR *directory_pointer;    struct dirent *entry;    char *suffix;    if ((directory_pointer &#x3D; opendir(RULES_FILES_PATH)) &#x3D;&#x3D; NULL)        printf(&quot;Error opening \n &quot;);    else    &#123;        while ((entry &#x3D; readdir(directory_pointer)) !&#x3D; NULL)        &#123;            suffix &#x3D; strrchr(entry-&gt;d_name, &#39;.&#39;);            if (suffix !&#x3D; NULL &amp;&amp; strcmp(suffix, &quot;.rules&quot;) &#x3D;&#x3D; 0)            &#123;                names[n++] &#x3D; entry-&gt;d_name;            &#125;        &#125;        closedir(directory_pointer);    &#125;    return names;&#125;&#x2F;* * 功能：将选择启用的规则集文件写入 CONFIG_YAML_FILR_PATH * 传参：rules_list规则集名称列表,count共启用规则集数目 * 返回：无 * usage: * char *a[] &#x3D; &#123;&quot;ftp.rules&quot;,&quot;dns.rules&quot;,&quot;dos.rules&quot;&#125;; * alter_select_rules(a,3); *&#x2F;static void alter_select_rules(char **rules_list, int count)&#123;    char rule_files[1000] &#x3D; &#123;&quot;rule-files: [&quot;&#125;;    for (int i &#x3D; 0; i &lt; count; i++)    &#123;        if (i !&#x3D; 0)        &#123;            strcat(rule_files, &quot;,&quot;);        &#125;        strcat(rule_files, rules_list[i]);    &#125;    strcat(rule_files, &quot;]\n&quot;);    insert_specific_line_to_file(rule_files, CONFIG_YAML_FILR_PATH, &quot;rule-files:&quot;);&#125;&#x2F;* * 功能：将选择启用的规则集文件写入 CONFIG_YAML_FILR_PATH * 传参：rules_list规则集名称列表,count共启用规则集数目 * 返回：无 * usage: * char *a[] &#x3D; &#123;&quot;192.168.0.0&#x2F;16&quot;,&quot;10.0.0.0&#x2F;8&quot;,&quot;172.16.0.0&#x2F;12&quot;&#125;; * alter_select_rules(a,3); *&#x2F;static void alter_HOME_NET(char **HOME_NET_list, int count)&#123;    char HOME_NET[1000] &#x3D; &#123;&quot;    HOME_NET: \&quot;[&quot;&#125;;    for (int i &#x3D; 0; i &lt; count; i++)    &#123;        if (i !&#x3D; 0)        &#123;            strcat(HOME_NET, &quot;,&quot;);        &#125;        strcat(HOME_NET, HOME_NET_list[i]);    &#125;    strcat(HOME_NET, &quot;]\&quot;\n&quot;);    insert_specific_line_to_file(HOME_NET, CONFIG_YAML_FILR_PATH, &quot;HOME_NET:&quot;);&#125;&#x2F;* * 功能：修改配置文件CONFIG_YAML_FILR_PATH中的mpm_algo选项 * 传参：mpm_algo待修改值 * 返回：无 * usage: * alter_mpm_algo(&quot;hs&quot;); *&#x2F;static void alter_mpm_algo(char *mpm_algo)&#123;    char mpm_algo_option[1000] &#x3D; &#123;&quot;mpm-algo: &quot;&#125;;    strcat(mpm_algo_option, mpm_algo);    strcat(mpm_algo_option, &quot;\n&quot;);    insert_specific_line_to_file(mpm_algo_option, CONFIG_YAML_FILR_PATH, &quot;mpm-algo:&quot;);&#125;&#x2F;* * 功能：修改配置文件CONFIG_YAML_FILR_PATH中的spm_algo选项 * 传参：spm_algo待修改值 * 返回：无 * usage: * alter_spm_algo(&quot;hc&quot;); *&#x2F;static void alter_spm_algo(char *spm_algo)&#123;    char spm_algo_option[1000] &#x3D; &#123;&quot;spm-algo: &quot;&#125;;    strcat(spm_algo_option, spm_algo);    strcat(spm_algo_option, &quot;\n&quot;);    insert_specific_line_to_file(spm_algo_option, CONFIG_YAML_FILR_PATH, &quot;spm-algo:&quot;);&#125;&#x2F;* * 功能：修改指定规则的动作 * 传参：rules_name规则集名称，sid规则标识符，action动作名称 * 返回：无 * usage: * alter_rule_action(&quot;ftp.rules&quot;, &quot;2026691&quot;, &quot;alert&quot;); *&#x2F;static void alter_rule_action(char *rules_name, char *sid, char *action)&#123;    FILE *fp;    FILE *fc;    char *temp_file &#x3D; (char *)malloc(strlen(RULES_FILES_PATH) + strlen(&quot;temp.rules&quot;) + 1);    sprintf(temp_file, &quot;%s&#x2F;%s&quot;, RULES_FILES_PATH, &quot;temp.rules&quot;);    int line_hit &#x3D; 0;    int ch;    char line[1000];    char temp_line[1000];    char *actions[] &#x3D; &#123;&quot;alert&quot;, &quot;pass&quot;, &quot;drop&quot;, &quot;reject&quot;&#125;;    char *load_file &#x3D; (char *)malloc(strlen(RULES_FILES_PATH) + strlen(rules_name) + 1);    sprintf(load_file, &quot;%s&#x2F;%s&quot;, RULES_FILES_PATH, rules_name);    fc &#x3D; fopen(temp_file, &quot;w&quot;);    fp &#x3D; fopen(load_file, &quot;r&quot;);    if (fp &#x3D;&#x3D; NULL || fc &#x3D;&#x3D; NULL)    &#123;        printf(&quot;Error opening \n &quot;);    &#125;    else    &#123;        while (!feof(fp) &amp;&amp; !line_hit)        &#123;            fgets(line, 1000, fp);            if (strstr(line, sid))            &#123;                line_hit &#x3D; 1;            &#125;            else            &#123;                fprintf(fc, &quot;%s&quot;, line);            &#125;        &#125;        strrp(line, actions[0], action, temp_line);        memset(line, 0, 1000);        strrp(temp_line, actions[1], action, line);        memset(temp_line, 0, 1000);        strrp(line, actions[2], action, temp_line);        memset(line, 0, 1000);        strrp(temp_line, actions[3], action, line);        fprintf(fc, &quot;%s&quot;, line);        while ((ch &#x3D; fgetc(fp)) !&#x3D; EOF)        &#123;            fprintf(fc, &quot;%c&quot;, ch);        &#125;        fclose(fc);        fclose(fp);        remove(load_file);        rename(temp_file, load_file);    &#125;&#125;&#x2F;* * 功能：添加自定义规则到 CUSTOMRULES_FILE_PATH 文件中 * 传参：action动作名称，protocol协议名称，stream_rule流量方向规则，option_rule选项规则 * 返回：无 * usage: * char a[1000] &#x3D; &quot;msg:&quot;ET MALWARE STOLENPENCIL CnC Domain in DNS Lookup&quot;; dns.query; content:&quot;client-message.com&quot;; nocase; fast_pattern; endswith; reference:url,asert.arbornetworks.com&#x2F;stolen-pencil-campaign-targets-academia&#x2F;; classtype:command-and-control; sid:2026691; rev:4; metadata:affected_product Windows_XP_Vista_7_8_10_Server_32_64_Bit, attack_target Client_Endpoint, created_at 2018_12_05, deployment Perimeter, former_category MALWARE, malware_family StolenPencil, performance_impact Low, signature_severity Major, updated_at 2020_09_16;&quot;; * add_custom_rule(&quot;alert&quot;, &quot;dns&quot;, &quot;$HOME_NET any -&gt; any any&quot;, a); *&#x2F;static void add_custom_rule(char *action, char *protocol, char *stream_rule, char *option_rule)&#123;    char *rule_content &#x3D; (char *)malloc(strlen(action) + strlen(protocol) + strlen(stream_rule) + strlen(option_rule) + 20);    sprintf(rule_content, &quot;%s %s %s (%s)&quot;, action, protocol, stream_rule, option_rule);    FILE *fp &#x3D; fopen(CUSTOMRULES_FILE_PATH, &quot;a+&quot;);    if (fp &#x3D;&#x3D; NULL)    &#123;        printf(&quot;Error opening \n &quot;);    &#125;    else    &#123;        fseek(fp, 0, SEEK_END);        fwrite(rule_content, strlen(rule_content), 1, fp);        fclose(fp);    &#125;&#125;&#x2F;* * 功能：在文本中将指定内容插入在某一字段所在行(覆盖该行方式) * 传参：line待插入的整行内容，load_file待插入的文件名，des_opt被覆盖行的特征字段 * 返回：无 * usage: * char a[1000] &#x3D; &quot;rule-file: [ftp.rules,dns.rules]&quot;; * insert_specific_line_to_file(a,CONFIG_YAML_FILR_PATH,&quot;rule-file:&quot;); *&#x2F;static void insert_specific_line_to_file(char *ins_content, char *load_file, char *des_opt)&#123;    FILE *fp;    FILE *fc;    int line_hit &#x3D; 0;    int ch;    char line[1000];    char temp_file[100] &#x3D; &#123;&#125;;    strcat(temp_file, load_file);    strcat(temp_file, &quot;.temp&quot;);    fp &#x3D; fopen(load_file, &quot;r&quot;);    fc &#x3D; fopen(temp_file, &quot;w&quot;);    if (fp &#x3D;&#x3D; NULL || fc &#x3D;&#x3D; NULL)    &#123;        printf(&quot;Error opening \n &quot;);    &#125;    else    &#123;        while (!feof(fp) &amp;&amp; !line_hit)        &#123;            fgets(line, 1000, fp);            if (strstr(line, des_opt))            &#123;                line_hit &#x3D; 1;            &#125;            else            &#123;                fprintf(fc, &quot;%s&quot;, line);            &#125;        &#125;        fprintf(fc, &quot;%s&quot;, ins_content);        while ((ch &#x3D; fgetc(fp)) !&#x3D; EOF)        &#123;            fprintf(fc, &quot;%c&quot;, ch);        &#125;        fclose(fc);        fclose(fp);        remove(load_file);        rename(temp_file, load_file);    &#125;&#125;&#x2F;* * 功能：sid读取 * 传参：src_rule源规则字符串 * 返回：sid规则标识符 * usage: * char a[1000] &#x3D; &quot;alert dns $HOME_NET any -&gt; any any (msg:&quot;ET MALWARE STOLENPEN...... sid:2026691; ......ajor, updated_at 2020_09_16;)&quot;; * char b[10] &#x3D; read_rule_sid(a); *&#x2F;static char *read_rule_sid(char *src_rule)&#123;    int n &#x3D; 0;    char *index &#x3D; strstr(src_rule, &quot;sid:&quot;) + 4;    int position &#x3D; index - src_rule;    while (src_rule[position] !&#x3D; &#39;;&#39;)    &#123;        sid[n++] &#x3D; src_rule[position++];    &#125;    return sid;&#125;&#x2F;* * 功能：字符串替换 * 传参：src源字符串，sub待替换内容，rp替换内容，p输出字符串 * 返回：无 * char line[1000] &#x3D; &quot;aabbccddxxyyzz&quot;; * char temp_line[1000]; * char action[10] &#x3D; &quot;drop&quot;; * char rep[10] &#x3D; &quot;alert&quot;; * strrp(line, actions, rep, temp_line); *&#x2F;static void strrp(char *src, char *sub, char *rp, char *p)&#123;    int sub_len &#x3D; strlen(sub);    char *po &#x3D; NULL, *q &#x3D; src;    while ((po &#x3D; strstr(q, sub)) !&#x3D; NULL)    &#123;        strncat(p, q, po - q);        strcat(p, rp);        q +&#x3D; po - q + sub_len;    &#125;    strcat(p, q);&#125;</code></pre></div>]]></content>
     
     
     <categories>
       
-      <category>日常</category>
+      <category>项目组</category>
       
-      <category>微醺日记</category>
+      <category>Suricata</category>
       
     </categories>
     
     
     <tags>
       
-      <tag>啤酒</tag>
+      <tag>Suricata</tag>
       
-      <tag>牛啤堂</tag>
+      <tag>API</tag>
       
     </tags>
     
@@ -205,31 +240,58 @@
   
   
   <entry>
-    <title>挑战杯记录1</title>
-    <link href="/posts/a2531f57/"/>
-    <url>/posts/a2531f57/</url>
+    <title>Suricata规则重载</title>
+    <link href="/posts/bbe9896b/"/>
+    <url>/posts/bbe9896b/</url>
     
-    <content type="html"><![CDATA[<blockquote><p>最近一两个月主要在做之前参加的挑战杯专项赛，中国电信的题目，做IPS。</p><p>关于比赛记录一些内容。有些技术成果不便分享。其他的一些内容可参见Categories中<a href="https://leex0.top/categories/">[项目组, Suricata/DPDK]</a>。</p></blockquote><h2 id="比赛内容"><a href="#比赛内容" class="headerlink" title="比赛内容"></a>比赛内容</h2><p>简单来说：<code>在国产平台(比赛是鲲鹏+麒麟)，基于Suricata做一个入侵防御系统，需要具有比较大的流量负载能力，和对一些恶意流量能够识别拦截</code>。</p><p>大流量下还有一些分片之类的变形，仍需要能够负载和识别拦截。</p><p>流量是给了pcap和csv说明，照着一个一个写对应的规则就可以。</p><h2 id="技术方案"><a href="#技术方案" class="headerlink" title="技术方案"></a>技术方案</h2><p>主要用DPDK和Suricata结合，DPDK负责大流量的转发，Suricata用写的和收集的规则负责检测。最后结合日志做一个WEB界面。</p><h2 id="工作内容"><a href="#工作内容" class="headerlink" title="工作内容"></a>工作内容</h2><h4 id="1-DPDK-Suricata结合并在国产平台运行"><a href="#1-DPDK-Suricata结合并在国产平台运行" class="headerlink" title="1. DPDK+Suricata结合并在国产平台运行"></a>1. DPDK+Suricata结合并在国产平台运行</h4><p>参考了一些别的DPDK+Suricata结合的项目，了解基本程序运行和结合逻辑。最终在尝试多个版本后<strong>确定使用的版本</strong>。</p><p>在国产平台上编译运行也遇到不少问题，主要是<strong>依赖、驱动、库兼容性的问题</strong>解决。</p><h4 id="2-编写规则"><a href="#2-编写规则" class="headerlink" title="2. 编写规则"></a>2. 编写规则</h4><p>对所有的恶意数据流分析之后，还是需要写不少规则，熟悉完规则编写语法，对照着已有的规则，分工进行规则编写。</p><p>每次一轮编写完成，重放恶意流量，查看流量是否识别到拦截下来，对没有识别好的流量继续优化规则。最后一共筛了几遍规则，形成了<strong>针对性的恶意流量规则集</strong>。</p><p>此外还添加了<strong>精选的现有规则</strong>。默认的规则集条目非常多，检测很慢影响效率。对默认规则进行精简，留下了数量合适的现有规则，合并自己的规则集使用。</p><h4 id="3-界面"><a href="#3-界面" class="headerlink" title="3. 界面"></a>3. 界面</h4><p>界面主要是<strong>针对Suricata的配置文件、规则管理、日志文件写一些接口</strong>，使其能够正确的在前端进行查看与配置。</p><h4 id="4-调参"><a href="#4-调参" class="headerlink" title="4. 调参"></a>4. 调参</h4><p>默认的Suricata参数对于大流量的负载能力一般，需要<strong>针对测试环境进行参数调整</strong>来获取更好的性能。</p><blockquote><p>本次主要调整的参数如下：</p><ul><li><p>针对NUMA环境分配CPU数量</p></li><li><p>调整数据流的超时限制</p></li><li><p>对数据流与会话预分配内存，使用大页内存提高缓存效率</p></li><li><p>调整分片重组的深度限制，在保证负载的情况下尽量对更多的分片进行检测</p></li></ul></blockquote><h2 id><a href="#" class="headerlink" title></a></h2><h2 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h2><table><thead><tr><th align="center">测试项</th><th align="center">测试结果</th></tr></thead><tbody><tr><td align="center">检测率</td><td align="center">98%</td></tr><tr><td align="center">误截率</td><td align="center">0%</td></tr><tr><td align="center">单10G网卡吞吐</td><td align="center">9G——阻断率99.41%</td></tr><tr><td align="center">双10G网卡吞吐</td><td align="center">20G——阻断率82.514%</td></tr><tr><td align="center">小包吞吐</td><td align="center">8.196Gbps</td></tr><tr><td align="center">新建连接数吞吐</td><td align="center">16.15万flow/s——阻断率74.86%</td></tr></tbody></table>]]></content>
+    <content type="html"><![CDATA[<blockquote><p>Suricata 不重启情况下更新规则rules。</p></blockquote><h2 id="1-Suricata-规则重载步骤"><a href="#1-Suricata-规则重载步骤" class="headerlink" title="1. Suricata  规则重载步骤"></a>1. Suricata  规则重载步骤</h2><ol><li>加载新的配置配置，更新规则变量</li><li>加载新的规则</li><li>构建新的检测引擎</li><li>用新的检测引擎替换旧的引擎</li><li>确保所有线程已更新</li><li>释放旧的检测引擎</li></ol><p><em>注：系统要有足够内存用于启动两个检测引擎（替换过程中有两个引擎同时存在）</em></p><h2 id="2-两种规则重载方式"><a href="#2-两种规则重载方式" class="headerlink" title="2. 两种规则重载方式"></a>2. 两种规则重载方式</h2><h3 id="2-1-Signal"><a href="#2-1-Signal" class="headerlink" title="2.1 Signal"></a>2.1 <code>Signal</code></h3><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kill -USR2 $(pidof suricata)</code></pre></div><blockquote><p>SIGUSR2</p><p>Causes Suricata to perform a live rule reload.</p></blockquote><h3 id="2-2-Unix-socket"><a href="#2-2-Unix-socket" class="headerlink" title="2.2 Unix socket"></a>2.2 <code>Unix socket</code></h3><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">suricatasc -c reload-rules</code></pre></div><blockquote><p>Unix socket方式需要安装suricatasc脚本，通过普通编译方式安装则默认安装完成。</p><p>若未安装，通过如下命令在 <code>python/suricatasc</code> 下安装</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sudo python setup.py install</code></pre></div></blockquote><h2 id="3-测试"><a href="#3-测试" class="headerlink" title="3. 测试"></a>3. 测试</h2><p>分别测试了上述两种方式下的两项内容，共四项测试。</p><ol><li>测试Signal方式，对于yaml中已载入的.rules文件修改后重载</li><li>测试Signal方式，对于yaml中已载入的.rules文件修改后重载</li><li>测试Unix socket方式，对于yaml中未载入的.rules文件添加后重载</li><li>测试Unix socket方式，对于yaml中未载入的.rules文件添加后重载</li></ol><p>测试均成功，以下为其中一项测试的日志情况<code>/var/log/suricata/suricata.log</code>，其他类似。</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">10&#x2F;8&#x2F;2021 -- 00:09:51 - &lt;Notice&gt; - rule reload starting10&#x2F;8&#x2F;2021 -- 00:09:51 - &lt;Info&gt; - 1 rule files processed. 1 rules successfully loaded, 0 rules failed10&#x2F;8&#x2F;2021 -- 00:09:51 - &lt;Info&gt; - Threshold config parsed: 0 rule(s) found10&#x2F;8&#x2F;2021 -- 00:09:51 - &lt;Info&gt; - 1 signatures processed. 0 are IP-only rules, 1 are inspecting packet payload, 0 inspect application layer, 0 are decoder event only10&#x2F;8&#x2F;2021 -- 00:09:51 - &lt;Info&gt; - cleaning up signature grouping structure... complete10&#x2F;8&#x2F;2021 -- 00:09:51 - &lt;Notice&gt; - rule reload complete10&#x2F;8&#x2F;2021 -- 00:10:27 - &lt;Notice&gt; - rule reload starting10&#x2F;8&#x2F;2021 -- 00:10:27 - &lt;Info&gt; - 1 rule files processed. 1 rules successfully loaded, 0 rules failed10&#x2F;8&#x2F;2021 -- 00:10:27 - &lt;Info&gt; - Threshold config parsed: 0 rule(s) found10&#x2F;8&#x2F;2021 -- 00:10:27 - &lt;Info&gt; - 1 signatures processed. 0 are IP-only rules, 1 are inspecting packet payload, 0 inspect application layer, 0 are decoder event only10&#x2F;8&#x2F;2021 -- 00:10:27 - &lt;Info&gt; - cleaning up signature grouping structure... complete10&#x2F;8&#x2F;2021 -- 00:10:27 - &lt;Notice&gt; - rule reload complete10&#x2F;8&#x2F;2021 -- 00:10:27 - &lt;Info&gt; - Unix socket: lost connection with client00000000</code></pre></div><hr><blockquote><p>参考：</p><p><a href="https://suricata.readthedocs.io/en/suricata-6.0.3/manpages/suricata.html#signals">https://suricata.readthedocs.io/en/suricata-6.0.3/manpages/suricata.html#signals</a></p></blockquote>]]></content>
     
     
     <categories>
       
       <category>项目组</category>
       
-      <category>挑战杯</category>
+      <category>Suricata</category>
       
     </categories>
     
     
     <tags>
       
-      <tag>DPDK</tag>
-      
-      <tag>挑战杯</tag>
-      
       <tag>Suricata</tag>
       
       <tag>入侵检测</tag>
+      
+      <tag>rules</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Hexo推送及备份</title>
+    <link href="/posts/554fe90e/"/>
+    <url>/posts/554fe90e/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>Hexo推送通过渲染<code>./source</code>形成<code>./public</code>，将<code>./public</code>推送至Git下<code>master</code>主分支显示页面。</p><p>推送上传的都是渲染后的html内容，期望在推送前端页面同时，将所有博客资源进行推送保存，方便版本管理以及多设备同步编辑。</p><p>方式：<strong>在hexo博客git项目下增加分支backup保存博客所有内容，推送博客内容同时推送分支。</strong></p></blockquote><h2 id="布置分支"><a href="#布置分支" class="headerlink" title="布置分支"></a>布置分支</h2><p>在A电脑上完成hexo搭建以及正常deploy后，在hexo目录下进行操作：</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">git initgit remote add origin https:&#x2F;&#x2F;github.com&#x2F;Github_username&#x2F;Github_username.github.io.gitgit checkout -b branch_namegit add .git commit -m &quot;comment info&quot;git push origin backup # backup随意填写，分支名</code></pre></div><h2 id="拉取分支"><a href="#拉取分支" class="headerlink" title="拉取分支"></a>拉取分支</h2><p>在B电脑上<a href="https://leex0.top/posts/25ad3a99/">布置git与node环境</a>，拉取分支</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">git clone -b backup https:&#x2F;&#x2F;github.com&#x2F;Github_username&#x2F;Github_username.github.io.gitcd Github_username.github.io  sudo npm install -g hexo-clisudo npm installsudo npm install hexo-deployer-git</code></pre></div><h2 id="内容同步"><a href="#内容同步" class="headerlink" title="内容同步"></a>内容同步</h2><p>在一处电脑完成写作后，推送内容</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hexo g -dgit add .git commit -m &quot;comment info&quot;git push origin backup</code></pre></div><p>在另一处电脑需保持同步</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">git pull https:&#x2F;&#x2F;github.com&#x2F;Github_username&#x2F;Github_username.github.io backup</code></pre></div><h2 id="补：添加命令进行推送"><a href="#补：添加命令进行推送" class="headerlink" title="补：添加命令进行推送"></a>补：添加命令进行推送</h2><blockquote><p>每次在推送hexo都需要输入多个指令，现在还增加了分支备份，添加<code>alias</code>进行一键推送。</p><p>git提交的comment使用日期与时间戳。</p></blockquote><h3 id="方案一：直接alias（遇到问题）"><a href="#方案一：直接alias（遇到问题）" class="headerlink" title="方案一：直接alias（遇到问题）"></a>方案一：直接<code>alias</code>（遇到问题）</h3><p>在<code>~/.zshrc</code>中(根据使用shell变化)添加如下<code>alias</code>：</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">alias hexopush&#x3D;&quot;hexo clean &amp;&amp; hexo g &amp;&amp; hexo d &amp;&amp; git commit -am &quot;$(date &quot;+%Y-%m-%d-%s&quot;)&quot; &amp;&amp; git push origin backup&quot;</code></pre></div><p>问题在于，进行<code>source ~./zshrc</code>后，通过终端查看<code>alias</code>发现<code>hexopus</code>h中的<strong>时间戳固定不变</strong>，为source操作时的时间。</p><p>应该是在<code>source ~./zshrc</code>时<code>alias</code>中的变量<code>$(date &quot;+%Y-%m-%d-%s&quot;)</code>会被计算出并且固定保存。</p><p>于是采用方案二。</p><h3 id="方案二：引用脚本"><a href="#方案二：引用脚本" class="headerlink" title="方案二：引用脚本"></a>方案二：引用脚本</h3><p>将方案一中的内容保存到脚本中，通过alias执行脚本。</p><p><code>~/opt/script/hexopush.sh</code>:</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">cd &#x2F;Users&#x2F;buddyholly&#x2F;LeeX0Blogecho &quot; &quot;echo &quot;#################################&quot;echo &quot;### Hexo deployment Start!    ###&quot;echo &quot;#################################&quot;hexo cleanhexo g -decho &quot; &quot;echo &quot;#################################&quot;echo &quot;### Hexo deployment finished! ###&quot;echo &quot;### Git Push Start!           ###&quot;echo &quot;#################################&quot;git add .git commit -am &quot;$(date &quot;+%Y-%m-%d-%s&quot;)&quot;git push origin backupecho &quot; &quot;echo &quot;#################################&quot;echo &quot;### Git Push finished!        ###&quot;echo &quot;#################################&quot;</code></pre></div><p>在<code>~/.zshrc</code>中添加如下<code>alias hexopush=&#39;. ~/opt/script/hexopush.sh&#39;</code></p><p><strong>使用时，在<code>hexo</code>根目录下执行<code>hexopush</code>即可完成master与backup分支推送。</strong></p><hr><blockquote><p>参考：<br><a href="https://mmmbo.com/2019/12/29/Hexo-Github-Pages-MWeb-Editor-blog/">https://mmmbo.com/2019/12/29/Hexo-Github-Pages-MWeb-Editor-blog/</a></p></blockquote>]]></content>
+    
+    
+    <categories>
+      
+      <category>日常</category>
+      
+      <category>博客</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Hexo</tag>
+      
+      <tag>Github</tag>
       
     </tags>
     
@@ -263,35 +325,6 @@
       <tag>Bear</tag>
       
       <tag>Obsidian</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>Hexo推送及备份</title>
-    <link href="/posts/554fe90e/"/>
-    <url>/posts/554fe90e/</url>
-    
-    <content type="html"><![CDATA[<blockquote><p>Hexo推送通过渲染<code>./source</code>形成<code>./public</code>，将<code>./public</code>推送至Git下<code>master</code>主分支显示页面。</p><p>推送上传的都是渲染后的html内容，期望在推送前端页面同时，将所有博客资源进行推送保存，方便版本管理以及多设备同步编辑。</p><p>方式：<strong>在hexo博客git项目下增加分支backup保存博客所有内容，推送博客内容同时推送分支。</strong></p></blockquote><h2 id="布置分支"><a href="#布置分支" class="headerlink" title="布置分支"></a>布置分支</h2><p>在A电脑上完成hexo搭建以及正常deploy后，在hexo目录下进行操作：</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">git initgit remote add origin https:&#x2F;&#x2F;github.com&#x2F;Github_username&#x2F;Github_username.github.io.gitgit checkout -b branch_namegit add .git commit -m &quot;comment info&quot;git push origin backup # backup随意填写，分支名</code></pre></div><h2 id="拉取分支"><a href="#拉取分支" class="headerlink" title="拉取分支"></a>拉取分支</h2><p>在B电脑上<a href="https://leex0.top/posts/25ad3a99/">布置git与node环境</a>，拉取分支</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">git clone -b backup https:&#x2F;&#x2F;github.com&#x2F;Github_username&#x2F;Github_username.github.io.gitcd Github_username.github.io  sudo npm install -g hexo-clisudo npm installsudo npm install hexo-deployer-git</code></pre></div><h2 id="内容同步"><a href="#内容同步" class="headerlink" title="内容同步"></a>内容同步</h2><p>在一处电脑完成写作后，推送内容</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hexo g -dgit add .git commit -m &quot;comment info&quot;git push origin backup</code></pre></div><p>在另一处电脑需保持同步</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">git pull https:&#x2F;&#x2F;github.com&#x2F;Github_username&#x2F;Github_username.github.io backup</code></pre></div><h2 id="补：添加命令进行推送"><a href="#补：添加命令进行推送" class="headerlink" title="补：添加命令进行推送"></a>补：添加命令进行推送</h2><blockquote><p>每次在推送hexo都需要输入多个指令，现在还增加了分支备份，添加<code>alias</code>进行一键推送。</p><p>git提交的comment使用日期与时间戳。</p></blockquote><h3 id="方案一：直接alias（遇到问题）"><a href="#方案一：直接alias（遇到问题）" class="headerlink" title="方案一：直接alias（遇到问题）"></a>方案一：直接<code>alias</code>（遇到问题）</h3><p>在<code>~/.zshrc</code>中(根据使用shell变化)添加如下<code>alias</code>：</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">alias hexopush&#x3D;&quot;hexo clean &amp;&amp; hexo g &amp;&amp; hexo d &amp;&amp; git commit -am &quot;$(date &quot;+%Y-%m-%d-%s&quot;)&quot; &amp;&amp; git push origin backup&quot;</code></pre></div><p>问题在于，进行<code>source ~./zshrc</code>后，通过终端查看<code>alias</code>发现<code>hexopus</code>h中的<strong>时间戳固定不变</strong>，为source操作时的时间。</p><p>应该是在<code>source ~./zshrc</code>时<code>alias</code>中的变量<code>$(date &quot;+%Y-%m-%d-%s&quot;)</code>会被计算出并且固定保存。</p><p>于是采用方案二。</p><h3 id="方案二：引用脚本"><a href="#方案二：引用脚本" class="headerlink" title="方案二：引用脚本"></a>方案二：引用脚本</h3><p>将方案一中的内容保存到脚本中，通过alias执行脚本。</p><p><code>~/opt/script/hexopush.sh</code>:</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">cd &#x2F;Users&#x2F;buddyholly&#x2F;LeeX0Blogecho &quot; &quot;echo &quot;#################################&quot;echo &quot;### Hexo deployment Start!    ###&quot;echo &quot;#################################&quot;hexo cleanhexo g -decho &quot; &quot;echo &quot;#################################&quot;echo &quot;### Hexo deployment finished! ###&quot;echo &quot;### Git Push Start!           ###&quot;echo &quot;#################################&quot;git add .git commit -am &quot;$(date &quot;+%Y-%m-%d-%s&quot;)&quot;git push origin backupecho &quot; &quot;echo &quot;#################################&quot;echo &quot;### Git Push finished!        ###&quot;echo &quot;#################################&quot;</code></pre></div><p>在<code>~/.zshrc</code>中添加如下<code>alias hexopush=&#39;. ~/opt/script/hexopush.sh&#39;</code></p><p><strong>使用时，在<code>hexo</code>根目录下执行<code>hexopush</code>即可完成master与backup分支推送。</strong></p><hr><blockquote><p>参考：<br><a href="https://mmmbo.com/2019/12/29/Hexo-Github-Pages-MWeb-Editor-blog/">https://mmmbo.com/2019/12/29/Hexo-Github-Pages-MWeb-Editor-blog/</a></p></blockquote>]]></content>
-    
-    
-    <categories>
-      
-      <category>日常</category>
-      
-      <category>博客</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>Hexo</tag>
-      
-      <tag>Github</tag>
       
     </tags>
     
@@ -389,58 +422,27 @@
   
   
   <entry>
-    <title>Suricata配置接口</title>
-    <link href="/posts/ad19baf/"/>
-    <url>/posts/ad19baf/</url>
+    <title>微醺日记——啤酒杂谈3-气泡实验室与古斯</title>
+    <link href="/posts/9ea5f31b/"/>
+    <url>/posts/9ea5f31b/</url>
     
-    <content type="html"><![CDATA[<blockquote><p>为<code>Suricata</code>对应的WEB页面开发编写相关接口用以实现配置修改与规则简单管理。</p></blockquote><h2 id="库引入、接口声明、常量定义"><a href="#库引入、接口声明、常量定义" class="headerlink" title="库引入、接口声明、常量定义"></a>库引入、接口声明、常量定义</h2><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c">#include &lt;stdio.h&gt;#include &lt;stdlib.h&gt;#include &lt;string.h&gt;#include &lt;dirent.h&gt;static char **read_rules_file_name();static void alter_select_rules(char **rules_list, int count);static void alter_HOME_NET(char **HOME_NET_list, int count);static void alter_mpm_algo(char *mpm_algo);static void alter_spm_algo(char *spm_algo);static void alter_rule_action(char *rules_name, char *sid, char *action);static void add_custom_rule(char *action, char *protocol, char *stream_rule, char *option_rule);static void insert_specific_line_to_file(char *ins_content, char *load_file, char *des_opt);static char *read_rule_sid(char *src_rule);static void strrp(char *src, char *sub, char *rp, char *p);#define RULES_FILES_PATH &quot;&#x2F;var&#x2F;lib&#x2F;suricata&#x2F;rules&quot;#define CUSTOMRULES_FILE_PATH &quot;&#x2F;var&#x2F;lib&#x2F;suricata&#x2F;rules&#x2F;custom.rules&quot;#define CONFIG_YAML_FILR_PATH &quot;&#x2F;etc&#x2F;suricata&#x2F;suricata.yaml&quot;char *names[100];char sid[20];</code></pre></div><h2 id="接口定义"><a href="#接口定义" class="headerlink" title="接口定义"></a>接口定义</h2><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c">&#x2F;* * 功能：读取 RULES_FILES_PATH 路径下所有规则文件名 * 传参：无 * 返回：names规则名二维数组 * usage： * read_rules_file_name(); *&#x2F;static char **read_rules_file_name()&#123;    int n &#x3D; 0;    DIR *directory_pointer;    struct dirent *entry;    char *suffix;    if ((directory_pointer &#x3D; opendir(RULES_FILES_PATH)) &#x3D;&#x3D; NULL)        printf(&quot;Error opening \n &quot;);    else    &#123;        while ((entry &#x3D; readdir(directory_pointer)) !&#x3D; NULL)        &#123;            suffix &#x3D; strrchr(entry-&gt;d_name, &#39;.&#39;);            if (suffix !&#x3D; NULL &amp;&amp; strcmp(suffix, &quot;.rules&quot;) &#x3D;&#x3D; 0)            &#123;                names[n++] &#x3D; entry-&gt;d_name;            &#125;        &#125;        closedir(directory_pointer);    &#125;    return names;&#125;&#x2F;* * 功能：将选择启用的规则集文件写入 CONFIG_YAML_FILR_PATH * 传参：rules_list规则集名称列表,count共启用规则集数目 * 返回：无 * usage: * char *a[] &#x3D; &#123;&quot;ftp.rules&quot;,&quot;dns.rules&quot;,&quot;dos.rules&quot;&#125;; * alter_select_rules(a,3); *&#x2F;static void alter_select_rules(char **rules_list, int count)&#123;    char rule_files[1000] &#x3D; &#123;&quot;rule-files: [&quot;&#125;;    for (int i &#x3D; 0; i &lt; count; i++)    &#123;        if (i !&#x3D; 0)        &#123;            strcat(rule_files, &quot;,&quot;);        &#125;        strcat(rule_files, rules_list[i]);    &#125;    strcat(rule_files, &quot;]\n&quot;);    insert_specific_line_to_file(rule_files, CONFIG_YAML_FILR_PATH, &quot;rule-files:&quot;);&#125;&#x2F;* * 功能：将选择启用的规则集文件写入 CONFIG_YAML_FILR_PATH * 传参：rules_list规则集名称列表,count共启用规则集数目 * 返回：无 * usage: * char *a[] &#x3D; &#123;&quot;192.168.0.0&#x2F;16&quot;,&quot;10.0.0.0&#x2F;8&quot;,&quot;172.16.0.0&#x2F;12&quot;&#125;; * alter_select_rules(a,3); *&#x2F;static void alter_HOME_NET(char **HOME_NET_list, int count)&#123;    char HOME_NET[1000] &#x3D; &#123;&quot;    HOME_NET: \&quot;[&quot;&#125;;    for (int i &#x3D; 0; i &lt; count; i++)    &#123;        if (i !&#x3D; 0)        &#123;            strcat(HOME_NET, &quot;,&quot;);        &#125;        strcat(HOME_NET, HOME_NET_list[i]);    &#125;    strcat(HOME_NET, &quot;]\&quot;\n&quot;);    insert_specific_line_to_file(HOME_NET, CONFIG_YAML_FILR_PATH, &quot;HOME_NET:&quot;);&#125;&#x2F;* * 功能：修改配置文件CONFIG_YAML_FILR_PATH中的mpm_algo选项 * 传参：mpm_algo待修改值 * 返回：无 * usage: * alter_mpm_algo(&quot;hs&quot;); *&#x2F;static void alter_mpm_algo(char *mpm_algo)&#123;    char mpm_algo_option[1000] &#x3D; &#123;&quot;mpm-algo: &quot;&#125;;    strcat(mpm_algo_option, mpm_algo);    strcat(mpm_algo_option, &quot;\n&quot;);    insert_specific_line_to_file(mpm_algo_option, CONFIG_YAML_FILR_PATH, &quot;mpm-algo:&quot;);&#125;&#x2F;* * 功能：修改配置文件CONFIG_YAML_FILR_PATH中的spm_algo选项 * 传参：spm_algo待修改值 * 返回：无 * usage: * alter_spm_algo(&quot;hc&quot;); *&#x2F;static void alter_spm_algo(char *spm_algo)&#123;    char spm_algo_option[1000] &#x3D; &#123;&quot;spm-algo: &quot;&#125;;    strcat(spm_algo_option, spm_algo);    strcat(spm_algo_option, &quot;\n&quot;);    insert_specific_line_to_file(spm_algo_option, CONFIG_YAML_FILR_PATH, &quot;spm-algo:&quot;);&#125;&#x2F;* * 功能：修改指定规则的动作 * 传参：rules_name规则集名称，sid规则标识符，action动作名称 * 返回：无 * usage: * alter_rule_action(&quot;ftp.rules&quot;, &quot;2026691&quot;, &quot;alert&quot;); *&#x2F;static void alter_rule_action(char *rules_name, char *sid, char *action)&#123;    FILE *fp;    FILE *fc;    char *temp_file &#x3D; (char *)malloc(strlen(RULES_FILES_PATH) + strlen(&quot;temp.rules&quot;) + 1);    sprintf(temp_file, &quot;%s&#x2F;%s&quot;, RULES_FILES_PATH, &quot;temp.rules&quot;);    int line_hit &#x3D; 0;    int ch;    char line[1000];    char temp_line[1000];    char *actions[] &#x3D; &#123;&quot;alert&quot;, &quot;pass&quot;, &quot;drop&quot;, &quot;reject&quot;&#125;;    char *load_file &#x3D; (char *)malloc(strlen(RULES_FILES_PATH) + strlen(rules_name) + 1);    sprintf(load_file, &quot;%s&#x2F;%s&quot;, RULES_FILES_PATH, rules_name);    fc &#x3D; fopen(temp_file, &quot;w&quot;);    fp &#x3D; fopen(load_file, &quot;r&quot;);    if (fp &#x3D;&#x3D; NULL || fc &#x3D;&#x3D; NULL)    &#123;        printf(&quot;Error opening \n &quot;);    &#125;    else    &#123;        while (!feof(fp) &amp;&amp; !line_hit)        &#123;            fgets(line, 1000, fp);            if (strstr(line, sid))            &#123;                line_hit &#x3D; 1;            &#125;            else            &#123;                fprintf(fc, &quot;%s&quot;, line);            &#125;        &#125;        strrp(line, actions[0], action, temp_line);        memset(line, 0, 1000);        strrp(temp_line, actions[1], action, line);        memset(temp_line, 0, 1000);        strrp(line, actions[2], action, temp_line);        memset(line, 0, 1000);        strrp(temp_line, actions[3], action, line);        fprintf(fc, &quot;%s&quot;, line);        while ((ch &#x3D; fgetc(fp)) !&#x3D; EOF)        &#123;            fprintf(fc, &quot;%c&quot;, ch);        &#125;        fclose(fc);        fclose(fp);        remove(load_file);        rename(temp_file, load_file);    &#125;&#125;&#x2F;* * 功能：添加自定义规则到 CUSTOMRULES_FILE_PATH 文件中 * 传参：action动作名称，protocol协议名称，stream_rule流量方向规则，option_rule选项规则 * 返回：无 * usage: * char a[1000] &#x3D; &quot;msg:&quot;ET MALWARE STOLENPENCIL CnC Domain in DNS Lookup&quot;; dns.query; content:&quot;client-message.com&quot;; nocase; fast_pattern; endswith; reference:url,asert.arbornetworks.com&#x2F;stolen-pencil-campaign-targets-academia&#x2F;; classtype:command-and-control; sid:2026691; rev:4; metadata:affected_product Windows_XP_Vista_7_8_10_Server_32_64_Bit, attack_target Client_Endpoint, created_at 2018_12_05, deployment Perimeter, former_category MALWARE, malware_family StolenPencil, performance_impact Low, signature_severity Major, updated_at 2020_09_16;&quot;; * add_custom_rule(&quot;alert&quot;, &quot;dns&quot;, &quot;$HOME_NET any -&gt; any any&quot;, a); *&#x2F;static void add_custom_rule(char *action, char *protocol, char *stream_rule, char *option_rule)&#123;    char *rule_content &#x3D; (char *)malloc(strlen(action) + strlen(protocol) + strlen(stream_rule) + strlen(option_rule) + 20);    sprintf(rule_content, &quot;%s %s %s (%s)&quot;, action, protocol, stream_rule, option_rule);    FILE *fp &#x3D; fopen(CUSTOMRULES_FILE_PATH, &quot;a+&quot;);    if (fp &#x3D;&#x3D; NULL)    &#123;        printf(&quot;Error opening \n &quot;);    &#125;    else    &#123;        fseek(fp, 0, SEEK_END);        fwrite(rule_content, strlen(rule_content), 1, fp);        fclose(fp);    &#125;&#125;&#x2F;* * 功能：在文本中将指定内容插入在某一字段所在行(覆盖该行方式) * 传参：line待插入的整行内容，load_file待插入的文件名，des_opt被覆盖行的特征字段 * 返回：无 * usage: * char a[1000] &#x3D; &quot;rule-file: [ftp.rules,dns.rules]&quot;; * insert_specific_line_to_file(a,CONFIG_YAML_FILR_PATH,&quot;rule-file:&quot;); *&#x2F;static void insert_specific_line_to_file(char *ins_content, char *load_file, char *des_opt)&#123;    FILE *fp;    FILE *fc;    int line_hit &#x3D; 0;    int ch;    char line[1000];    char temp_file[100] &#x3D; &#123;&#125;;    strcat(temp_file, load_file);    strcat(temp_file, &quot;.temp&quot;);    fp &#x3D; fopen(load_file, &quot;r&quot;);    fc &#x3D; fopen(temp_file, &quot;w&quot;);    if (fp &#x3D;&#x3D; NULL || fc &#x3D;&#x3D; NULL)    &#123;        printf(&quot;Error opening \n &quot;);    &#125;    else    &#123;        while (!feof(fp) &amp;&amp; !line_hit)        &#123;            fgets(line, 1000, fp);            if (strstr(line, des_opt))            &#123;                line_hit &#x3D; 1;            &#125;            else            &#123;                fprintf(fc, &quot;%s&quot;, line);            &#125;        &#125;        fprintf(fc, &quot;%s&quot;, ins_content);        while ((ch &#x3D; fgetc(fp)) !&#x3D; EOF)        &#123;            fprintf(fc, &quot;%c&quot;, ch);        &#125;        fclose(fc);        fclose(fp);        remove(load_file);        rename(temp_file, load_file);    &#125;&#125;&#x2F;* * 功能：sid读取 * 传参：src_rule源规则字符串 * 返回：sid规则标识符 * usage: * char a[1000] &#x3D; &quot;alert dns $HOME_NET any -&gt; any any (msg:&quot;ET MALWARE STOLENPEN...... sid:2026691; ......ajor, updated_at 2020_09_16;)&quot;; * char b[10] &#x3D; read_rule_sid(a); *&#x2F;static char *read_rule_sid(char *src_rule)&#123;    int n &#x3D; 0;    char *index &#x3D; strstr(src_rule, &quot;sid:&quot;) + 4;    int position &#x3D; index - src_rule;    while (src_rule[position] !&#x3D; &#39;;&#39;)    &#123;        sid[n++] &#x3D; src_rule[position++];    &#125;    return sid;&#125;&#x2F;* * 功能：字符串替换 * 传参：src源字符串，sub待替换内容，rp替换内容，p输出字符串 * 返回：无 * char line[1000] &#x3D; &quot;aabbccddxxyyzz&quot;; * char temp_line[1000]; * char action[10] &#x3D; &quot;drop&quot;; * char rep[10] &#x3D; &quot;alert&quot;; * strrp(line, actions, rep, temp_line); *&#x2F;static void strrp(char *src, char *sub, char *rp, char *p)&#123;    int sub_len &#x3D; strlen(sub);    char *po &#x3D; NULL, *q &#x3D; src;    while ((po &#x3D; strstr(q, sub)) !&#x3D; NULL)    &#123;        strncat(p, q, po - q);        strcat(p, rp);        q +&#x3D; po - q + sub_len;    &#125;    strcat(p, q);&#125;</code></pre></div>]]></content>
+    <content type="html"><![CDATA[<blockquote><p>最近连着去了几次气泡实验室，喝了一些古斯。有的忘了拍照。</p></blockquote><hr><blockquote><p>以下几款，先说结论，<strong>很推荐很推荐<code>芭乐古斯</code>和<code>果汁风暴</code>。</strong>喜欢不重口的世涛可以尝一下世涛。</p></blockquote><h3 id="气泡实验室-爪哇部落-芭乐古斯"><a href="#气泡实验室-爪哇部落-芭乐古斯" class="headerlink" title="气泡实验室 爪哇部落 芭乐古斯"></a>气泡实验室 爪哇部落 <a href="https://www.jiuhuar.com/craftbeer/5fb748d3526c607673e4e912.html">芭乐古斯</a></h3><p>就是因为这个酒去了不止一次气泡实验室。非常不错。</p><p>浓郁的果香，入口酸甜，酒感很弱，果味满满。酸甜平衡的很好。</p><p>同样十分适合女士喝。</p><p><img src="/posts/9ea5f31b/IMG_2910-7210275.jpeg"></p><h3 id="气泡实验室-爪哇部落-草莓古斯"><a href="#气泡实验室-爪哇部落-草莓古斯" class="headerlink" title="气泡实验室 爪哇部落 草莓古斯"></a>气泡实验室 爪哇部落 <a href="https://www.jiuhuar.com/craftbeer/5f9dee81526c607673d92145.html">草莓古斯</a></h3><p>没什么味道，草莓味也不算很大，而且感觉做出来不是很搭调。</p><p>还是几款柑橘浆果类的这种增味对啤酒而言更适合。</p><h3 id="气泡实验室-爪哇部落-凤梨古斯"><a href="#气泡实验室-爪哇部落-凤梨古斯" class="headerlink" title="气泡实验室 爪哇部落 凤梨古斯"></a>气泡实验室 爪哇部落 <a href="https://www.jiuhuar.com/craftbeer/5fdac448790112110b7c10d8.html">凤梨古斯</a></h3><p>比较甜，有些酸，味道普普通通。</p><h3 id="气泡实验室-爪哇部落-魔法浆果黑加仑古斯"><a href="#气泡实验室-爪哇部落-魔法浆果黑加仑古斯" class="headerlink" title="气泡实验室 爪哇部落 魔法浆果黑加仑古斯"></a>气泡实验室 爪哇部落 <a href="https://www.jiuhuar.com/craftbeer/6014fb23526c6076731e039c.html">魔法浆果黑加仑古斯</a></h3><p>特别甜，一杯喝了半杯就甜的不想喝了。不太喜欢。</p><h3 id="气泡实验室-爪哇部落-绿里奇迹古斯"><a href="#气泡实验室-爪哇部落-绿里奇迹古斯" class="headerlink" title="气泡实验室 爪哇部落 绿里奇迹古斯"></a>气泡实验室 爪哇部落 <a href="https://www.jiuhuar.com/craftbeer/60e7cc97790112168caafba1.html">绿里奇迹古斯</a></h3><p>和凤梨古斯一样，有点酸甜普普通通。</p><h3 id="气泡实验室-果汁风暴-双倍新英格兰IPA"><a href="#气泡实验室-果汁风暴-双倍新英格兰IPA" class="headerlink" title="气泡实验室 果汁风暴 双倍新英格兰IPA"></a>气泡实验室 <a href="https://www.jiuhuar.com/craftbeer/603db8f17901124c0b489d93.html">果汁风暴 双倍新英格兰IPA</a></h3><p>这款是喝过的气泡实验室的第一款酒。也比较不错。</p><p>酒体浑浊，薄厚适中。确实正如其名果汁风暴，拿到手里感觉是一杯香气馥郁的果汁。闻起来喝起来都像，但又不是明显的香精味道，有着大量热带水果的香气。</p><p>果味之外，也有酒花的苦味，但不很强烈。</p><p>此外，这款酒的度数有8度多，对于这个口感而言根本体会不到这个度数，所以应该容易喝这款喝醉。</p><p><img src="/posts/9ea5f31b/IMG_2908-7210275.jpeg"></p><p>还有一款气泡实验室 <a href="https://www.jiuhuar.com/craftbeer/5b3992fc8ba5b0902e8b4568.html">及时雨</a> 新英格兰IPA，这个没有喝过，据了解是果汁风暴(juicy storm)的前身juicy rain。</p><h3 id="气泡实验室-气泡-IPA"><a href="#气泡实验室-气泡-IPA" class="headerlink" title="气泡实验室 气泡 IPA"></a>气泡实验室 <a href="https://www.jiuhuar.com/craftbeer/5b9f6f508ba5b04a2e8b4568.html">气泡 IPA</a></h3><p>普普通通IPA。</p><h3 id="气泡实验室-金色波特"><a href="#气泡实验室-金色波特" class="headerlink" title="气泡实验室 金色波特"></a>气泡实验室 <a href="https://www.jiuhuar.com/craftbeer/5b9f6d3c8ba5b0492e8b456a.html">金色波特</a></h3><p>颜色相对于其他波特来说比较淡，淡淡的金色。</p><p>口味相对其他波特也挺淡的。透着淡淡的咖啡味。</p><h3 id="气泡实验室-香草帝国世涛"><a href="#气泡实验室-香草帝国世涛" class="headerlink" title="气泡实验室 香草帝国世涛"></a>气泡实验室 <a href="https://www.jiuhuar.com/craftbeer/5b9f73198ba5b0442e8b4569.html">香草帝国世涛</a></h3><p>颜色重，酒体厚，除此之外也不是特别像世涛。</p><p>我喝起来一股花生酱🥜味。</p><p><img src="/posts/9ea5f31b/IMG_2992-7210275.jpeg"></p><h3 id="牛啤堂-帝都海盐-古斯"><a href="#牛啤堂-帝都海盐-古斯" class="headerlink" title="牛啤堂 帝都海盐 古斯"></a>牛啤堂 <a href="https://www.jiuhuar.com/craftbeer/5a7854da8ba5b0c30d8b4569.html">帝都海盐</a> 古斯</h3><p>主要是比较酸，稍微有一点点咸的回味。</p><p>整体而言就是酸，特别是第一口。之后就没那么酸，可以接受，但可能期望值比较高，没有喝出特别好的味道。</p><p>感觉很适合搭配油腻的东西佐餐，本身就比较清爽，同时又有酸味更加解腻。</p><h3 id="牛啤堂-芒果群-芒果海盐酸啤"><a href="#牛啤堂-芒果群-芒果海盐酸啤" class="headerlink" title="牛啤堂 芒果群 芒果海盐酸啤"></a>牛啤堂 <a href="https://www.jiuhuar.com/craftbeer/60b62ed5526c60388fd787f4.html">芒果群</a> 芒果海盐酸啤</h3><p>口味非常light，没味道，硬要说就有一丝丝芒果🥭味道？不是很喜欢。</p><hr><blockquote><p>结尾粘一份芭乐古斯啤酒简介：</p><p>昏沉沉大太阳，使人放弃希望</p><p>空气在发烫，眼角留着晒伤</p><p>一个人踩着浪，已脱水的身体</p><p>汗水依然继续流淌，做着白日梦</p><p>脚步有些沉重，残留一身伤痛</p><p>心还留在Guava Tribe，太平洋的风让我有些醉</p><p>这游戏太过刺激，不想清醒，因为会痛</p><p>原谅我的吧啦吧啦，与我的不切实际，彻底告别</p><p>举起我的blahblah Gose，沉落在五光十色</p><p>去完成happy ending</p><p>All love is in the room</p><p>Gonna have the blahblah gose</p><p>Ruling my Guava tribe</p><p>美好假期，在“爪哇部落”重置</p></blockquote>]]></content>
     
     
     <categories>
       
-      <category>项目组</category>
+      <category>日常</category>
       
-      <category>Suricata</category>
+      <category>微醺日记</category>
       
     </categories>
     
     
     <tags>
       
-      <tag>Suricata</tag>
+      <tag>啤酒</tag>
       
-      <tag>API</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>Suricata规则重载</title>
-    <link href="/posts/bbe9896b/"/>
-    <url>/posts/bbe9896b/</url>
-    
-    <content type="html"><![CDATA[<blockquote><p>Suricata 不重启情况下更新规则rules。</p></blockquote><h2 id="1-Suricata-规则重载步骤"><a href="#1-Suricata-规则重载步骤" class="headerlink" title="1. Suricata  规则重载步骤"></a>1. Suricata  规则重载步骤</h2><ol><li>加载新的配置配置，更新规则变量</li><li>加载新的规则</li><li>构建新的检测引擎</li><li>用新的检测引擎替换旧的引擎</li><li>确保所有线程已更新</li><li>释放旧的检测引擎</li></ol><p><em>注：系统要有足够内存用于启动两个检测引擎（替换过程中有两个引擎同时存在）</em></p><h2 id="2-两种规则重载方式"><a href="#2-两种规则重载方式" class="headerlink" title="2. 两种规则重载方式"></a>2. 两种规则重载方式</h2><h3 id="2-1-Signal"><a href="#2-1-Signal" class="headerlink" title="2.1 Signal"></a>2.1 <code>Signal</code></h3><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kill -USR2 $(pidof suricata)</code></pre></div><blockquote><p>SIGUSR2</p><p>Causes Suricata to perform a live rule reload.</p></blockquote><h3 id="2-2-Unix-socket"><a href="#2-2-Unix-socket" class="headerlink" title="2.2 Unix socket"></a>2.2 <code>Unix socket</code></h3><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">suricatasc -c reload-rules</code></pre></div><blockquote><p>Unix socket方式需要安装suricatasc脚本，通过普通编译方式安装则默认安装完成。</p><p>若未安装，通过如下命令在 <code>python/suricatasc</code> 下安装</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sudo python setup.py install</code></pre></div></blockquote><h2 id="3-测试"><a href="#3-测试" class="headerlink" title="3. 测试"></a>3. 测试</h2><p>分别测试了上述两种方式下的两项内容，共四项测试。</p><ol><li>测试Signal方式，对于yaml中已载入的.rules文件修改后重载</li><li>测试Signal方式，对于yaml中已载入的.rules文件修改后重载</li><li>测试Unix socket方式，对于yaml中未载入的.rules文件添加后重载</li><li>测试Unix socket方式，对于yaml中未载入的.rules文件添加后重载</li></ol><p>测试均成功，以下为其中一项测试的日志情况<code>/var/log/suricata/suricata.log</code>，其他类似。</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">10&#x2F;8&#x2F;2021 -- 00:09:51 - &lt;Notice&gt; - rule reload starting10&#x2F;8&#x2F;2021 -- 00:09:51 - &lt;Info&gt; - 1 rule files processed. 1 rules successfully loaded, 0 rules failed10&#x2F;8&#x2F;2021 -- 00:09:51 - &lt;Info&gt; - Threshold config parsed: 0 rule(s) found10&#x2F;8&#x2F;2021 -- 00:09:51 - &lt;Info&gt; - 1 signatures processed. 0 are IP-only rules, 1 are inspecting packet payload, 0 inspect application layer, 0 are decoder event only10&#x2F;8&#x2F;2021 -- 00:09:51 - &lt;Info&gt; - cleaning up signature grouping structure... complete10&#x2F;8&#x2F;2021 -- 00:09:51 - &lt;Notice&gt; - rule reload complete10&#x2F;8&#x2F;2021 -- 00:10:27 - &lt;Notice&gt; - rule reload starting10&#x2F;8&#x2F;2021 -- 00:10:27 - &lt;Info&gt; - 1 rule files processed. 1 rules successfully loaded, 0 rules failed10&#x2F;8&#x2F;2021 -- 00:10:27 - &lt;Info&gt; - Threshold config parsed: 0 rule(s) found10&#x2F;8&#x2F;2021 -- 00:10:27 - &lt;Info&gt; - 1 signatures processed. 0 are IP-only rules, 1 are inspecting packet payload, 0 inspect application layer, 0 are decoder event only10&#x2F;8&#x2F;2021 -- 00:10:27 - &lt;Info&gt; - cleaning up signature grouping structure... complete10&#x2F;8&#x2F;2021 -- 00:10:27 - &lt;Notice&gt; - rule reload complete10&#x2F;8&#x2F;2021 -- 00:10:27 - &lt;Info&gt; - Unix socket: lost connection with client00000000</code></pre></div><hr><blockquote><p>参考：</p><p><a href="https://suricata.readthedocs.io/en/suricata-6.0.3/manpages/suricata.html#signals">https://suricata.readthedocs.io/en/suricata-6.0.3/manpages/suricata.html#signals</a></p></blockquote>]]></content>
-    
-    
-    <categories>
-      
-      <category>项目组</category>
-      
-      <category>Suricata</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>Suricata</tag>
-      
-      <tag>入侵检测</tag>
-      
-      <tag>rules</tag>
+      <tag>牛啤堂</tag>
       
     </tags>
     
@@ -469,9 +471,38 @@
       
       <tag>Suricata</tag>
       
+      <tag>PF_RING</tag>
+      
       <tag>入侵检测</tag>
       
-      <tag>PF_RING</tag>
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>微醺日记——啤酒杂谈2-牛啤堂一些</title>
+    <link href="/posts/a177e6fa/"/>
+    <url>/posts/a177e6fa/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>超市碰到了几个买了尝尝。</p></blockquote><h3 id="牛啤堂-凛冬将至-小麦博克"><a href="#牛啤堂-凛冬将至-小麦博克" class="headerlink" title="牛啤堂 凛冬将至 小麦博克"></a>牛啤堂 <a href="https://www.jiuhuar.com/craftbeer/5a795e078ba5b085368b456a.html">凛冬将至</a> 小麦博克</h3><p>比较顺滑，没有大多IPA苦的那么明显。</p><p>有麦芽那种味道，有一些甜味感觉，总感觉能量很高。</p><h3 id="牛啤堂-非黑记-白世涛"><a href="#牛啤堂-非黑记-白世涛" class="headerlink" title="牛啤堂 非黑记 白世涛"></a>牛啤堂 <a href="https://www.jiuhuar.com/craftbeer/60b62e20526c60388fd787a4.html">非黑记</a> 白世涛</h3><p>忘记了自己喝的具体哪款。不是很喜欢，咖啡味明显但是不融合。</p><p>作为世涛酒体不够厚，让苦味显得很单薄和冲击。</p><h3 id="牛啤堂-花醉似泥-成都腊梅风味奶油艾尔"><a href="#牛啤堂-花醉似泥-成都腊梅风味奶油艾尔" class="headerlink" title="牛啤堂 花醉似泥 成都腊梅风味奶油艾尔"></a>牛啤堂 <a href="https://www.jiuhuar.com/craftbeer/60b63dfd790112168c23c793.html">花醉似泥</a> 成都腊梅风味奶油艾尔</h3><p>没有什么酒味，微微花香，入口像蔓越莓汁。</p><h3 id="牛啤堂-帝都海盐-古斯"><a href="#牛啤堂-帝都海盐-古斯" class="headerlink" title="牛啤堂 帝都海盐 古斯"></a>牛啤堂 <a href="https://www.jiuhuar.com/craftbeer/5a7854da8ba5b0c30d8b4569.html">帝都海盐</a> 古斯</h3><p>主要是比较酸，稍微有一点点咸的回味。</p><p>整体而言就是酸，特别是第一口。之后就没那么酸，可以接受，但可能期望值比较高，没有喝出特别好的味道。</p><p>感觉很适合搭配油腻的东西佐餐，本身就比较清爽，同时又有酸味更加解腻。</p><h3 id="牛啤堂-芒果群-芒果海盐酸啤"><a href="#牛啤堂-芒果群-芒果海盐酸啤" class="headerlink" title="牛啤堂 芒果群 芒果海盐酸啤"></a>牛啤堂 <a href="https://www.jiuhuar.com/craftbeer/60b62ed5526c60388fd787f4.html">芒果群</a> 芒果海盐酸啤</h3><p>口味非常light，没味道，硬要说就有一丝丝芒果🥭味道？不是很喜欢。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>日常</category>
+      
+      <category>微醺日记</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>啤酒</tag>
+      
+      <tag>牛啤堂</tag>
       
     </tags>
     
@@ -855,37 +886,6 @@
   
   
   <entry>
-    <title>SetUID、SetGID与Sticky BIT</title>
-    <link href="/posts/8ee6b0b9/"/>
-    <url>/posts/8ee6b0b9/</url>
-    
-    <content type="html"><![CDATA[<blockquote><p>Linux除了我们常见的读(r)写(w)执行(x)权限外，还有三个较为特殊的权限SetUID、SetGID与Sticky BIT。</p></blockquote><h2 id="1-SetUID与SetGID"><a href="#1-SetUID与SetGID" class="headerlink" title="1. SetUID与SetGID"></a>1. SetUID与SetGID</h2><p>通常对于可执行程序能够设定<code>SetUID</code>权限，且命令执行者需要对该程序拥有<code>x</code>权限。</p><p><strong>设定<code>SetUID</code>权限后，命令执行者在执行程序时获得程序拥有者的身份，且身份改变仅在执行过程中有效。</strong></p><p>例：修改用户<code>passwd</code></p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ ll &#x2F;etc&#x2F;passwd &#x2F;etc&#x2F;shadow &#x2F;usr&#x2F;bin&#x2F;passwd-rw-r--r-- 1 root root    3360  3月 30 15:40 &#x2F;etc&#x2F;passwd-rw-r----- 1 root shadow  1808  3月 30 15:40 &#x2F;etc&#x2F;shadow-rwsr-xr-x 1 root root   63960  2月  7  2020 &#x2F;usr&#x2F;bin&#x2F;passwd</code></pre></div><ul><li><p>可以看到普通用户并没有对<code>/etc/passwd</code>与<code>/etc/shadow</code>具有执行修改权限。但在实际使用需求上是有修改自己password的需求。</p></li><li><p>所以在用户的<code>/usr/bin/passwd</code>程序中，设置了<code>SetUID</code>即拥有者权限中的<code>s</code>。</p></li><li><p>可以看到<code>Others</code>用户具有可执行权限<code>x</code>，而程序拥有者设定了<code>SetUID</code>，同时程序拥有者为<code>root</code>。</p></li><li><p>所以<code>Others</code>用户在执行<code>/usr/bin/passwd</code>时，会临时获得<code>root</code>权限，从而能修改密码。</p></li></ul><blockquote><p>SetGID与SetUID原理基本相同。</p></blockquote><h2 id="2-Sticky-BIT"><a href="#2-Sticky-BIT" class="headerlink" title="2. Sticky BIT"></a>2. Sticky BIT</h2><p>通常对于目录能够设定<code>Sticky BIT</code>。用于避免非文件拥有者误操作文件。</p><p>例：对于<code>/tmp</code>目录所有用户都具有操作权限，但任何人创建的文件能被其他人任意修改与删除可能会带来错误。</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ ll -d &#x2F;tmpdrwxrwxrwt 19 root root 4096  4月 15 09:39 &#x2F;tmp</code></pre></div><p><strong>可以通过对<code>/tmp</code>目录设定<code>Sticky BIT</code>即权限最后的<code>t</code>，来保证其中的文件仅能够被文件拥有者修改。</strong></p><h2 id="3-权限修改"><a href="#3-权限修改" class="headerlink" title="3. 权限修改"></a>3. 权限修改</h2><p>在常规的<em>777</em>类型的模式下设置权限，在最前面增加一位设置<code>SetUID</code>、<code>SetGID</code>与<code>Sticky BIT</code>即可，分别对应4、2、1。或通过增加权限的方式。</p><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"># 设置具有SetUID但其他用户只读的权限chmod 4744 filename# 设置setuid权限chmod u+s filename  # 设置setgid权限chmod g+s filename  # 设置stick bit权限，针对目录chmod o+t dirname  </code></pre></div><hr><blockquote><p>参考:</p><p><a href="https://blog.csdn.net/wxbmelisky/article/details/51649343">https://blog.csdn.net/wxbmelisky/article/details/51649343</a></p><p><a href="https://www.jianshu.com/p/70f9ea162ca9">https://www.jianshu.com/p/70f9ea162ca9</a></p></blockquote>]]></content>
-    
-    
-    <categories>
-      
-      <category>学习笔记</category>
-      
-      <category>Linux</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>Linux</tag>
-      
-      <tag>权限</tag>
-      
-      <tag>SetUID</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>VSCode中配置Go相关插件失败问题</title>
     <link href="/posts/3d084d62/"/>
     <url>/posts/3d084d62/</url>
@@ -933,9 +933,9 @@
     
     <tags>
       
-      <tag>渗透测试</tag>
-      
       <tag>Vulnhub</tag>
+      
+      <tag>渗透测试</tag>
       
       <tag>提权</tag>
       
@@ -964,9 +964,9 @@
     
     <tags>
       
-      <tag>渗透测试</tag>
-      
       <tag>Vulnhub</tag>
+      
+      <tag>渗透测试</tag>
       
       <tag>文件包含</tag>
       
@@ -1204,9 +1204,9 @@
       
       <tag>Docker</tag>
       
-      <tag>Dockerfile</tag>
-      
       <tag>Image</tag>
+      
+      <tag>Dockerfile</tag>
       
     </tags>
     
@@ -1353,9 +1353,9 @@
       
       <tag>MacOS</tag>
       
-      <tag>Ubuntu</tag>
-      
       <tag>Docker</tag>
+      
+      <tag>Ubuntu</tag>
       
     </tags>
     
@@ -1424,11 +1424,40 @@
   
   
   <entry>
+    <title>IDEA出现cannot access class错误</title>
+    <link href="/posts/d3c91af1/"/>
+    <url>/posts/d3c91af1/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>IDEA缓存引起的一点小BUG。</p></blockquote><p>如果明明有这个类存在但仍然提示cannot access，这可能是IDE的bug，可以清除缓存并重启。</p><p>在IDEA中：</p><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">1. Go to File2. Invalidate Caches3. You can choose only Invalidate and restart</code></pre></div><hr><blockquote><p>参考：</p><p><a href="https://stackoverflow.com/questions/38549649/java-cannot-access-class-class-file-not-found">https://stackoverflow.com/questions/38549649/java-cannot-access-class-class-file-not-found</a></p></blockquote>]]></content>
+    
+    
+    <categories>
+      
+      <category>学习笔记</category>
+      
+      <category>Java</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Java</tag>
+      
+      <tag>IDEA</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>《史蒂夫·乔布斯传》摘录</title>
     <link href="/posts/eed80891/"/>
     <url>/posts/eed80891/</url>
     
-    <content type="html"><![CDATA[<blockquote><p>《史蒂夫·乔布斯传》沃尔特·艾萨克森</p></blockquote><h3 id="1"><a href="#1" class="headerlink" title="# 1"></a># 1</h3><p>一个具有强烈个性的人身上集合了人文和科学的天赋后所能产生的那种创造力，我相信这种创造力也是在21世纪建立创新型经济的关键因素。</p><h3 id="2"><a href="#2" class="headerlink" title="# 2"></a># 2</h3><p>“有些人认为，因为我被亲生父母抛弃过，所以我非常努力地工作以求出人头地，这样我父母就会后悔当初的决定，还有一些类似的言论，都太荒谬了。”他坚称，“知道自己是被领养的也许让我感觉更加独立，但我从未感觉自己被抛弃过。我一直都觉得自己很特别。我的父母让我觉得自己很特别。”之后，每当有人称保罗和克拉拉为乔布斯的”养父母“或者暗示他俩不是他的”亲生父母“时，乔布斯就会异常愤怒。”他们百分之一千是我的父母。“他说。另一方面，当谈及他的亲生父母时，他显得很草率：“他们就是我的精子库和卵子库，这话并不过分，因为这就是事实，他们扮演的就是精子库的角色，仅此而已。”</p><blockquote><p>生活中确有的亲情，在内心的感受上要比血脉的相连来的更为直接。</p><p>或许随着年龄的生长才会越加注意血脉带来的感受吧。</p></blockquote><h3 id="3"><a href="#3" class="headerlink" title="# 3"></a># 3</h3><p>​        宗教应该更多地强调精神体验，而不是一味遵守教条。“<strong>当基督教太过基于信仰，而忽略了以耶稣的生活方式或者从耶稣的角度看世界时，他的精髓就消失了，</strong>”他告诉我，“我觉得不同的宗教就好比通往同一栋房子的不同的门。有时候我觉得这栋房子存在，有时候我又觉得它不存在。这是最神秘的。”</p><h3 id="4"><a href="#4" class="headerlink" title="# 4"></a># 4</h3><p><strong>求知若饥，虚心若愚。</strong></p><p><strong>Stay hungry, Stay foolish.</strong></p><h3 id="5"><a href="#5" class="headerlink" title="# 5"></a># 5</h3><p>苦行和极简将会让人更加敏锐。“他相信匮乏即是富足，自律产生喜悦。”她说，“他知道一个大多数人不知道的道理：物极必反。”</p><h3 id="6"><a href="#6" class="headerlink" title="# 6"></a># 6</h3><p><strong>简洁并不仅仅是视觉上的，也不仅仅是把杂乱无章的东西变少或者抹掉，而是要挖掘复杂性的深度。</strong>要想获得简洁，你就必须要挖的足够深。打个比方，如果你是为了在产品上不装螺丝钉，那你最后可能会造出一个极其繁琐复杂的东西。<strong>更好的方式，是更深刻地理解“简洁”一词，理解他的每一个部分，以及它是如何制造的。你必须深刻的把握产品的精髓，从而判断出哪些不重要的部件是可以拿掉的。</strong></p><h3 id="7"><a href="#7" class="headerlink" title="# 7"></a># 7</h3><p><strong>记住自己很快就要死了，这是我面对人生重大选择时最重要的工具。因为，几乎一切——所有外界的期望，所有骄傲，所有对于困窘和失败的恐惧——这些东西都在死亡面前烟消云散，只留下真正重要的东西。记住自己终会死去，是我所知最好的方式，避免陷入认为自己会失去什么的陷阱。你已是一无所有，没理由不追随内心。</strong></p>]]></content>
+    <content type="html"><![CDATA[<blockquote><p>《史蒂夫·乔布斯传》沃尔特·艾萨克森</p></blockquote><h3 id="1"><a href="#1" class="headerlink" title="# 1"></a># 1</h3><p>一个具有强烈个性的人身上集合了人文和科学的天赋后所能产生的那种创造力，我相信这种创造力也是在21世纪建立创新型经济的关键因素。</p><h3 id="2"><a href="#2" class="headerlink" title="# 2"></a># 2</h3><p>“有些人认为，因为我被亲生父母抛弃过，所以我非常努力地工作以求出人头地，这样我父母就会后悔当初的决定，还有一些类似的言论，都太荒谬了。”他坚称，“知道自己是被领养的也许让我感觉更加独立，但我从未感觉自己被抛弃过。我一直都觉得自己很特别。我的父母让我觉得自己很特别。”之后，每当有人称保罗和克拉拉为乔布斯的”养父母“或者暗示他俩不是他的”亲生父母“时，乔布斯就会异常愤怒。”他们百分之一千是我的父母。“他说。另一方面，当谈及他的亲生父母时，他显得很草率：“他们就是我的精子库和卵子库，这话并不过分，因为这就是事实，他们扮演的就是精子库的角色，仅此而已。”</p><blockquote><p>生活中确有的亲情，在内心的感受上要比血脉的相连来的更为直接。</p><p>或许随着年龄的生长才会越加注意血脉带来的感受吧。</p></blockquote><h3 id="3"><a href="#3" class="headerlink" title="# 3"></a># 3</h3><p>宗教应该更多地强调精神体验，而不是一味遵守教条。“<strong>当基督教太过基于信仰，而忽略了以耶稣的生活方式或者从耶稣的角度看世界时，他的精髓就消失了，</strong>”他告诉我，“我觉得不同的宗教就好比通往同一栋房子的不同的门。有时候我觉得这栋房子存在，有时候我又觉得它不存在。这是最神秘的。”</p><h3 id="4"><a href="#4" class="headerlink" title="# 4"></a># 4</h3><p><strong>求知若饥，虚心若愚。</strong></p><p><strong>Stay hungry, Stay foolish.</strong></p><h3 id="5"><a href="#5" class="headerlink" title="# 5"></a># 5</h3><p>苦行和极简将会让人更加敏锐。“他相信匮乏即是富足，自律产生喜悦。”她说，“他知道一个大多数人不知道的道理：物极必反。”</p><h3 id="6"><a href="#6" class="headerlink" title="# 6"></a># 6</h3><p><strong>简洁并不仅仅是视觉上的，也不仅仅是把杂乱无章的东西变少或者抹掉，而是要挖掘复杂性的深度。</strong>要想获得简洁，你就必须要挖的足够深。打个比方，如果你是为了在产品上不装螺丝钉，那你最后可能会造出一个极其繁琐复杂的东西。<strong>更好的方式，是更深刻地理解“简洁”一词，理解他的每一个部分，以及它是如何制造的。你必须深刻的把握产品的精髓，从而判断出哪些不重要的部件是可以拿掉的。</strong></p><h3 id="7"><a href="#7" class="headerlink" title="# 7"></a># 7</h3><p><strong>记住自己很快就要死了，这是我面对人生重大选择时最重要的工具。因为，几乎一切——所有外界的期望，所有骄傲，所有对于困窘和失败的恐惧——这些东西都在死亡面前烟消云散，只留下真正重要的东西。记住自己终会死去，是我所知最好的方式，避免陷入认为自己会失去什么的陷阱。你已是一无所有，没理由不追随内心。</strong></p>]]></content>
     
     
     <categories>
@@ -1447,6 +1476,35 @@
       <tag>史蒂夫·乔布斯</tag>
       
       <tag>沃尔特·艾萨克森</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Mac上查看文件的编码格式</title>
+    <link href="/posts/2a640f66/"/>
+    <url>/posts/2a640f66/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>中文文件编码有些问题，之前并不知道相关系统命令来修改文件编码，使用编辑器修改过于复杂。</p></blockquote><p>查到了一个比较易用的命令:<code>enca</code></p><ol><li>查看你的系统有没有安装此命令，直接在终端执行<code>enca</code>命令，查看</li><li>如果没有安装，直接<code>brew install enca</code>即可，安装完毕即可使用。</li></ol><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"># 查看file文件的编码格式enca file # 将file文件转换为utf-8的格式enca -x utf-8 file# 查看帮助enca --help</code></pre></div><hr><blockquote><p>参考：</p><p><a href="http://glanwang.com/2016/07/08/Mac/Mac%E4%B8%8A%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%E7%9A%84%E7%BC%96%E7%A0%81%E6%A0%BC%E5%BC%8F/">http://glanwang.com/2016/07/08/Mac/Mac%E4%B8%8A%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%E7%9A%84%E7%BC%96%E7%A0%81%E6%A0%BC%E5%BC%8F/</a></p></blockquote>]]></content>
+    
+    
+    <categories>
+      
+      <category>日常</category>
+      
+      <category>Mac</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>MacOS</tag>
+      
+      <tag>编码</tag>
       
     </tags>
     
@@ -1938,9 +1996,9 @@
     
     <tags>
       
-      <tag>Hydra</tag>
-      
       <tag>渗透测试</tag>
+      
+      <tag>Hydra</tag>
       
       <tag>弱口令扫描</tag>
       
@@ -1969,9 +2027,9 @@
     
     <tags>
       
-      <tag>Hydra</tag>
-      
       <tag>渗透测试</tag>
+      
+      <tag>Hydra</tag>
       
     </tags>
     
