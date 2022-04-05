@@ -4,6 +4,66 @@
   
   
   <entry>
+    <title>Craft导出md文章两种方式</title>
+    <link href="/posts/f9481444/"/>
+    <url>/posts/f9481444/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p><code>Craft</code> 导出文章有通常选用<strong>分享</strong>按钮，若导出<code>.md</code>文件，文章中的图片均以craft的url形式出现。不便于导出归档做博客等。</p></blockquote><h3 id="1-分享按钮方式"><a href="#1-分享按钮方式" class="headerlink" title="1. 分享按钮方式"></a>1. 分享按钮方式</h3><p>导出样式如下，见引言。</p><p>![image-20220405224615466](/Users/buddyholly/Library/Application Support/typora-user-images/image-20220405224615466.png)</p><h3 id="2-从边栏以文件导出"><a href="#2-从边栏以文件导出" class="headerlink" title="2. 从边栏以文件导出"></a>2. 从边栏以文件导出</h3><p>在右侧边栏，右键选中文件再进行导出<code>.md</code>，会生成一个<code>.md</code>文件以及文件名对应的<code>xxx.assets</code>文件夹。</p><p>且<code>.md</code>中图片超链接与导出的<code>assets</code>文件夹保持一致。</p><blockquote><p>这个设计应该是方便用户整个文件夹导出资料，所以将文章中的内容以文件保存。</p><p>‼️<strong>对于本地归档的需求，可以选用本导出方式。</strong></p></blockquote><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"> ~&#x2F;Downloads lsExported Documents ~&#x2F;Downloads ls Exported\ Documents微醺日记——日本酒简单分类.assets                微醺日记——日本酒简单分类.md ~&#x2F;Downloads ls Exported\ Documents&#x2F;微醺日记——日本酒简单分类.assetsclassification.png             classification_png_preview.png rice.png                       rice_png_preview.png</code></pre></div>]]></content>
+    
+    
+    <categories>
+      
+      <category>日常</category>
+      
+      <category>App体验</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Craft</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>ELK Stack使用：Elasticsearch+Kibana+Metricbeat</title>
+    <link href="/posts/47e144c2/"/>
+    <url>/posts/47e144c2/</url>
+    
+    <content type="html"><![CDATA[<h1 id="1-Elasticsearch-Download-Elasticsearch-https-www-elastic-co-cn-downloads-elasticsearch"><a href="#1-Elasticsearch-Download-Elasticsearch-https-www-elastic-co-cn-downloads-elasticsearch" class="headerlink" title="1. [Elasticsearch](Download Elasticsearch https://www.elastic.co/cn/downloads/elasticsearch)"></a>1. [Elasticsearch](Download Elasticsearch <a href="https://www.elastic.co/cn/downloads/elasticsearch">https://www.elastic.co/cn/downloads/elasticsearch</a>)</h1><blockquote><p><code>Elasticsearch</code>是一个开源的高扩展的分布式全文检索引擎，它可以近乎实时的存储、检索数据；本身扩展性很好，可以扩展到上百台服务器，处理PB级别的数据。</p><p><code>Elasticsearch</code>也使用Java开发并使用<code>Lucene</code>作为其核心来实现所有索引和搜索的功能，但是它的目的是通过简单的RESTful API来隐藏Lucene的复杂性，从而让全文搜索变得简单。</p></blockquote><h3 id="1-1-部署"><a href="#1-1-部署" class="headerlink" title="1.1 部署"></a>1.1 部署</h3><p>测试环境</p><div class="code-wrapper"><pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">Linux ubuntu 4.15.0-142-generic #146~16.04.1-Ubuntu SMP Tue Apr 13 09:27:15 UTC 2021 x86_64 x86_64 x86_64 GNU&#x2F;Linux### 网络信息 ###inet addr:192.168.11.140  Bcast:192.168.11.255  Mask:255.255.255.0</code></pre></div><p>下载<code>Elasticsearch</code></p><div class="code-wrapper"><pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">### 部署依赖Java环境 ### apt-get install openjdk-8-jdkjava -versionwget https:&#x2F;&#x2F;artifacts.elastic.co&#x2F;downloads&#x2F;elasticsearch&#x2F;elasticsearch-8.1.2-linux-x86_64.tar.gztar -zxvf elasticsearch-8.1.2-linux-x86_64.tar.gzcd elasticsearch-8.1.2</code></pre></div><p>修改配置文件</p><div class="code-wrapper"><pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">### 设置 Elasticsearch 所在 host 地址 #### By default Elasticsearch is only accessible on localhost. Set a different# address here to expose this node on the network:network.host: 192.168.11.140### 默认端口为9200可根据需求设置 ####http.port: 9200### 不需要的话可以关闭安全设置 #### Enable security featuresxpack.security.enabled: falsexpack.security.enrollment.enabled: false</code></pre></div><p>启动<code>Elasticsearch</code></p><div class="code-wrapper"><pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">### 前台启动 ###.&#x2F;bin&#x2F;elasticsearch### 后台启动 ###nohup .&#x2F;bin&#x2F;elasticsearch &amp;### 查看进程 ###ps -ef | grep elasticsearch</code></pre></div><p>启动成功后可访问端口获得信息</p><div class="code-wrapper"><pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">&gt; elasticsearch-8.1.2 curl 192.168.11.140:9200&#123;  &quot;name&quot; : &quot;ubuntu&quot;,  &quot;cluster_name&quot; : &quot;elasticsearch&quot;,  &quot;cluster_uuid&quot; : &quot;1Xe_ptwRQc-NXTS4D8gxSQ&quot;,  &quot;version&quot; : &#123;    &quot;number&quot; : &quot;8.1.2&quot;,    &quot;build_flavor&quot; : &quot;default&quot;,    &quot;build_type&quot; : &quot;tar&quot;,    &quot;build_hash&quot; : &quot;31df9689e80bad366ac20176aa7f2371ea5eb4c1&quot;,    &quot;build_date&quot; : &quot;2022-03-29T21:18:59.991429448Z&quot;,    &quot;build_snapshot&quot; : false,    &quot;lucene_version&quot; : &quot;9.0.0&quot;,    &quot;minimum_wire_compatibility_version&quot; : &quot;7.17.0&quot;,    &quot;minimum_index_compatibility_version&quot; : &quot;7.0.0&quot;  &#125;,  &quot;tagline&quot; : &quot;You Know, for Search&quot;&#125;</code></pre></div><h3 id="1-2-部署问题"><a href="#1-2-部署问题" class="headerlink" title="1.2 部署问题"></a>1.2 部署问题</h3><ul><li><h4 id="最大虚拟内存不足"><a href="#最大虚拟内存不足" class="headerlink" title="最大虚拟内存不足"></a>最大虚拟内存不足</h4></li></ul><div class="code-wrapper"><pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">&#x2F;&#x2F; 将虚拟内存大小设置为更大值sysctl -w vm.max_map_count&#x3D;262144</code></pre></div><ul><li><h4 id="root用户"><a href="#root用户" class="headerlink" title="root用户"></a><code>root</code>用户</h4></li></ul><p><code>Elasticsearch</code>是不允许使用<code>root</code>用户启动的，所以我们需要添加用户启动。</p><div class="code-wrapper"><pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">adduser espasswd eschown -R es:es  ~&#x2F;elasticsearch-8.1.2</code></pre></div><h1 id="2-Kibana"><a href="#2-Kibana" class="headerlink" title="2. Kibana"></a>2. Kibana</h1><blockquote><p><code>Kibana</code>是一个开源的分析与可视化平台，设计出来用于和<code>Elasticsearch</code>一起使用的。你可以用<code>Kibana</code>搜索、查看、交互存放在<code>Elasticsearch</code>索引里的数据，使用各种不同的图表、表格、地图等<code>Kibana</code>能够很轻易地展示高级数据分析与可视化。</p></blockquote><h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><p>下载<code>Kibana</code></p><div class="code-wrapper"><pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">wget https:&#x2F;&#x2F;artifacts.elastic.co&#x2F;downloads&#x2F;kibana&#x2F;kibana-8.1.2-linux-x86_64.tar.gztar -zxvf kibana-8.1.2-linux-x86_64.tar.gzcd kibana-8.1.2&#x2F;</code></pre></div><p>修改配置文件</p><div class="code-wrapper"><pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">### Kibana服务host ###server.host: &quot;192.168.11.140&quot;### 默认port 5601 ####server.port: 5601### 指定elasticsearch.hosts ###elasticsearch.hosts: [&quot;http:&#x2F;&#x2F;192.168.11.140:9200&quot;]</code></pre></div><p>启动<code>Kibana</code></p><div class="code-wrapper"><pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">### 前台启动 ###.&#x2F;bin&#x2F;kibana### 后台启动 ###nohup .&#x2F;bin&#x2F;kibana &amp;### 停止 #### ps -ef | grep 5601 找不到kibana服务fuser -n tcp 5601kill -p pid</code></pre></div><h1 id="3-Metricbeat"><a href="#3-Metricbeat" class="headerlink" title="3. Metricbeat"></a>3. Metricbeat</h1><blockquote><p>Metricbeat可以定期收集操作系统和服务器的运行指标（CPU，内存，硬盘，IO,读写速度，进程等等），Metricbeat可以将收集到的指标和数据发送到你指定的输出，比如：elasticsearch，最终达成监视服务器的目标。</p></blockquote><h3 id="部署-1"><a href="#部署-1" class="headerlink" title="部署"></a>部署</h3><p>下载<code>Metricbeat</code></p><div class="code-wrapper"><pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">wget https:&#x2F;&#x2F;artifacts.elastic.co&#x2F;downloads&#x2F;beats&#x2F;metricbeat&#x2F;metricbeat-8.1.2-linux-x86_64.tar.gztar -xvf metricbeat-8.1.2-linux-x86_64.tar.gzcd metricbeat-8.1.2-linux-x86_64</code></pre></div><p>修改配置文件</p><div class="code-wrapper"><pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">### 设置kibana地址 ###setup.kibana:  # Kibana Host  # Scheme and port can be left out and will be set to the default (http and 5601)  # In case you specify and additional path, the scheme is required: http:&#x2F;&#x2F;localhost:5601&#x2F;path  # IPv6 addresses should always be defined as: https:&#x2F;&#x2F;[2001:db8::1]:5601  host: &quot;192.168.11.140:5601&quot;### 设置Elasticsearch地址 #### ---------------------------- Elasticsearch Output ----------------------------output.elasticsearch:  # Array of hosts to connect to.  hosts: [&quot;192.168.11.140:9200&quot;]### 设置Dashboards启动 #### &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; Dashboards &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;# These settings control loading the sample dashboards to the Kibana index. Loading# the dashboards is disabled by default and can be enabled either by setting the# options here or by using the &#96;setup&#96; command.setup.dashboards.enabled: true</code></pre></div><p>启动<code>Metricbeat</code></p><div class="code-wrapper"><pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">.&#x2F;metricbeat -e</code></pre></div><h1 id="4-效果截图"><a href="#4-效果截图" class="headerlink" title="4. 效果截图"></a>4. 效果截图</h1><blockquote><p>上述仅做了ELK Stack的最简单配置与使用，下图为相关展示。</p></blockquote><p><img src="/posts/47e144c2/Image.png" alt="Image.png"></p><p>![Image.png](ELK-Stack使用：Elasticsearch-Kibana-Metricbeat/Image (2).png)</p><p>下图为启动<code>Dashboards</code>才可分析展示：</p><p>![Image.png](ELK-Stack使用：Elasticsearch-Kibana-Metricbeat/Image (3).png)</p><p>![Image.png](ELK-Stack使用：Elasticsearch-Kibana-Metricbeat/Image (4).png)</p><p>![Image.png](ELK-Stack使用：Elasticsearch-Kibana-Metricbeat/Image (5).png)</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>项目组</category>
+      
+      <category>探针</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>ELK</tag>
+      
+      <tag>Elasticsearch</tag>
+      
+      <tag>Metricbeat</tag>
+      
+      <tag>日志收集</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>IDEA出现cannot access class错误</title>
     <link href="/posts/d3c91af1/"/>
     <url>/posts/d3c91af1/</url>
@@ -142,11 +202,11 @@
       
       <tag>DPDK</tag>
       
-      <tag>挑战杯</tag>
-      
       <tag>Suricata</tag>
       
       <tag>入侵检测</tag>
+      
+      <tag>挑战杯</tag>
       
     </tags>
     
@@ -500,9 +560,9 @@
       
       <tag>Suricata</tag>
       
-      <tag>入侵检测</tag>
-      
       <tag>PF_RING</tag>
+      
+      <tag>入侵检测</tag>
       
     </tags>
     
@@ -1411,9 +1471,9 @@
       
       <tag>MacOS</tag>
       
-      <tag>Docker</tag>
-      
       <tag>Ubuntu</tag>
+      
+      <tag>Docker</tag>
       
     </tags>
     
@@ -1907,9 +1967,9 @@
     
     <tags>
       
-      <tag>Ubuntu</tag>
-      
       <tag>Kali</tag>
+      
+      <tag>Ubuntu</tag>
       
     </tags>
     
