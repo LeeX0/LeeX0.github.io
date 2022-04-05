@@ -15,7 +15,7 @@ date: 2022-03-23 17:42:44
 
 导出样式如下，见引言。
 
-![image-20220405224615466](/Users/buddyholly/Library/Application Support/typora-user-images/image-20220405224615466.png)
+![](Craft导出md文章两种方式/image-20220405224615466.png)
 
 ### 2. 从边栏以文件导出
 

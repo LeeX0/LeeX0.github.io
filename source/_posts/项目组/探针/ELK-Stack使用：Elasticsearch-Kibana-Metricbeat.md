@@ -12,7 +12,7 @@ abbrlink: 47e144c2
 date: 2022-03-15 22:35:10
 ---
 
-# 1. [Elasticsearch](Download Elasticsearch https://www.elastic.co/cn/downloads/elasticsearch)
+# 1. [Elasticsearch](https://www.elastic.co/cn/downloads/elasticsearch)
 
 > `Elasticsearch`是一个开源的高扩展的分布式全文检索引擎，它可以近乎实时的存储、检索数据；本身扩展性很好，可以扩展到上百台服务器，处理PB级别的数据。
 >
@@ -213,15 +213,15 @@ setup.dashboards.enabled: true
 
 > 上述仅做了ELK Stack的最简单配置与使用，下图为相关展示。
 
-![Image.png](ELK-Stack使用：Elasticsearch-Kibana-Metricbeat/Image.png)
+![](ELK-Stack使用：Elasticsearch-Kibana-Metricbeat/Image.png)
 
-![Image.png](ELK-Stack使用：Elasticsearch-Kibana-Metricbeat/Image (2).png)
+![](ELK-Stack使用：Elasticsearch-Kibana-Metricbeat/Image(2).png)
 
 下图为启动`Dashboards`才可分析展示：
 
-![Image.png](ELK-Stack使用：Elasticsearch-Kibana-Metricbeat/Image (3).png)
+![](ELK-Stack使用：Elasticsearch-Kibana-Metricbeat/Image(3).png)
 
-![Image.png](ELK-Stack使用：Elasticsearch-Kibana-Metricbeat/Image (4).png)
+![](ELK-Stack使用：Elasticsearch-Kibana-Metricbeat/Image(4).png)
 
-![Image.png](ELK-Stack使用：Elasticsearch-Kibana-Metricbeat/Image (5).png)
+![](ELK-Stack使用：Elasticsearch-Kibana-Metricbeat/Image(5).png)
 
